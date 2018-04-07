@@ -37,18 +37,38 @@ class PrioritiesViewController: UITableViewController {
         return cell
     }
     
-    // Marks cells with checkmark
+    
+    
+    // Perform Segue
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        }
-        else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
-        
+        performSegue(withIdentifier: "goToProjects", sender: self)
     }
+    
+    
+    // Prepare for Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! ProjectViewController
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.selectedPriority = priorities?[indexPath.row]
+        }
+    }
+    
+    
+    
+    
+//    // Marks cells with checkmark
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        
+//        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
+//            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+//        }
+//        else {
+//            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+//        }
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        
+//    }
     
     // Queries Database for Priorities
     func loadPriorities() {
