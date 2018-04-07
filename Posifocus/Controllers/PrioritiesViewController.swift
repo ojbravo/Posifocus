@@ -62,8 +62,6 @@ class PrioritiesViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Priority", style: .default) { (action) in
             // this is where we say what happens once the button is clicked
             
-            print(textField.text)
-            
             self.itemArray.append(textField.text!)
             
             self.tableView.reloadData()

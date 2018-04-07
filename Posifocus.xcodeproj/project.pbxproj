@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		930BCCC320786D0B00424182 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930BCCC220786D0B00424182 /* Data.swift */; };
 		933A8783207848CB001C5DFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933A8782207848CB001C5DFB /* AppDelegate.swift */; };
 		933A8785207848CB001C5DFB /* PrioritiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933A8784207848CB001C5DFB /* PrioritiesViewController.swift */; };
 		933A8788207848CB001C5DFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A8786207848CB001C5DFB /* Main.storyboard */; };
 		933A878A207848CC001C5DFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 933A8789207848CC001C5DFB /* Assets.xcassets */; };
 		933A878D207848CC001C5DFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A878B207848CC001C5DFB /* LaunchScreen.storyboard */; };
+		F3BA9CFBAD72B4D98F86F399 /* Pods_Posifocus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34F268D02CBA9A5124F21B2 /* Pods_Posifocus.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F905C57862D01D80BBCAFE5 /* Pods-Posifocus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Posifocus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Posifocus/Pods-Posifocus.debug.xcconfig"; sourceTree = "<group>"; };
+		930BCCC220786D0B00424182 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		933A877F207848CB001C5DFB /* Posifocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posifocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		933A8782207848CB001C5DFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		933A8784207848CB001C5DFB /* PrioritiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrioritiesViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +26,8 @@
 		933A8789207848CC001C5DFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		933A878C207848CC001C5DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		933A878E207848CC001C5DFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A34F268D02CBA9A5124F21B2 /* Pods_Posifocus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Posifocus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6460EAEC1F9761927555512 /* Pods-Posifocus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Posifocus.release.xcconfig"; path = "Pods/Target Support Files/Pods-Posifocus/Pods-Posifocus.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +35,70 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3BA9CFBAD72B4D98F86F399 /* Pods_Posifocus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		077AA1C5DBDB603975B857F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A34F268D02CBA9A5124F21B2 /* Pods_Posifocus.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2AD4BDA5311F2B5D335FCFB3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4F905C57862D01D80BBCAFE5 /* Pods-Posifocus.debug.xcconfig */,
+				A6460EAEC1F9761927555512 /* Pods-Posifocus.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		930BCCBE20786C4A00424182 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		930BCCBF20786C5800424182 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				933A878B207848CC001C5DFB /* LaunchScreen.storyboard */,
+				933A8786207848CB001C5DFB /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		930BCCC020786C5E00424182 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				933A8784207848CB001C5DFB /* PrioritiesViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		930BCCC120786C9400424182 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				933A8789207848CC001C5DFB /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		933A8776207848CB001C5DFB = {
 			isa = PBXGroup;
 			children = (
+				930BCCC220786D0B00424182 /* Data.swift */,
 				933A8781207848CB001C5DFB /* Posifocus */,
 				933A8780207848CB001C5DFB /* Products */,
+				2AD4BDA5311F2B5D335FCFB3 /* Pods */,
+				077AA1C5DBDB603975B857F1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,10 +114,10 @@
 			isa = PBXGroup;
 			children = (
 				933A8782207848CB001C5DFB /* AppDelegate.swift */,
-				933A8784207848CB001C5DFB /* PrioritiesViewController.swift */,
-				933A8786207848CB001C5DFB /* Main.storyboard */,
-				933A8789207848CC001C5DFB /* Assets.xcassets */,
-				933A878B207848CC001C5DFB /* LaunchScreen.storyboard */,
+				930BCCBE20786C4A00424182 /* Models */,
+				930BCCBF20786C5800424182 /* Views */,
+				930BCCC020786C5E00424182 /* Controllers */,
+				930BCCC120786C9400424182 /* Supporting Files */,
 				933A878E207848CC001C5DFB /* Info.plist */,
 			);
 			path = Posifocus;
@@ -71,9 +130,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 933A8791207848CC001C5DFB /* Build configuration list for PBXNativeTarget "Posifocus" */;
 			buildPhases = (
+				3D849254ED917271B9015563 /* [CP] Check Pods Manifest.lock */,
 				933A877B207848CB001C5DFB /* Sources */,
 				933A877C207848CB001C5DFB /* Frameworks */,
 				933A877D207848CB001C5DFB /* Resources */,
+				7C7A0F0F9141B8DB9875DDBB /* [CP] Embed Pods Frameworks */,
+				C3A60C58F0F873F97DBD65AE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,12 +192,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3D849254ED917271B9015563 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Posifocus-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C7A0F0F9141B8DB9875DDBB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Posifocus/Pods-Posifocus-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Posifocus/Pods-Posifocus-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3A60C58F0F873F97DBD65AE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Posifocus/Pods-Posifocus-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		933A877B207848CB001C5DFB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				933A8785207848CB001C5DFB /* PrioritiesViewController.swift in Sources */,
+				930BCCC320786D0B00424182 /* Data.swift in Sources */,
 				933A8783207848CB001C5DFB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +397,7 @@
 		};
 		933A8792207848CC001C5DFB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F905C57862D01D80BBCAFE5 /* Pods-Posifocus.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -296,6 +416,7 @@
 		};
 		933A8793207848CC001C5DFB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6460EAEC1F9761927555512 /* Pods-Posifocus.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
