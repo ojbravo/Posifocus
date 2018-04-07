@@ -48,7 +48,7 @@
             </objects>
             <point key="canvasLocation" x="1852" y="133.5832083958021"/>
         </scene>
-        <!--Project View Controller-->
+        <!--Projects-->
         <scene sceneID="lGx-tj-tcC">
             <objects>
                 <tableViewController id="ejs-7n-kee" customClass="ProjectViewController" customModule="Posifocus" customModuleProvider="target" sceneMemberID="viewController">
@@ -57,7 +57,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="WWy-QK-t5P">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectCell" id="WWy-QK-t5P">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WWy-QK-t5P" id="kvb-hk-bOL">
@@ -71,10 +71,57 @@
                             <outlet property="delegate" destination="ejs-7n-kee" id="S9c-ju-4bp"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Projects" id="pJf-i9-HEg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="V2r-1q-4r5">
+                            <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addNewProject:" destination="ejs-7n-kee" id="zhL-nW-I8v"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="hIP-Kt-Rn2" kind="show" identifier="goToTasks" id="scl-Ck-vpa"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3PK-6V-OzM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2711" y="131"/>
+        </scene>
+        <!--Tasks-->
+        <scene sceneID="ZnT-ee-LFr">
+            <objects>
+                <tableViewController id="hIP-Kt-Rn2" customClass="TaskViewController" customModule="Posifocus" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6H5-0x-O7d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskCell" id="fRc-vk-IGN">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fRc-vk-IGN" id="fEK-kg-3Xl">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="hIP-Kt-Rn2" id="bAb-bA-Lqd"/>
+                            <outlet property="delegate" destination="hIP-Kt-Rn2" id="Nds-fz-WIx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Tasks" id="QfH-4P-ExD">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="hlS-pc-2fZ">
+                            <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addNewTask:" destination="hIP-Kt-Rn2" id="Sqb-Bl-dgY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="weG-fi-VVw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3532" y="128"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Oo8-NK-VTz">
@@ -99,4 +146,5 @@
             <point key="canvasLocation" x="912.79999999999995" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

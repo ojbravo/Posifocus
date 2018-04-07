@@ -13,6 +13,7 @@
 		930BCCCB20786FD800424182 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930BCCCA20786FD800424182 /* Task.swift */; };
 		930BCCCD20786FEA00424182 /* Gratitude.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930BCCCC20786FEA00424182 /* Gratitude.swift */; };
 		930BCCCF207873C700424182 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930BCCCE207873C700424182 /* ProjectViewController.swift */; };
+		930BCCD120792E0900424182 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930BCCD020792E0900424182 /* TaskViewController.swift */; };
 		933A8783207848CB001C5DFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933A8782207848CB001C5DFB /* AppDelegate.swift */; };
 		933A8785207848CB001C5DFB /* PrioritiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933A8784207848CB001C5DFB /* PrioritiesViewController.swift */; };
 		933A8788207848CB001C5DFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A8786207848CB001C5DFB /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 		930BCCCA20786FD800424182 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		930BCCCC20786FEA00424182 /* Gratitude.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gratitude.swift; sourceTree = "<group>"; };
 		930BCCCE207873C700424182 /* ProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
+		930BCCD020792E0900424182 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		933A877F207848CB001C5DFB /* Posifocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posifocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		933A8782207848CB001C5DFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		933A8784207848CB001C5DFB /* PrioritiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrioritiesViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			children = (
 				933A8784207848CB001C5DFB /* PrioritiesViewController.swift */,
 				930BCCCE207873C700424182 /* ProjectViewController.swift */,
+				930BCCD020792E0900424182 /* TaskViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				930BCCC320786D0B00424182 /* Data.swift in Sources */,
 				933A8783207848CB001C5DFB /* AppDelegate.swift in Sources */,
 				930BCCCD20786FEA00424182 /* Gratitude.swift in Sources */,
+				930BCCD120792E0900424182 /* TaskViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -88,6 +88,8 @@ class PrioritiesViewController: UITableViewController {
         catch {
             print("Error writing priority \(error)")
         }
+        
+        self.tableView.reloadData()
     }
     
     // Add Priority (+) Button Pressed

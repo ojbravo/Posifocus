@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class Task: Object {
-    @objc dynamic var title: String = ""
+    @objc dynamic var name: String = ""
     @objc dynamic var done: Bool = false
     var parentProject = LinkingObjects(fromType: Project.self, property: "tasks")
 }
