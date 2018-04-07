@@ -7,19 +7,24 @@
 //
 
 import UIKit
+import RealmSwift
 
 class PrioritiesViewController: UITableViewController {
 
-    var itemArray = ["Faith", "Family", "Friends"]
+    let realm = try! Realm()
+    
+    var priorities: Results<Priority>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadPriorities()
         
     }
     
     // Defines number of cells to accomodate entire list
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemArray.count
+        return priorities?.count ?? 1
     }
     
     // Populates cells from database
@@ -27,7 +32,7 @@ class PrioritiesViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PrioritiesCell", for: indexPath)
         
-        cell.textLabel?.text = itemArray[indexPath.row]
+        cell.textLabel?.text = priorities?[indexPath.row].name ?? "No Priorities Added Yet"
         
         return cell
     }
@@ -45,8 +50,27 @@ class PrioritiesViewController: UITableViewController {
         
     }
     
-    // Add New Item
+    // Queries Database for Priorities
+    func loadPriorities() {
+        
+        priorities = realm.objects(Priority.self)
+        
+        tableView.reloadData()
+    }
     
+    // Save Priority to Database
+    func save(priority: Priority) {
+        do {
+            try realm.write {
+                realm.add(priority)
+            }
+        }
+        catch {
+            print("Error writing priority \(error)")
+        }
+    }
+    
+    // Add Priority (+) Button Pressed
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
         var textField = UITextField()
@@ -62,9 +86,10 @@ class PrioritiesViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Priority", style: .default) { (action) in
             // this is where we say what happens once the button is clicked
             
-            self.itemArray.append(textField.text!)
-            
-            self.tableView.reloadData()
+            let newPriority = Priority()
+            newPriority.name = textField.text!
+        
+            self.save(priority: newPriority)
         }
         
         
