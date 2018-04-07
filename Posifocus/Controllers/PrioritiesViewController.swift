@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class PrioritiesViewController: UITableViewController {
 
@@ -15,11 +16,20 @@ class PrioritiesViewController: UITableViewController {
     
     var priorities: Results<Priority>?
     
+    let themeColor: String = "8CC252"  //green
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadPriorities()
         
+        tableView.separatorStyle = .none
+        navigationController?.navigationBar.barTintColor = UIColor(hexString: themeColor)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.barTintColor = UIColor(hexString: themeColor)
+        navigationController?.navigationBar.isTranslucent = false
     }
     
     // Defines number of cells to accomodate entire list
@@ -34,6 +44,14 @@ class PrioritiesViewController: UITableViewController {
         
         cell.textLabel?.text = priorities?[indexPath.row].name ?? "No Priorities Added Yet"
         
+        if let bgcolor = UIColor(hexString: themeColor)?.darken(byPercentage:
+            CGFloat(indexPath.row) / CGFloat(priorities!.count + 3)) {
+                
+                cell.backgroundColor = bgcolor
+                cell.textLabel?.textColor = UIColor.white
+        }
+        
+        
         return cell
     }
     
@@ -41,7 +59,10 @@ class PrioritiesViewController: UITableViewController {
     
     // Perform Segue
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         performSegue(withIdentifier: "goToProjects", sender: self)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
@@ -54,21 +75,6 @@ class PrioritiesViewController: UITableViewController {
         }
     }
     
-    
-    
-    
-//    // Marks cells with checkmark
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        
-//        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-//            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-//        }
-//        else {
-//            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-//        }
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        
-//    }
     
     // Queries Database for Priorities
     func loadPriorities() {

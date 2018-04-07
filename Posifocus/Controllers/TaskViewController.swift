@@ -14,6 +14,8 @@ class TaskViewController: UITableViewController {
     let realm = try! Realm()
     var tasks: Results<Task>?
     
+    let themeColor: String = "FC5830"  //orange
+    
     
     var selectedProject : Project? {
         didSet{
@@ -24,6 +26,18 @@ class TaskViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.separatorStyle = .none
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.barTintColor = UIColor(hexString: themeColor)
+        navigationController?.navigationBar.isTranslucent = false
+        title = (selectedProject?.name)! + " Tasks"
+    }
+    
+    override func willMove(toParentViewController parent: UIViewController?) {
+        self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "FDC02F")
     }
     
     // Defines number of cells to accomodate entire list
@@ -39,13 +53,30 @@ class TaskViewController: UITableViewController {
         
         cell.textLabel?.text = tasks?[indexPath.row].name ?? "No Tasks Added Yet"
         
+        if let bgcolor = UIColor(hexString: themeColor)?.darken(byPercentage:
+            CGFloat(indexPath.row) / CGFloat(tasks!.count + 3)) {
+            
+            cell.backgroundColor = bgcolor
+            cell.textLabel?.textColor = UIColor.white
+        }
+        
         return cell
     }
     
     
     // Marks cells with checkmark
     
+        override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
+            if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
+                tableView.cellForRow(at: indexPath)?.accessoryType = .none
+            }
+            else {
+                tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
+    
+        }
     
     // Queries Projects from Database
     func loadTasks() {

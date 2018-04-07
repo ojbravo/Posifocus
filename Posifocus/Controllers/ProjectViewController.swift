@@ -14,7 +14,8 @@ class ProjectViewController: UITableViewController {
     let realm = try! Realm()
     var projects: Results<Project>?
     
-
+    let themeColor: String = "FDC02F" // yellow
+    
     var selectedPriority : Priority? {
         didSet{
             loadProjects()
@@ -24,6 +25,19 @@ class ProjectViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.separatorStyle = .none
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.barTintColor = UIColor(hexString: themeColor)
+        navigationController?.navigationBar.isTranslucent = false
+        title = (selectedPriority?.name)! + " Projects"
+    }
+    
+    override func willMove(toParentViewController parent: UIViewController?) {
+        self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "8CC252")
     }
     
     // Defines number of cells to accomodate entire list
@@ -36,8 +50,15 @@ class ProjectViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier:"ProjectCell", for: indexPath)
-    
+        
         cell.textLabel?.text = projects?[indexPath.row].name ?? "No Projects Added Yet"
+        
+        if let bgcolor = UIColor(hexString: themeColor)?.darken(byPercentage:
+            CGFloat(indexPath.row) / CGFloat(projects!.count + 3)) {
+            
+            cell.backgroundColor = bgcolor
+            cell.textLabel?.textColor = UIColor.white
+        }
         
         return cell
     }
@@ -46,6 +67,8 @@ class ProjectViewController: UITableViewController {
     // Connects to Segue
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToTasks", sender: self)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
@@ -57,9 +80,6 @@ class ProjectViewController: UITableViewController {
             destinationVC.selectedProject = projects?[indexPath.row]
         }
     }
-    
-    
-    // Marks cells with checkmark
     
     
     
