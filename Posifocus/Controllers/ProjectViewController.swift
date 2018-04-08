@@ -168,7 +168,7 @@ class ProjectViewController: SwipeTableViewController {
         }
         
         
-        let action = UIAlertAction(title: "Update Project", style: .default) { (action) in
+        let action = UIAlertAction(title: "Update", style: .default) { (action) in
             // this is where we say what happens once the button is clicked
             
             if self.selectedPriority != nil {
@@ -186,6 +186,7 @@ class ProjectViewController: SwipeTableViewController {
         }
         
         alert.addAction(action)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)
         

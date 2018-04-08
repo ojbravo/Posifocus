@@ -162,7 +162,8 @@ class TaskViewController: SwipeTableViewController  {
         }
         
         
-        let action = UIAlertAction(title: "Update Task", style: .default) { (action) in
+        
+        let action = UIAlertAction(title: "Update", style: .default) { (action) in
             // this is where we say what happens once the button is clicked
             
             if self.selectedProject != nil {
@@ -183,6 +184,7 @@ class TaskViewController: SwipeTableViewController  {
         }
         
         alert.addAction(action)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)
         

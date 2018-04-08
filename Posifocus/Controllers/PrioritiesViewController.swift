@@ -150,7 +150,7 @@ class PrioritiesViewController: SwipeTableViewController {
         }
         
         
-        let action = UIAlertAction(title: "Update Priority", style: .default) { (action) in
+        let action = UIAlertAction(title: "Update", style: .default) { (action) in
             // this is where we say what happens once the button is clicked
             
             do {
@@ -166,6 +166,7 @@ class PrioritiesViewController: SwipeTableViewController {
         }
         
         alert.addAction(action)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)
         
