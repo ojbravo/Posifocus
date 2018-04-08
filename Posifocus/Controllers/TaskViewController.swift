@@ -26,6 +26,8 @@ class TaskViewController: SwipeTableViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.backgroundColor = UIColor(hexString: themeColor)?.darken(byPercentage: 0.25)
     }
     
     override func viewWillAppear(_ animated: Bool) {

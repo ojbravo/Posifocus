@@ -24,7 +24,9 @@ class ProjectViewController: SwipeTableViewController {
 
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        
+        self.tableView.backgroundColor = UIColor(hexString: themeColor)?.darken(byPercentage: 0.25)
     }
     
     override func viewWillAppear(_ animated: Bool) {
