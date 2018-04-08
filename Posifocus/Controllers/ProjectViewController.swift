@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class ProjectViewController: UITableViewController {
+class ProjectViewController: SwipeTableViewController {
     
     let realm = try! Realm()
     var projects: Results<Project>?
@@ -26,6 +26,7 @@ class ProjectViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.rowHeight = 60.0
         tableView.separatorStyle = .none
         
     }
@@ -49,7 +50,9 @@ class ProjectViewController: UITableViewController {
     // Populates cells from database
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier:"ProjectCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        
+        //let cell = tableView.dequeueReusableCell(withIdentifier:"Cell", for: indexPath)
         
         cell.textLabel?.text = projects?[indexPath.row].name ?? "No Projects Added Yet"
         
@@ -141,5 +144,17 @@ class ProjectViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    override func updateModel(at indexPath: IndexPath) {
+        if let deleteProject = self.projects?[indexPath.row] {
+            do {
+                try self.realm.write {
+                    self.realm.delete(deleteProject)
+                }
+            } catch {
+                print("Couldn't delete project \(error)")
+            }
+        }
+        
+    }
     
 }

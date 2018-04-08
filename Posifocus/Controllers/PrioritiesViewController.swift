@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import ChameleonFramework
 
-class PrioritiesViewController: UITableViewController {
+class PrioritiesViewController: SwipeTableViewController {
 
     let realm = try! Realm()
     
@@ -23,6 +23,7 @@ class PrioritiesViewController: UITableViewController {
         
         loadPriorities()
         
+        tableView.rowHeight = 60.0
         tableView.separatorStyle = .none
         navigationController?.navigationBar.barTintColor = UIColor(hexString: themeColor)
     }
@@ -40,7 +41,7 @@ class PrioritiesViewController: UITableViewController {
     // Populates cells from database
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PrioritiesCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         cell.textLabel?.text = priorities?[indexPath.row].name ?? "No Priorities Added Yet"
         
@@ -125,6 +126,19 @@ class PrioritiesViewController: UITableViewController {
         alert.addAction(action)
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    override func updateModel(at indexPath: IndexPath) {
+        if let deletePriority = self.priorities?[indexPath.row] {
+            do {
+                try self.realm.write {
+                    self.realm.delete(deletePriority)
+                }
+            } catch {
+                print("Couldn't delete priority \(error)")
+            }
+        }
+        
     }
     
 }

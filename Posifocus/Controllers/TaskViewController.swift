@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class TaskViewController: UITableViewController {
+class TaskViewController: SwipeTableViewController  {
 
     let realm = try! Realm()
     var tasks: Results<Task>?
@@ -27,6 +27,7 @@ class TaskViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.rowHeight = 60.0
         tableView.separatorStyle = .none
     }
     
@@ -49,7 +50,7 @@ class TaskViewController: UITableViewController {
     // Populates cells from database
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TaskCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         cell.textLabel?.text = tasks?[indexPath.row].name ?? "No Tasks Added Yet"
         
@@ -135,4 +136,19 @@ class TaskViewController: UITableViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    override func updateModel(at indexPath: IndexPath) {
+        if let deleteTask = self.tasks?[indexPath.row] {
+            do {
+                try self.realm.write {
+                    self.realm.delete(deleteTask)
+                }
+            } catch {
+                print("Couldn't delete task \(error)")
+            }
+        }
+
+    }
 }
+
+
