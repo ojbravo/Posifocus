@@ -33,51 +33,47 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         
         if orientation == .left {
-            let markComplete = SwipeAction(style: .destructive, title: "Complete") { action, indexPath in
+            let markCompleteButton = SwipeAction(style: .destructive, title: "Done") { action, indexPath in
                 // handle action by updating model with deletion
                 
-                self.updateModel(at: indexPath)
+                self.markItemComplete(at: indexPath)
                 
             }
             
             // customize the action appearance
-            markComplete.image = UIImage(named: "complete-icon")
-            markComplete.backgroundColor = UIColor(hexString: "59d66e")
+            markCompleteButton.image = UIImage(named: "complete-icon")
+            markCompleteButton.backgroundColor = UIColor(hexString: "59d66e")
+            markCompleteButton.hidesWhenSelected = true
             
-            return [markComplete]
+            return [markCompleteButton]
         
         } else {
-            let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            let deleteButton = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
                 // handle action by updating model with deletion
                 
-                self.updateModel(at: indexPath)
+                self.deleteItem(at: indexPath)
                 
             }
             
             // customize the action appearance
-            deleteAction.image = UIImage(named: "delete-icon")
-            deleteAction.backgroundColor = UIColor(hexString: "f93f40")
+            deleteButton.image = UIImage(named: "delete-icon")
+            deleteButton.backgroundColor = UIColor(hexString: "f93f40")
             
-            let editAction = SwipeAction(style: .destructive, title: "Edit") { action, indexPath in
+            let editButton = SwipeAction(style: .destructive, title: "Edit") { action, indexPath in
                 // handle action by updating model with deletion
                 
-                self.updateModel(at: indexPath)
+                self.editItem(at: indexPath)
+                
                 
             }
             
             // customize the action appearance
-            editAction.image = UIImage(named: "edit-icon")
-            editAction.backgroundColor = UIColor(hexString: "2180f7")
+            editButton.image = UIImage(named: "edit-icon")
+            editButton.backgroundColor = UIColor(hexString: "2180f7")
+            editButton.hidesWhenSelected = true
             
-            return [deleteAction, editAction]
+            return [deleteButton, editButton]
         }
-        
-        
-        //guard orientation == .right else { return nil }
-        
-        
-        
-        
     }
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
@@ -87,8 +83,8 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         return options
     }
     
-    func updateModel(at indexPath: IndexPath) {
-        
-    }
+    func deleteItem(at indexPath: IndexPath) {}
+    func editItem(at indexPath: IndexPath) {}
+    func markItemComplete(at indexPath: IndexPath) {}
 }
 

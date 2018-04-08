@@ -125,7 +125,7 @@ class PrioritiesViewController: SwipeTableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    override func updateModel(at indexPath: IndexPath) {
+    override func deleteItem(at indexPath: IndexPath) {
         if let deletePriority = self.priorities?[indexPath.row] {
             do {
                 try self.realm.write {
@@ -135,8 +135,42 @@ class PrioritiesViewController: SwipeTableViewController {
                 print("Couldn't delete priority \(error)")
             }
         }
+    }
+    
+    override func editItem(at indexPath: IndexPath) {
+        
+        var textField = UITextField()
+        let currentPriority = priorities![indexPath.row].name
+        
+        let alert = UIAlertController(title: "Update Priority", message: "", preferredStyle: .alert)
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.text = currentPriority
+            textField = alertTextField
+        }
+        
+        
+        let action = UIAlertAction(title: "Update Priority", style: .default) { (action) in
+            // this is where we say what happens once the button is clicked
+            
+            do {
+                try self.realm.write {
+                    self.priorities![indexPath.row].name = textField.text!
+                }
+            } catch {
+                print("Error saving new items, \(error)")
+            }
+            
+            self.tableView.reloadData()
+            
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
         
     }
+    
     
 }
 

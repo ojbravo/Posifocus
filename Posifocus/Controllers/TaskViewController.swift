@@ -136,7 +136,7 @@ class TaskViewController: SwipeTableViewController  {
         present(alert, animated: true, completion: nil)
     }
     
-    override func updateModel(at indexPath: IndexPath) {
+    override func deleteItem(at indexPath: IndexPath) {
         if let deleteTask = self.tasks?[indexPath.row] {
             do {
                 try self.realm.write {
@@ -147,6 +147,45 @@ class TaskViewController: SwipeTableViewController  {
             }
         }
 
+    }
+    
+    override func editItem(at indexPath: IndexPath) {
+        
+        var textField = UITextField()
+        let currentTask = tasks![indexPath.row].name
+        
+        let alert = UIAlertController(title: "Update Task", message: "", preferredStyle: .alert)
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.text = currentTask
+            textField = alertTextField
+        }
+        
+        
+        let action = UIAlertAction(title: "Update Task", style: .default) { (action) in
+            // this is where we say what happens once the button is clicked
+            
+            if self.selectedProject != nil {
+                do {
+                    try self.realm.write {
+                    
+                        self.tasks![indexPath.row].name = textField.text!
+                        //newItem.dateCreated = Date()
+                        
+                    }
+                } catch {
+                    print("Error saving new items, \(error)")
+                }
+            }
+            
+            self.tableView.reloadData()
+            
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+        
     }
 }
 
