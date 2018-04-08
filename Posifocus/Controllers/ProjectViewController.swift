@@ -24,11 +24,7 @@ class ProjectViewController: SwipeTableViewController {
 
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.rowHeight = 60.0
-        tableView.separatorStyle = .none
-        
+        super.viewDidLoad()        
     }
     
     override func viewWillAppear(_ animated: Bool) {

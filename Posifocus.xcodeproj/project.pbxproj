@@ -15,10 +15,11 @@
 		930BCCCF207873C700424182 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930BCCCE207873C700424182 /* ProjectViewController.swift */; };
 		930BCCD120792E0900424182 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930BCCD020792E0900424182 /* TaskViewController.swift */; };
 		930BCCD32079A62600424182 /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930BCCD22079A62600424182 /* SwipeTableViewController.swift */; };
+		930BCCD92079BC5000424182 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930BCCD52079BC4F00424182 /* Assets.xcassets */; };
+		930BCCDD2079BC6400424182 /* edit-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 930BCCDC2079BC6400424182 /* edit-icon.png */; };
 		933A8783207848CB001C5DFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933A8782207848CB001C5DFB /* AppDelegate.swift */; };
 		933A8785207848CB001C5DFB /* PrioritiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933A8784207848CB001C5DFB /* PrioritiesViewController.swift */; };
 		933A8788207848CB001C5DFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A8786207848CB001C5DFB /* Main.storyboard */; };
-		933A878A207848CC001C5DFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 933A8789207848CC001C5DFB /* Assets.xcassets */; };
 		933A878D207848CC001C5DFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A878B207848CC001C5DFB /* LaunchScreen.storyboard */; };
 		F3BA9CFBAD72B4D98F86F399 /* Pods_Posifocus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34F268D02CBA9A5124F21B2 /* Pods_Posifocus.framework */; };
 /* End PBXBuildFile section */
@@ -33,11 +34,14 @@
 		930BCCCE207873C700424182 /* ProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		930BCCD020792E0900424182 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		930BCCD22079A62600424182 /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
+		930BCCD52079BC4F00424182 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		930BCCDC2079BC6400424182 /* edit-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit-icon.png"; sourceTree = "<group>"; };
+		930BCCDE2079BC7F00424182 /* delete-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-icon.png"; sourceTree = "<group>"; };
+		930BCCDF2079BC9400424182 /* complete-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "complete-icon.png"; sourceTree = "<group>"; };
 		933A877F207848CB001C5DFB /* Posifocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posifocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		933A8782207848CB001C5DFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		933A8784207848CB001C5DFB /* PrioritiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrioritiesViewController.swift; sourceTree = "<group>"; };
 		933A8787207848CB001C5DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		933A8789207848CC001C5DFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		933A878C207848CC001C5DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		933A878E207848CC001C5DFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A34F268D02CBA9A5124F21B2 /* Pods_Posifocus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Posifocus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,7 +111,10 @@
 		930BCCC120786C9400424182 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				933A8789207848CC001C5DFB /* Assets.xcassets */,
+				930BCCD52079BC4F00424182 /* Assets.xcassets */,
+				930BCCDF2079BC9400424182 /* complete-icon.png */,
+				930BCCDE2079BC7F00424182 /* delete-icon.png */,
+				930BCCDC2079BC6400424182 /* edit-icon.png */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -206,7 +213,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				933A878D207848CC001C5DFB /* LaunchScreen.storyboard in Resources */,
-				933A878A207848CC001C5DFB /* Assets.xcassets in Resources */,
+				930BCCDD2079BC6400424182 /* edit-icon.png in Resources */,
+				930BCCD92079BC5000424182 /* Assets.xcassets in Resources */,
 				933A8788207848CB001C5DFB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

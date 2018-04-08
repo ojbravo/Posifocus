@@ -22,10 +22,6 @@ class PrioritiesViewController: SwipeTableViewController {
         super.viewDidLoad()
         
         loadPriorities()
-        
-        tableView.rowHeight = 60.0
-        tableView.separatorStyle = .none
-        navigationController?.navigationBar.barTintColor = UIColor(hexString: themeColor)
     }
     
     override func viewWillAppear(_ animated: Bool) {

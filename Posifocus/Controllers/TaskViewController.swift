@@ -26,9 +26,6 @@ class TaskViewController: SwipeTableViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.rowHeight = 60.0
-        tableView.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
