@@ -12,7 +12,7 @@ import RealmSwift
 class ProjectViewController: SwipeTableViewController {
     
     let realm = try! Realm()
-    var projects: Results<Project>?
+    var projects: List<Project>?
     
     let themeColor: String = "FDC02F" // yellow
     
@@ -87,7 +87,7 @@ class ProjectViewController: SwipeTableViewController {
     // Queries Projects from Database
     func loadProjects() {
         
-        projects = selectedPriority?.projects.sorted(byKeyPath: "name", ascending: true)
+        projects = selectedPriority?.projects
         
         tableView.reloadData()
     }
@@ -138,6 +138,7 @@ class ProjectViewController: SwipeTableViewController {
         }
         
         alert.addAction(action)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)
     }

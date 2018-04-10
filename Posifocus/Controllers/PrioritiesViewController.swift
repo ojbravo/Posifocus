@@ -20,10 +20,11 @@ class PrioritiesViewController: SwipeTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.tableView.backgroundColor = UIColor(hexString: themeColor)?.darken(byPercentage: 0.25)
         loadPriorities()
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = UIColor(hexString: themeColor)
@@ -121,6 +122,7 @@ class PrioritiesViewController: SwipeTableViewController {
         
         
         alert.addAction(action)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)
     }
@@ -183,6 +185,14 @@ class PrioritiesViewController: SwipeTableViewController {
         present(alert, animated: true, completion: nil)
         
     }
+    
+    
+    override func setDataSource(at indexPath: IndexPath) {
+        var currentPriority = Array(self.priorities!)
+        currentPriority.swapAt((indexPath.row), (Path.initialIndexPath?.row)!)
+    }
+    
+    
     
     
 }

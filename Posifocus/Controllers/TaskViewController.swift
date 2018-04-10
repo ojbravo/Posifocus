@@ -12,7 +12,7 @@ import RealmSwift
 class TaskViewController: SwipeTableViewController  {
 
     let realm = try! Realm()
-    var tasks: Results<Task>?
+    var tasks: List<Task>?
     
     let themeColor: String = "FC5830"  //orange
     
@@ -81,7 +81,7 @@ class TaskViewController: SwipeTableViewController  {
     // Queries Projects from Database
     func loadTasks() {
         
-        tasks = selectedProject?.tasks.sorted(byKeyPath: "name", ascending: true)
+        tasks = selectedProject?.tasks
         
         tableView.reloadData()
     }
@@ -132,6 +132,7 @@ class TaskViewController: SwipeTableViewController  {
         }
         
         alert.addAction(action)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)
     }

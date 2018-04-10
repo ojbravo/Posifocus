@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //print(Realm.Configuration.defaultConfiguration.fileURL!)
+        UIApplication.shared.statusBarStyle = .lightContent
         
         do {
             _ = try Realm()
