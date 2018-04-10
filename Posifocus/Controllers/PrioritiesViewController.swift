@@ -127,8 +127,20 @@ class PrioritiesViewController: SwipeTableViewController {
     
     override func deleteItem(at indexPath: IndexPath) {
         if let deletePriority = self.priorities?[indexPath.row] {
+            let deleteProjectsCount = deletePriority.projects.count
+            
+            //if tasks.count, if projects.count
+            
             do {
                 try self.realm.write {
+                    if deleteProjectsCount != 0 {
+                        for i in 0...(deleteProjectsCount - 1) {
+                            if deletePriority.projects[i].tasks.count != 0 {
+                                self.realm.delete(deletePriority.projects[i].tasks)
+                            }
+                        }
+                        self.realm.delete(deletePriority.projects)
+                    }
                     self.realm.delete(deletePriority)
                 }
             } catch {

@@ -143,9 +143,13 @@ class ProjectViewController: SwipeTableViewController {
     }
     
     override func deleteItem(at indexPath: IndexPath) {
+        
         if let deleteProject = self.projects?[indexPath.row] {
             do {
                 try self.realm.write {
+                    if deleteProject.tasks.count != 0 {
+                        self.realm.delete(deleteProject.tasks)
+                    }
                     self.realm.delete(deleteProject)
                 }
             } catch {
