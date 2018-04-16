@@ -12,7 +12,7 @@ import RealmSwift
 class TaskViewController: SwipeTableViewController  {
 
     let realm = try! Realm()
-    var tasks: List<Task>?
+    var tasks: Results<Task>?
     
     let themeColor: String = "FC5830"  //orange
     
@@ -81,7 +81,7 @@ class TaskViewController: SwipeTableViewController  {
     // Queries Projects from Database
     func loadTasks() {
         
-        tasks = selectedProject?.tasks
+        tasks = selectedProject?.tasks.sorted(byKeyPath: "order", ascending: true)
         
         tableView.reloadData()
     }
@@ -119,7 +119,7 @@ class TaskViewController: SwipeTableViewController  {
                     try self.realm.write {
                         let newTask = Task()
                         newTask.name = textField.text!
-                        //newItem.dateCreated = Date()
+                        newTask.order = (self.tasks?.count)!
                         currentProject.tasks.append(newTask)
                     }
                 } catch {
@@ -142,6 +142,12 @@ class TaskViewController: SwipeTableViewController  {
             do {
                 try self.realm.write {
                     self.realm.delete(deleteTask)
+                    
+                    var i = 0
+                    while i < ((tasks?.count)!) {
+                        self.tasks![i].setValue(i, forKey: "order")
+                        i = i + 1
+                    }
                 }
             } catch {
                 print("Couldn't delete task \(error)")
@@ -189,6 +195,33 @@ class TaskViewController: SwipeTableViewController  {
         
         present(alert, animated: true, completion: nil)
         
+    }
+    
+    override func setDataSource(at indexPath: IndexPath, initialIndex: Int) {
+        var tasksList = Array(self.tasks!)
+        tasksList.swapAt((indexPath.row), (Path.initialIndexPath?.row)!)
+        
+        do {
+            try self.realm.write {
+                let originalRow: Int = (Path.initialIndexPath?.row)!
+                let newRow: Int = indexPath.row;
+                
+                if (newRow < originalRow) {
+                    self.tasks![(newRow)].setValue(-1, forKey: "order")
+                    self.tasks![(originalRow)].setValue(newRow, forKey: "order")
+                    self.tableView.reloadData()
+                    self.tasks![0].setValue(originalRow, forKey: "order")
+                } else {
+                    self.tasks![(newRow)].setValue(tasks?.count, forKey: "order")
+                    self.tasks![(originalRow)].setValue(newRow, forKey: "order")
+                    self.tableView.reloadData()
+                    self.tasks![(tasks?.count)! - 1].setValue(originalRow, forKey: "order")
+                }
+                self.tableView.reloadData()
+            }
+        } catch {
+            print("Error saving new items, \(error)")
+        }
     }
 }
 
