@@ -12,7 +12,7 @@ import RealmSwift
 class ProjectViewController: SwipeTableViewController {
     
     let realm = try! Realm()
-    var projects: List<Project>?
+    var projects: Results<Project>?
     
     let themeColor: String = "FDC02F" // yellow
     
@@ -87,8 +87,7 @@ class ProjectViewController: SwipeTableViewController {
     // Queries Projects from Database
     func loadProjects() {
         
-        projects = selectedPriority?.projects
-        
+        projects = selectedPriority?.projects.sorted(byKeyPath: "order", ascending: true)
         tableView.reloadData()
     }
     
@@ -125,7 +124,7 @@ class ProjectViewController: SwipeTableViewController {
                     try self.realm.write {
                         let newProject = Project()
                         newProject.name = textField.text!
-                        //newItem.dateCreated = Date()
+                        newProject.order = (self.projects?.count)!
                         currentPriority.projects.append(newProject)
                     }
                 } catch {
@@ -152,6 +151,12 @@ class ProjectViewController: SwipeTableViewController {
                         self.realm.delete(deleteProject.tasks)
                     }
                     self.realm.delete(deleteProject)
+                    
+                    var i = 0
+                    while i < ((projects?.count)!) {
+                        self.projects![i].setValue(i, forKey: "order")
+                        i = i + 1 
+                    }
                 }
             } catch {
                 print("Couldn't delete project \(error)")
@@ -195,6 +200,34 @@ class ProjectViewController: SwipeTableViewController {
         
         present(alert, animated: true, completion: nil)
         
+    }
+    
+    
+    override func setDataSource(at indexPath: IndexPath, initialIndex: Int) {
+        var projectsList = Array(self.projects!)
+        projectsList.swapAt((indexPath.row), (Path.initialIndexPath?.row)!)
+        
+        do {
+            try self.realm.write {
+                let originalRow: Int = (Path.initialIndexPath?.row)!
+                let newRow: Int = indexPath.row;
+                
+                if (newRow < originalRow) {
+                    self.projects![(newRow)].setValue(-1, forKey: "order")
+                    self.projects![(originalRow)].setValue(newRow, forKey: "order")
+                    self.tableView.reloadData()
+                    self.projects![0].setValue(originalRow, forKey: "order")
+                } else {
+                    self.projects![(newRow)].setValue(projects?.count, forKey: "order")
+                    self.projects![(originalRow)].setValue(newRow, forKey: "order")
+                    self.tableView.reloadData()
+                    self.projects![(projects?.count)! - 1].setValue(originalRow, forKey: "order")
+                }
+                self.tableView.reloadData()
+            }
+        } catch {
+            print("Error saving new items, \(error)")
+        }
     }
     
 }
