@@ -89,7 +89,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     func deleteItem(at indexPath: IndexPath) {}
     func editItem(at indexPath: IndexPath) {}
     func markItemComplete(at indexPath: IndexPath) {}
-    func setDataSource(at indexPath: IndexPath) {}
+    func setDataSource(at indexPath: IndexPath, initialIndex: Int) {}
     
     
     
@@ -98,11 +98,12 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         let longpress = gestureRecognizer as! UILongPressGestureRecognizer
         let state = longpress.state
         let locationInView = longpress.location(in: self.tableView)
-        var indexPath = self.tableView.indexPathForRow(at: locationInView)
+        let indexPath = self.tableView.indexPathForRow(at: locationInView)
         
         switch state {
         case .began:
             if indexPath != nil {
+
                 Path.initialIndexPath = indexPath
                 let cell = self.tableView.cellForRow(at: indexPath!) as! SwipeTableViewCell
                 My.cellSnapShot = snapshopOfCell(inputView: cell)
@@ -130,10 +131,13 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
             My.cellSnapShot?.center = center!
             if ((indexPath != nil) && (indexPath != Path.initialIndexPath)) {
                 
-                
-                self.setDataSource(at: indexPath!)
+                let initialIndex: Int = Int(Path.initialIndexPath!.row)
+            
+                //print("Initial Index: \(String(describing: initialIndex))")
+                self.setDataSource(at: indexPath!, initialIndex: initialIndex)
                 //self.wayPoints.swapAt((indexPath?.row)!, (Path.initialIndexPath?.row)!)
                 //swap(&self.wayPoints[(indexPath?.row)!], &self.wayPoints[(Path.initialIndexPath?.row)!])
+                
                 self.tableView.moveRow(at: Path.initialIndexPath!, to: indexPath!)
                 Path.initialIndexPath = indexPath
             }

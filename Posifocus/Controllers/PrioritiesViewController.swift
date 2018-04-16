@@ -22,7 +22,9 @@ class PrioritiesViewController: SwipeTableViewController {
         super.viewDidLoad()
 
         self.tableView.backgroundColor = UIColor(hexString: themeColor)?.darken(byPercentage: 0.25)
-        loadPriorities()
+        //loadPriorities()
+        
+        priorities = realm.objects(Priority.self).sorted(byKeyPath: "order", ascending: true)
     }
     
     
@@ -78,7 +80,7 @@ class PrioritiesViewController: SwipeTableViewController {
     // Queries Database for Priorities
     func loadPriorities() {
         
-        priorities = realm.objects(Priority.self)
+        priorities = realm.objects(Priority.self).sorted(byKeyPath: "order", ascending: true)
         
         tableView.reloadData()
     }
@@ -96,6 +98,7 @@ class PrioritiesViewController: SwipeTableViewController {
         
         self.tableView.reloadData()
     }
+
     
     // Add Priority (+) Button Pressed
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -115,6 +118,7 @@ class PrioritiesViewController: SwipeTableViewController {
             
             let newPriority = Priority()
             newPriority.name = textField.text!
+            newPriority.order = (self.priorities?.count)!
         
             self.save(priority: newPriority)
         }
@@ -187,13 +191,31 @@ class PrioritiesViewController: SwipeTableViewController {
     }
     
     
-    override func setDataSource(at indexPath: IndexPath) {
-        var currentPriority = Array(self.priorities!)
-        currentPriority.swapAt((indexPath.row), (Path.initialIndexPath?.row)!)
+    override func setDataSource(at indexPath: IndexPath, initialIndex: Int) {
+        var prioritiesList = Array(self.priorities!)
+        prioritiesList.swapAt((indexPath.row), (Path.initialIndexPath?.row)!)
+        
+        do {
+            try self.realm.write {
+                let originalRow: Int = (Path.initialIndexPath?.row)!
+                let newRow: Int = indexPath.row;
+                
+                if (newRow < originalRow) {
+                    self.priorities![(newRow)].setValue(-1, forKey: "order")
+                    self.priorities![(originalRow)].setValue(newRow, forKey: "order")
+                    self.tableView.reloadData()
+                    self.priorities![0].setValue(originalRow, forKey: "order")
+                } else {
+                    self.priorities![(newRow)].setValue(priorities?.count, forKey: "order")
+                    self.priorities![(originalRow)].setValue(newRow, forKey: "order")
+                    self.tableView.reloadData()
+                    self.priorities![(priorities?.count)! - 1].setValue(originalRow, forKey: "order")
+                }
+                self.tableView.reloadData()
+            }
+        } catch {
+            print("Error saving new items, \(error)")
+        }
     }
-    
-    
-    
-    
 }
 
