@@ -24,7 +24,7 @@ class ProjectViewController: SwipeTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.backgroundColor = UIColor.pfYellow.darker(darkness: 0.9) //make 25% darker
+        self.tableView.backgroundColor = UIColor.pfYellow.darker(darkness: 0.9)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -213,6 +213,94 @@ class ProjectViewController: SwipeTableViewController {
         
         present(alert, animated: true, completion: nil)
         
+    }
+    
+    
+    
+    override func markItemComplete(at indexPath: IndexPath) {
+        
+        // Mark Item Complete
+        if (projects![indexPath.row].completed == false) {
+            
+            // Mark item complete and move to the end of the list
+            do {
+                try realm.write {
+                    let lastPosition = (projects?.count)!
+                    projects![indexPath.row].setValue(true, forKey: "completed")
+                    projects![indexPath.row].setValue(lastPosition, forKey: "order")
+                    
+                }
+            } catch {
+                print("Error updating items after marked complete, \(error)")
+            }
+            
+            
+            // Shift all items up in the list by one position
+            var i = 0
+            while i < ((projects?.count)!) {
+                if (i >= indexPath.row) {
+                    do {
+                        try self.realm.write {
+                            let shiftUp = i
+                            projects![i].setValue(shiftUp, forKey: "order")
+                        }
+                    } catch {
+                        print("Error updating items after marked complete, \(error)")
+                    }
+                }
+                
+                i = i + 1
+            }
+            tableView.reloadData()
+            
+            
+            
+            loadProjects()
+        }
+            
+            // Mark Item NOT Complete
+        else {
+            
+            // Mark item NOT Completed
+            do {
+                try self.realm.write {
+                    
+                    projects![indexPath.row].setValue(false, forKey: "completed")
+                    projects![indexPath.row].setValue((-1), forKey: "order")
+                }
+            } catch {
+                print("Error updating items after marked complete, \(error)")
+            }
+            tableView.reloadData()
+            
+            
+            // Shift all items down the list by one position
+            var i = indexPath.row
+            while i > 0 {
+                do {
+                    try self.realm.write {
+                        let shiftDown = i
+                        projects![i].setValue(shiftDown, forKey: "order")
+                    }
+                } catch {
+                    print("Error updating items after marked complete, \(error)")
+                }
+                
+                
+                i = i - 1
+            }
+            
+            // Set item order to 0
+            do {
+                try self.realm.write {
+                    projects![0].setValue(0, forKey: "order")
+                }
+            } catch {
+                print("Error updating items after marked complete, \(error)")
+            }
+            
+            loadProjects()
+        }
     }
     
     

@@ -200,6 +200,94 @@ class PrioritiesViewController: SwipeTableViewController {
         
     }
     
+    
+    override func markItemComplete(at indexPath: IndexPath) {
+        
+        // Mark Item Complete
+        if (priorities![indexPath.row].completed == false) {
+            
+            // Mark item complete and move to the end of the list
+            do {
+                try realm.write {
+                    let lastPosition = (priorities?.count)!
+                    priorities![indexPath.row].setValue(true, forKey: "completed")
+                    priorities![indexPath.row].setValue(lastPosition, forKey: "order")
+                    
+                }
+            } catch {
+                print("Error updating items after marked complete, \(error)")
+            }
+            
+            
+            // Shift all items up in the list by one position
+            var i = 0
+            while i < ((priorities?.count)!) {
+                if (i >= indexPath.row) {
+                    do {
+                        try self.realm.write {
+                            let shiftUp = i
+                            priorities![i].setValue(shiftUp, forKey: "order")
+                        }
+                    } catch {
+                        print("Error updating items after marked complete, \(error)")
+                    }
+                }
+                
+                i = i + 1
+            }
+            tableView.reloadData()
+            
+            
+            
+            loadPriorities()
+        }
+            
+            // Mark Item NOT Complete
+        else {
+            
+            // Mark item NOT Completed
+            do {
+                try self.realm.write {
+                    
+                    priorities![indexPath.row].setValue(false, forKey: "completed")
+                    priorities![indexPath.row].setValue((-1), forKey: "order")
+                }
+            } catch {
+                print("Error updating items after marked complete, \(error)")
+            }
+            tableView.reloadData()
+            
+            
+            // Shift all items down the list by one position
+            var i = indexPath.row
+            while i > 0 {
+                do {
+                    try self.realm.write {
+                        let shiftDown = i
+                        priorities![i].setValue(shiftDown, forKey: "order")
+                    }
+                } catch {
+                    print("Error updating items after marked complete, \(error)")
+                }
+                
+                
+                i = i - 1
+            }
+            
+            // Set item order to 0
+            do {
+                try self.realm.write {
+                    priorities![0].setValue(0, forKey: "order")
+                }
+            } catch {
+                print("Error updating items after marked complete, \(error)")
+            }
+            
+            loadPriorities()
+        }
+    }
+    
+    
     // Reorder Table Cells
     override func setDataSource(at indexPath: IndexPath, initialIndex: Int) {
         var prioritiesList = Array(self.priorities!)
