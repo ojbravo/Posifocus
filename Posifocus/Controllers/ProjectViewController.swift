@@ -14,8 +14,6 @@ class ProjectViewController: SwipeTableViewController {
     let realm = try! Realm()
     var projects: Results<Project>?
     
-    let themeColor: String = "FDC02F" // yellow
-    
     var selectedPriority : Priority? {
         didSet{
             loadProjects()
@@ -26,17 +24,17 @@ class ProjectViewController: SwipeTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.backgroundColor = UIColor(hexString: themeColor)?.darken(byPercentage: 0.25)
+        self.tableView.backgroundColor = UIColor.pfYellow.darker(darkness: 0.9) //make 25% darker
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = UIColor(hexString: themeColor)
+        navigationController?.navigationBar.barTintColor = UIColor.pfYellow
         navigationController?.navigationBar.isTranslucent = false
         title = (selectedPriority?.name)! + " Projects"
     }
     
     override func willMove(toParentViewController parent: UIViewController?) {
-        self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "8CC252")
+        self.navigationController?.navigationBar.barTintColor = UIColor.pfGreen.darker(darkness: 0.9)
     }
     
     // Defines number of cells to accomodate entire list
@@ -54,12 +52,27 @@ class ProjectViewController: SwipeTableViewController {
         
         cell.textLabel?.text = projects?[indexPath.row].name ?? "No Projects Added Yet"
         
-        if let bgcolor = UIColor(hexString: themeColor)?.darken(byPercentage:
-            CGFloat(indexPath.row) / CGFloat(projects!.count + 3)) {
+        let cellRange = NSMakeRange(0, (cell.textLabel?.text?.count)!)
+        let attributedText = NSMutableAttributedString(string: (cell.textLabel?.text)!)
+        
+        if (projects?[indexPath.row].completed)! {
+            cell.backgroundColor = UIColor.darkGray
+            cell.textLabel?.textColor = UIColor.lightGray
+            attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
+                                        value: NSUnderlineStyle.styleSingle.rawValue, range: cellRange)
             
-            cell.backgroundColor = bgcolor
+            
+            cell.textLabel?.attributedText =  attributedText
+            
+        } else {
+            let numberOfRows = 1 - (CGFloat(indexPath.row) / CGFloat(projects!.count + 3))
+            
+            cell.backgroundColor = UIColor.pfYellow.darker(darkness: numberOfRows)
             cell.textLabel?.textColor = UIColor.white
+            attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
+                                        value: NSUnderlineStyle.styleNone.rawValue, range: cellRange)
         }
+        
         
         return cell
     }

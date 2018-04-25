@@ -14,9 +14,6 @@ class TaskViewController: SwipeTableViewController  {
     let realm = try! Realm()
     var tasks: Results<Task>?
     
-    let themeColor: String = "FC5830"  //orange
-    
-    
     var selectedProject : Project? {
         didSet{
             loadTasks()
@@ -27,17 +24,17 @@ class TaskViewController: SwipeTableViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.backgroundColor = UIColor(hexString: themeColor)?.darken(byPercentage: 0.25)
+        self.tableView.backgroundColor = UIColor.pfOrange
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = UIColor(hexString: themeColor)
+        navigationController?.navigationBar.barTintColor = UIColor.pfOrange.darker(darkness: 0.90) //make 25% darker
         navigationController?.navigationBar.isTranslucent = false
         title = (selectedProject?.name)! + " Tasks"
     }
     
     override func willMove(toParentViewController parent: UIViewController?) {
-        self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "FDC02F")
+        self.navigationController?.navigationBar.barTintColor = UIColor.pfYellow
     }
     
     // Defines number of cells to accomodate entire list
@@ -50,41 +47,42 @@ class TaskViewController: SwipeTableViewController  {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        
         cell.textLabel?.text = tasks?[indexPath.row].name ?? "No Tasks Added Yet"
+        let cellRange = NSMakeRange(0, (cell.textLabel?.text?.count)!)
+        let attributedText = NSMutableAttributedString(string: (cell.textLabel?.text)!)
         
-        if let bgcolor = UIColor(hexString: themeColor)?.darken(byPercentage:
-            CGFloat(indexPath.row) / CGFloat(tasks!.count + 3)) {
+        if (tasks?[indexPath.row].completed)! {
+            cell.backgroundColor = UIColor.darkGray
+            cell.textLabel?.textColor = UIColor.lightGray
+            attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
+                                        value: NSUnderlineStyle.styleSingle.rawValue, range: cellRange)
             
-            cell.backgroundColor = bgcolor
+            
+            cell.textLabel?.attributedText =  attributedText
+            
+        } else {
+            let numberOfRows = 1 - (CGFloat(indexPath.row) / CGFloat(tasks!.count + 3))
+            
+                
+            cell.backgroundColor = UIColor.pfOrange.darker(darkness: numberOfRows)
             cell.textLabel?.textColor = UIColor.white
+            attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
+                                        value: NSUnderlineStyle.styleNone.rawValue, range: cellRange)
         }
         
         return cell
     }
     
     
-    // Marks cells with checkmark
-    
-        override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
-            if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-                tableView.cellForRow(at: indexPath)?.accessoryType = .none
-            }
-            else {
-                tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-            }
-            tableView.deselectRow(at: indexPath, animated: true)
-    
-        }
-    
-    // Queries Projects from Database
+    // Queries Tasks from Database
     func loadTasks() {
         
         tasks = selectedProject?.tasks.sorted(byKeyPath: "order", ascending: true)
         
         tableView.reloadData()
     }
+    
+    
     
     // Save Projects to Database
     func save(task: Task) {
@@ -196,6 +194,96 @@ class TaskViewController: SwipeTableViewController  {
         present(alert, animated: true, completion: nil)
         
     }
+    
+    override func markItemComplete(at indexPath: IndexPath) {
+
+        // Mark Item Complete
+        if (tasks![indexPath.row].completed == false) {
+            
+            // Mark item complete and move to the end of the list
+            do {
+                try realm.write {
+                    let lastPosition = (tasks?.count)!
+                    tasks![indexPath.row].setValue(true, forKey: "completed")
+                    tasks![indexPath.row].setValue(lastPosition, forKey: "order")
+                    
+                }
+            } catch {
+                print("Error updating items after marked complete, \(error)")
+            }
+            
+            
+            // Shift all items up in the list by one position
+            var i = 0
+            while i < ((tasks?.count)!) {
+                if (i >= indexPath.row) {
+                    do {
+                        try self.realm.write {
+                            let shiftUp = i
+                            tasks![i].setValue(shiftUp, forKey: "order")
+                        }
+                    } catch {
+                        print("Error updating items after marked complete, \(error)")
+                    }
+                }
+                
+                i = i + 1
+            }
+            tableView.reloadData()
+            
+            
+            
+            loadTasks()
+        }
+        
+        // Mark Item NOT Complete
+        else {
+            
+            // Mark item NOT Completed
+            do {
+                try self.realm.write {
+                    
+                    tasks![indexPath.row].setValue(false, forKey: "completed")
+                    tasks![indexPath.row].setValue((-1), forKey: "order")
+                }
+            } catch {
+                print("Error updating items after marked complete, \(error)")
+            }
+            tableView.reloadData()
+            
+            
+            // Shift all items down the list by one position
+            var i = indexPath.row
+            while i > 0 {
+                do {
+                    try self.realm.write {
+                        let shiftDown = i
+                        tasks![i].setValue(shiftDown, forKey: "order")
+                    }
+                } catch {
+                    print("Error updating items after marked complete, \(error)")
+                }
+                
+                
+                i = i - 1
+            }
+            
+            // Set item order to 0
+            do {
+                try self.realm.write {
+                    tasks![0].setValue(0, forKey: "order")
+                }
+            } catch {
+                print("Error updating items after marked complete, \(error)")
+            }
+            
+            loadTasks()
+        }
+    }
+    
+    
+    
+    
     
     override func setDataSource(at indexPath: IndexPath, initialIndex: Int) {
         var tasksList = Array(self.tasks!)

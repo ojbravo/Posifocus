@@ -8,7 +8,7 @@
 
 import UIKit
 import RealmSwift
-import ChameleonFramework
+//import ChameleonFramework
 
 class PrioritiesViewController: SwipeTableViewController {
 
@@ -16,12 +16,10 @@ class PrioritiesViewController: SwipeTableViewController {
     
     var priorities: Results<Priority>?
     
-    let themeColor: String = "8CC252"  //green
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.backgroundColor = UIColor(hexString: themeColor)?.darken(byPercentage: 0.25)
+        self.tableView.backgroundColor = UIColor.pfGreen.darker(darkness: 0.9) // Make 25% Darker
         //loadPriorities()
         
         priorities = realm.objects(Priority.self).sorted(byKeyPath: "order", ascending: true)
@@ -29,7 +27,7 @@ class PrioritiesViewController: SwipeTableViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = UIColor(hexString: themeColor)
+        navigationController?.navigationBar.barTintColor = UIColor.pfGreen.darker(darkness: 0.9)
         navigationController?.navigationBar.isTranslucent = false
     }
     
@@ -45,11 +43,25 @@ class PrioritiesViewController: SwipeTableViewController {
         
         cell.textLabel?.text = priorities?[indexPath.row].name ?? "No Priorities Added Yet"
         
-        if let bgcolor = UIColor(hexString: themeColor)?.darken(byPercentage:
-            CGFloat(indexPath.row) / CGFloat(priorities!.count + 3)) {
-                
-                cell.backgroundColor = bgcolor
-                cell.textLabel?.textColor = UIColor.white
+        let cellRange = NSMakeRange(0, (cell.textLabel?.text?.count)!)
+        let attributedText = NSMutableAttributedString(string: (cell.textLabel?.text)!)
+        
+        if (priorities?[indexPath.row].completed)! {
+            cell.backgroundColor = UIColor.darkGray
+            cell.textLabel?.textColor = UIColor.lightGray
+            attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
+                                        value: NSUnderlineStyle.styleSingle.rawValue, range: cellRange)
+            
+            
+            cell.textLabel?.attributedText =  attributedText
+            
+        } else {
+            let numberOfRows = 1 - (CGFloat(indexPath.row) / CGFloat(priorities!.count + 3))
+
+            cell.backgroundColor = UIColor.pfGreen.darker(darkness: numberOfRows)
+            cell.textLabel?.textColor = UIColor.white
+            attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
+                                        value: NSUnderlineStyle.styleNone.rawValue, range: cellRange)
         }
         
         
@@ -123,8 +135,6 @@ class PrioritiesViewController: SwipeTableViewController {
             self.save(priority: newPriority)
         }
         
-        
-        
         alert.addAction(action)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
@@ -190,10 +200,11 @@ class PrioritiesViewController: SwipeTableViewController {
         
     }
     
-    
+    // Reorder Table Cells
     override func setDataSource(at indexPath: IndexPath, initialIndex: Int) {
         var prioritiesList = Array(self.priorities!)
         prioritiesList.swapAt((indexPath.row), (Path.initialIndexPath?.row)!)
+        
         
         do {
             try self.realm.write {

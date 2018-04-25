@@ -36,7 +36,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         
         if orientation == .left {
-            let markCompleteButton = SwipeAction(style: .destructive, title: "Done") { action, indexPath in
+            let markCompleteButton = SwipeAction(style: .default, title: "Done") { action, indexPath in
                 // handle action by updating model with deletion
                 
                 self.markItemComplete(at: indexPath)
@@ -45,7 +45,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
             
             // customize the action appearance
             markCompleteButton.image = UIImage(named: "complete-icon")
-            markCompleteButton.backgroundColor = UIColor(hexString: "59d66e")
+            markCompleteButton.backgroundColor = UIColor.btnGreen
             markCompleteButton.hidesWhenSelected = true
             
             return [markCompleteButton]
@@ -60,9 +60,9 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
             
             // customize the action appearance
             deleteButton.image = UIImage(named: "delete-icon")
-            deleteButton.backgroundColor = UIColor(hexString: "f93f40")
+            deleteButton.backgroundColor = UIColor.btnRed
             
-            let editButton = SwipeAction(style: .destructive, title: "Edit") { action, indexPath in
+            let editButton = SwipeAction(style: .default, title: "Edit") { action, indexPath in
                 // handle action by updating model with deletion
                 
                 self.editItem(at: indexPath)
@@ -72,7 +72,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
             
             // customize the action appearance
             editButton.image = UIImage(named: "edit-icon")
-            editButton.backgroundColor = UIColor(hexString: "2180f7")
+            editButton.backgroundColor = UIColor.btnBlue
             editButton.hidesWhenSelected = true
             
             return [deleteButton, editButton]
@@ -81,18 +81,18 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
         var options = SwipeTableOptions()
-        options.expansionStyle = .destructive
+        options.expansionStyle = orientation == .left ? .selection : .destructive
         options.transitionStyle = .border
         return options
     }
     
     func deleteItem(at indexPath: IndexPath) {}
     func editItem(at indexPath: IndexPath) {}
-    func markItemComplete(at indexPath: IndexPath) {}
+    func markItemComplete(at indexPath: IndexPath) { print("Marked Complete") }
     func setDataSource(at indexPath: IndexPath, initialIndex: Int) {}
     
     
-    
+    // Reorder Table Cells with longPressGesture
     @objc func longPressGestureRecognized(gestureRecognizer: UIGestureRecognizer) {
         
         let longpress = gestureRecognizer as! UILongPressGestureRecognizer
@@ -129,14 +129,12 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
             var center = My.cellSnapShot?.center
             center?.y = locationInView.y
             My.cellSnapShot?.center = center!
+            
+            
             if ((indexPath != nil) && (indexPath != Path.initialIndexPath)) {
                 
                 let initialIndex: Int = Int(Path.initialIndexPath!.row)
-            
-                //print("Initial Index: \(String(describing: initialIndex))")
                 self.setDataSource(at: indexPath!, initialIndex: initialIndex)
-                //self.wayPoints.swapAt((indexPath?.row)!, (Path.initialIndexPath?.row)!)
-                //swap(&self.wayPoints[(indexPath?.row)!], &self.wayPoints[(Path.initialIndexPath?.row)!])
                 
                 self.tableView.moveRow(at: Path.initialIndexPath!, to: indexPath!)
                 Path.initialIndexPath = indexPath
@@ -173,6 +171,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         cellSnapshot.layer.shadowOffset = CGSize(width: -5.0, height: 0.0)
         cellSnapshot.layer.shadowRadius = 5.0
         cellSnapshot.layer.shadowOpacity = 0.4
+
         return cellSnapshot
     }
     
@@ -183,10 +182,52 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     struct Path {
         static var initialIndexPath: IndexPath? = nil
     }
-    
-    
-    
+    // end Reorder with longPressGesture
     
     
 }
 
+extension UIColor {
+    
+    // Setup custom colours we can use throughout the app using hex values
+    static let pfYellow = UIColor(red:0.99, green:0.75, blue:0.18, alpha:1.0)
+    static let pfOrange = UIColor(red:0.99, green:0.35, blue:0.19, alpha:1.0)
+    static let pfGreen = UIColor(red:0.55, green:0.76, blue:0.32, alpha:1.0)
+    
+    static let btnGreen = UIColor(red:0.35, green:0.84, blue:0.43, alpha:1.0)
+    static let btnBlue = UIColor(red:0.13, green:0.50, blue:0.97, alpha:1.0)
+    static let btnRed = UIColor(red:0.98, green:0.25, blue:0.25, alpha:1.0)
+    
+    
+    // Create a UIColor from RGB
+    convenience init(red: Int, green: Int, blue: Int, a: CGFloat = 1.0) {
+        self.init(
+            red: CGFloat(red) / 255.0,
+            green: CGFloat(green) / 255.0,
+            blue: CGFloat(blue) / 255.0,
+            alpha: a
+        )
+    }
+    
+    // Create a UIColor from a hex value (E.g 0x000000)
+    convenience init(hex: Int, a: CGFloat = 1.0) {
+        self.init(
+            red: (hex >> 16) & 0xFF,
+            green: (hex >> 8) & 0xFF,
+            blue: hex & 0xFF,
+            a: a
+        )
+    }
+    
+    func darker(darkness: CGFloat) -> UIColor {
+        guard darkness <= 1.0 else { return self }
+        
+        let scalingFactor: CGFloat = darkness
+        var r: CGFloat = 0.0, g: CGFloat = 0.0, b: CGFloat = 0.0, a: CGFloat = 0.0
+        self.getRed(&r, green: &g, blue: &b, alpha: &a)
+        let newR = CGFloat.maximum(r * scalingFactor, 0.0),
+        newG = CGFloat.maximum(g * scalingFactor, 0.0),
+        newB = CGFloat.maximum(b * scalingFactor, 0.0)
+        return UIColor(red: newR, green: newG, blue: newB, alpha: 1.0)
+    }
+}
