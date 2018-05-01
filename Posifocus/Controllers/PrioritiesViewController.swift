@@ -19,8 +19,7 @@ class PrioritiesViewController: SwipeTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.backgroundColor = UIColor.pfGreen.darker(darkness: 0.9) // Make 25% Darker
-        //loadPriorities()
+        self.tableView.backgroundColor = UIColor.pfGreen.darker(darkness: 0.9)
         
         priorities = realm.objects(Priority.self).sorted(byKeyPath: "order", ascending: true)
     }
@@ -29,6 +28,10 @@ class PrioritiesViewController: SwipeTableViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = UIColor.pfGreen.darker(darkness: 0.9)
         navigationController?.navigationBar.isTranslucent = false
+    }
+    
+    override func willMove(toParentViewController parent: UIViewController?) {
+        self.navigationController?.navigationBar.barTintColor = UIColor.pfBlue
     }
     
     // Defines number of cells to accomodate entire list

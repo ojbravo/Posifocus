@@ -193,9 +193,11 @@ extension UIColor {
     static let pfYellow = UIColor(red:0.99, green:0.75, blue:0.18, alpha:1.0)
     static let pfOrange = UIColor(red:0.99, green:0.35, blue:0.19, alpha:1.0)
     static let pfGreen = UIColor(red:0.55, green:0.76, blue:0.32, alpha:1.0)
+    static let pfBerry = UIColor(red:0.92, green:0.08, blue:0.41, alpha:1.0)
+    static let pfBlue = UIColor(red:0.05, green:0.56, blue:0.87, alpha:1.0)
     
     static let btnGreen = UIColor(red:0.35, green:0.84, blue:0.43, alpha:1.0)
-    static let btnBlue = UIColor(red:0.13, green:0.50, blue:0.97, alpha:1.0)
+    static let btnBlue = UIColor(red:0.15, green:0.60, blue:0.98, alpha:1.0)
     static let btnRed = UIColor(red:0.98, green:0.25, blue:0.25, alpha:1.0)
     
     
