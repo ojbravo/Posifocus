@@ -10,9 +10,9 @@ import Foundation
 import RealmSwift
 
 class Gratitude: Object {
-    @objc dynamic var what: String = ""
-    @objc dynamic var why: String = ""
-    @objc dynamic var when = Date()
+    @objc dynamic var name: String = ""
+    @objc dynamic var details: String = ""
+    @objc dynamic var day = Date()
     @objc dynamic var category: String = ""
     @objc dynamic var rating: Int = 0
 }
