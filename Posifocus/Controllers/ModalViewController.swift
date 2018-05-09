@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol ModalViewControllerDelegate: class {
     func removeBlurredBackgroundView()
@@ -14,6 +15,9 @@ protocol ModalViewControllerDelegate: class {
 
 
 class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
+    
+    let realm = try! Realm()
+    var gratitudes: Results<Gratitude>?
     
     weak var delegate: ModalViewControllerDelegate?
     
@@ -54,6 +58,8 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
         gratitudeNotes.text = "My kids surprised me today by..."
         gratitudeNotes.textColor = UIColor.lightGray
         gratitudeNotes.delegate = self
+        
+        gratitudes = realm.objects(Gratitude.self).sorted(byKeyPath: "day", ascending: false)
     }
     
     
@@ -100,5 +106,22 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
         }
     }
     
+    @IBAction func saveGratitude(_ sender: UIButton) {
+        
+        do {
+            try self.realm.write {
+                let newGratitude = Gratitude()
+                newGratitude.name = gratitudeName.text!
+                newGratitude.notes = gratitudeNotes.text!
+                realm.add(newGratitude)
+            }
+        } catch {
+            print("Error saving new items, \(error)")
+        }
+
+        dismiss(animated: true, completion: nil)
+        delegate?.removeBlurredBackgroundView()
+    
+    }
     
 }

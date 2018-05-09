@@ -8,17 +8,19 @@
 
 import UIKit
 import RealmSwift
+import SwipeCellKit
 
 class GratitudesViewController: SwipeTableViewController, ModalViewControllerDelegate {
-    
+
     let realm = try! Realm()
     var gratitudes: Results<Gratitude>?
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.rowHeight = 200.0
+        tableView.rowHeight = 100.0
         self.tableView.backgroundColor = UIColor.pfBerry.darker(darkness: 0.9)
         
         gratitudes = realm.objects(Gratitude.self).sorted(byKeyPath: "day", ascending: false)
@@ -27,6 +29,7 @@ class GratitudesViewController: SwipeTableViewController, ModalViewControllerDel
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = UIColor.pfBerry
         navigationController?.navigationBar.isTranslucent = false
+        
     }
     
     override func willMove(toParentViewController parent: UIViewController?) {
@@ -42,12 +45,29 @@ class GratitudesViewController: SwipeTableViewController, ModalViewControllerDel
     // Populates cells from database
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        cell.textLabel?.text = gratitudes?[indexPath.row].name ?? "No Gratitudes Added Yet"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! GratitudeCell
+        cell.delegate = self
+        cell.backgroundColor = UIColor.clear
+        
+        let shadowPath = UIBezierPath(rect: cell.gratitudeView.bounds).cgPath
+        cell.gratitudeView.backgroundColor = UIColor.pfBerry
+        cell.gratitudeView.layer.cornerRadius = 2
+        cell.gratitudeView.clipsToBounds = false
+        cell.gratitudeView.layer.shadowColor = UIColor.black.cgColor
+        cell.gratitudeView.layer.shadowOffset = CGSize(width: 0, height: 0);
+        cell.gratitudeView.layer.shadowOpacity = 0.5
+        cell.gratitudeView.layer.shadowRadius = 1
+        cell.gratitudeView.layer.shadowPath = shadowPath
+        
+        cell.gratitudeName?.text = (gratitudes?[indexPath.row].name)!
+        cell.gratitudeName.textColor = UIColor.white
+        
+        cell.gratitudeNotes?.text = (gratitudes?[indexPath.row].notes)!
+        cell.gratitudeNotes.textColor = UIColor.white
+        
         
         return cell
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
@@ -71,6 +91,23 @@ class GratitudesViewController: SwipeTableViewController, ModalViewControllerDel
                 subview.removeFromSuperview()
             }
         }
+        tableView.reloadData()
     }
+    
+}
+
+
+class GratitudeCell: SwipeTableViewCell {
+    
+    
+    @IBOutlet weak var gratitudeView: UIView!
+    @IBOutlet weak var gratitudeName: UILabel!
+    @IBOutlet weak var gratitudeNotes: UILabel!
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
     
 }
