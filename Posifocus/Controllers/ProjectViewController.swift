@@ -11,7 +11,7 @@ import RealmSwift
 
 class ProjectViewController: SwipeTableViewController {
     
-    let realm = try! Realm()
+    //let realm = try! Realm()
     var projects: Results<Project>?
     
     var selectedPriority : Priority? {
@@ -155,28 +155,34 @@ class ProjectViewController: SwipeTableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    override func deleteItem(at indexPath: IndexPath) {
-        
-        if let deleteProject = self.projects?[indexPath.row] {
-            do {
-                try self.realm.write {
-                    if deleteProject.tasks.count != 0 {
-                        self.realm.delete(deleteProject.tasks)
-                    }
-                    self.realm.delete(deleteProject)
-                    
-                    var i = 0
-                    while i < ((projects?.count)!) {
-                        self.projects![i].setValue(i, forKey: "order")
-                        i = i + 1 
-                    }
-                }
-            } catch {
-                print("Couldn't delete project \(error)")
-            }
-        }
-        
+    override func deleteButtonPressed(at indexPath: IndexPath) {
+        self.deleteItems(at: indexPath, itemList: self.projects!)
     }
+    
+    
+    
+//    override func deleteItem(at indexPath: IndexPath) {
+//
+//        if let deleteProject = self.projects?[indexPath.row] {
+//            do {
+//                try self.realm.write {
+//                    if deleteProject.tasks.count != 0 {
+//                        self.realm.delete(deleteProject.tasks)
+//                    }
+//                    self.realm.delete(deleteProject)
+//
+//                    var i = 0
+//                    while i < ((projects?.count)!) {
+//                        self.projects![i].setValue(i, forKey: "order")
+//                        i = i + 1
+//                    }
+//                }
+//            } catch {
+//                print("Couldn't delete project \(error)")
+//            }
+//        }
+//
+//    }
     
     override func editItem(at indexPath: IndexPath) {
         

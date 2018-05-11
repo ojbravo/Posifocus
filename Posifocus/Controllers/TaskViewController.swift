@@ -11,8 +11,9 @@ import RealmSwift
 
 class TaskViewController: SwipeTableViewController  {
 
-    let realm = try! Realm()
+    //let realm = try! Realm()
     var tasks: Results<Task>?
+
     
     var selectedProject : Project? {
         didSet{
@@ -25,6 +26,7 @@ class TaskViewController: SwipeTableViewController  {
         super.viewDidLoad()
         
         self.tableView.backgroundColor = UIColor.pfOrange
+        profile = realm.objects(Profile.self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,23 +137,8 @@ class TaskViewController: SwipeTableViewController  {
         present(alert, animated: true, completion: nil)
     }
     
-    override func deleteItem(at indexPath: IndexPath) {
-        if let deleteTask = self.tasks?[indexPath.row] {
-            do {
-                try self.realm.write {
-                    self.realm.delete(deleteTask)
-                    
-                    var i = 0
-                    while i < ((tasks?.count)!) {
-                        self.tasks![i].setValue(i, forKey: "order")
-                        i = i + 1
-                    }
-                }
-            } catch {
-                print("Couldn't delete task \(error)")
-            }
-        }
-
+    override func deleteButtonPressed(at indexPath: IndexPath) {
+        self.deleteItems(at: indexPath, itemList: self.tasks!)
     }
     
     override func editItem(at indexPath: IndexPath) {

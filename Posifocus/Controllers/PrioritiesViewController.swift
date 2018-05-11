@@ -12,7 +12,7 @@ import RealmSwift
 
 class PrioritiesViewController: SwipeTableViewController {
 
-    let realm = try! Realm()
+    //let realm = try! Realm()
     
     var priorities: Results<Priority>?
     
@@ -144,29 +144,33 @@ class PrioritiesViewController: SwipeTableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    override func deleteItem(at indexPath: IndexPath) {
-        if let deletePriority = self.priorities?[indexPath.row] {
-            let deleteProjectsCount = deletePriority.projects.count
-            
-            //if tasks.count, if projects.count
-            
-            do {
-                try self.realm.write {
-                    if deleteProjectsCount != 0 {
-                        for i in 0...(deleteProjectsCount - 1) {
-                            if deletePriority.projects[i].tasks.count != 0 {
-                                self.realm.delete(deletePriority.projects[i].tasks)
-                            }
-                        }
-                        self.realm.delete(deletePriority.projects)
-                    }
-                    self.realm.delete(deletePriority)
-                }
-            } catch {
-                print("Couldn't delete priority \(error)")
-            }
-        }
+    override func deleteButtonPressed(at indexPath: IndexPath) {
+        self.deleteItems(at: indexPath, itemList: self.priorities!)
     }
+    
+//    override func deleteItem(at indexPath: IndexPath) {
+//        if let deletePriority = self.priorities?[indexPath.row] {
+//            let deleteProjectsCount = deletePriority.projects.count
+//
+//            //if tasks.count, if projects.count
+//
+//            do {
+//                try self.realm.write {
+//                    if deleteProjectsCount != 0 {
+//                        for i in 0...(deleteProjectsCount - 1) {
+//                            if deletePriority.projects[i].tasks.count != 0 {
+//                                self.realm.delete(deletePriority.projects[i].tasks)
+//                            }
+//                        }
+//                        self.realm.delete(deletePriority.projects)
+//                    }
+//                    self.realm.delete(deletePriority)
+//                }
+//            } catch {
+//                print("Couldn't delete priority \(error)")
+//            }
+//        }
+//    }
     
     override func editItem(at indexPath: IndexPath) {
         

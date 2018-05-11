@@ -8,10 +8,15 @@
 
 import UIKit
 import SwipeCellKit
+import RealmSwift
 
 class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegate {
     
+    let realm = try! Realm()
     var cell: UITableViewCell?
+    var gratitudes: Results<Gratitude>?
+    var profile: Results<Profile>?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +59,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
             let deleteButton = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
                 // handle action by updating model with deletion
                 
-                self.deleteItem(at: indexPath)
+                self.deleteButtonPressed(at: indexPath)
                 
             }
             
@@ -86,10 +91,41 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         return options
     }
     
-    func deleteItem(at indexPath: IndexPath) {}
+    func deleteButtonPressed(at indexPath: IndexPath) {}
     func editItem(at indexPath: IndexPath) {}
     func markItemComplete(at indexPath: IndexPath) { print("Marked Complete") }
     func setDataSource(at indexPath: IndexPath, initialIndex: Int) {}
+    
+    
+    
+    
+    func deleteItem<T: Object>(at indexPath: IndexPath, itemList: Results<T>) {
+        let item = itemList[indexPath.row]
+        do {
+            try self.realm.write {
+                self.realm.delete(item)
+                
+                var i = 0
+                while i < ((itemList.count)) {
+                    itemList[i].setValue(i, forKey: "order")
+                    i = i + 1
+                }
+            }
+        } catch {
+            print("Couldn't delete item \(error)")
+        }
+    }
+    
+    func deleteItems<T: Object>(at indexPath: IndexPath, itemList: Results<T>) {
+        let deleteItem = itemList[indexPath.row]
+        do {
+            try self.realm.write {
+                self.realm.delete(deleteItem)
+            }
+        } catch {
+            print("Couldn't delete task \(error)")
+        }
+    }
     
     
     // Reorder Table Cells with longPressGesture

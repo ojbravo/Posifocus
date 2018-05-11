@@ -12,15 +12,15 @@ import SwipeCellKit
 
 class GratitudesViewController: SwipeTableViewController, ModalViewControllerDelegate {
 
-    let realm = try! Realm()
-    var gratitudes: Results<Gratitude>?
+    //let realm = try! Realm()
+    //var gratitudes: Results<Gratitude>?
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.rowHeight = 100.0
+        tableView.rowHeight = 130.0
         self.tableView.backgroundColor = UIColor.pfBerry.darker(darkness: 0.9)
         
         gratitudes = realm.objects(Gratitude.self).sorted(byKeyPath: "day", ascending: false)
@@ -65,14 +65,47 @@ class GratitudesViewController: SwipeTableViewController, ModalViewControllerDel
         cell.gratitudeNotes?.text = (gratitudes?[indexPath.row].notes)!
         cell.gratitudeNotes.textColor = UIColor.white
         
+        let day = gratitudes![indexPath.row].day
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        
+        cell.gratitudeDate?.text = "\(dateFormatter.string(from: day))"
+        
+        //cell.gratitudeDate?.text = day
+        cell.gratitudeDate.textColor = UIColor.white
+        
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        
+        if orientation == .left {
+            return nil
+        } else {
+            let deleteButton = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+                // handle action by updating model with deletion
+                
+                self.deleteItems(at: indexPath, itemList: self.gratitudes!)
+                
+            }
+            
+            // customize the action appearance
+            deleteButton.image = UIImage(named: "delete-icon")
+            deleteButton.backgroundColor = UIColor.btnRed
+            
+            return [deleteButton]
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             if identifier == "ShowModalView" {
                 if let viewController = segue.destination as? ModalViewController {
+                    if (tableView.indexPathForSelectedRow != nil) {
+                        viewController.indexPath = tableView.indexPathForSelectedRow!
+                    }
                     viewController.delegate = self as ModalViewControllerDelegate
                     viewController.modalPresentationStyle = .overFullScreen
                 }
@@ -80,9 +113,9 @@ class GratitudesViewController: SwipeTableViewController, ModalViewControllerDel
         }
     }
     
-    
-
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ShowModalView", sender: indexPath);
+    }
     
     func removeBlurredBackgroundView() {
         
@@ -102,8 +135,9 @@ class GratitudeCell: SwipeTableViewCell {
     
     @IBOutlet weak var gratitudeView: UIView!
     @IBOutlet weak var gratitudeName: UILabel!
-    @IBOutlet weak var gratitudeNotes: UILabel!
-    
+
+    @IBOutlet weak var gratitudeNotes: UITextView!
+    @IBOutlet weak var gratitudeDate: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

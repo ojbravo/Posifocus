@@ -16,12 +16,19 @@
 		930BCCD32079A62600424182 /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930BCCD22079A62600424182 /* SwipeTableViewController.swift */; };
 		930BCCD92079BC5000424182 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930BCCD52079BC4F00424182 /* Assets.xcassets */; };
 		930BCCDD2079BC6400424182 /* edit-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 930BCCDC2079BC6400424182 /* edit-icon.png */; };
+		93157D2D20A630C8004008D8 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93157D2C20A630C8004008D8 /* Profile.swift */; };
 		9327E8362099078300D6DB28 /* GratitudesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327E8352099078300D6DB28 /* GratitudesViewController.swift */; };
 		9327E83A209A19C400D6DB28 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327E839209A19C400D6DB28 /* ModalViewController.swift */; };
+		9333027D20A6037600D7DAEA /* tasks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9333027820A6037500D7DAEA /* tasks@2x.png */; };
+		9333027E20A6037600D7DAEA /* priorities@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9333027920A6037600D7DAEA /* priorities@2x.png */; };
+		9333027F20A6037600D7DAEA /* relationships@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9333027A20A6037600D7DAEA /* relationships@2x.png */; };
+		9333028020A6037600D7DAEA /* projects@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9333027B20A6037600D7DAEA /* projects@2x.png */; };
+		9333028120A6037600D7DAEA /* gratitudes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9333027C20A6037600D7DAEA /* gratitudes@2x.png */; };
 		933A8783207848CB001C5DFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933A8782207848CB001C5DFB /* AppDelegate.swift */; };
 		933A8785207848CB001C5DFB /* PrioritiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933A8784207848CB001C5DFB /* PrioritiesViewController.swift */; };
 		933A8788207848CB001C5DFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A8786207848CB001C5DFB /* Main.storyboard */; };
 		933A878D207848CC001C5DFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A878B207848CC001C5DFB /* LaunchScreen.storyboard */; };
+		93B5670220A53EB800207697 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B5670120A53EB800207697 /* DashboardViewController.swift */; };
 		F3BA9CFBAD72B4D98F86F399 /* Pods_Posifocus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34F268D02CBA9A5124F21B2 /* Pods_Posifocus.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,14 +45,21 @@
 		930BCCDC2079BC6400424182 /* edit-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit-icon.png"; sourceTree = "<group>"; };
 		930BCCDE2079BC7F00424182 /* delete-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-icon.png"; sourceTree = "<group>"; };
 		930BCCDF2079BC9400424182 /* complete-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "complete-icon.png"; sourceTree = "<group>"; };
+		93157D2C20A630C8004008D8 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		9327E8352099078300D6DB28 /* GratitudesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratitudesViewController.swift; sourceTree = "<group>"; };
 		9327E839209A19C400D6DB28 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
+		9333027820A6037500D7DAEA /* tasks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tasks@2x.png"; sourceTree = "<group>"; };
+		9333027920A6037600D7DAEA /* priorities@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "priorities@2x.png"; sourceTree = "<group>"; };
+		9333027A20A6037600D7DAEA /* relationships@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "relationships@2x.png"; sourceTree = "<group>"; };
+		9333027B20A6037600D7DAEA /* projects@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "projects@2x.png"; sourceTree = "<group>"; };
+		9333027C20A6037600D7DAEA /* gratitudes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gratitudes@2x.png"; sourceTree = "<group>"; };
 		933A877F207848CB001C5DFB /* Posifocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posifocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		933A8782207848CB001C5DFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		933A8784207848CB001C5DFB /* PrioritiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrioritiesViewController.swift; sourceTree = "<group>"; };
 		933A8787207848CB001C5DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		933A878C207848CC001C5DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		933A878E207848CC001C5DFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93B5670120A53EB800207697 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = Posifocus/Controllers/DashboardViewController.swift; sourceTree = SOURCE_ROOT; };
 		A34F268D02CBA9A5124F21B2 /* Pods_Posifocus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Posifocus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6460EAEC1F9761927555512 /* Pods-Posifocus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Posifocus.release.xcconfig"; path = "Pods/Target Support Files/Pods-Posifocus/Pods-Posifocus.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,6 +96,7 @@
 		930BCCBE20786C4A00424182 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				93157D2C20A630C8004008D8 /* Profile.swift */,
 				930BCCCC20786FEA00424182 /* Gratitude.swift */,
 				930BCCC620786FC300424182 /* Priority.swift */,
 				930BCCC820786FCD00424182 /* Project.swift */,
@@ -102,6 +117,7 @@
 		930BCCC020786C5E00424182 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				93B5670120A53EB800207697 /* DashboardViewController.swift */,
 				930BCCD22079A62600424182 /* SwipeTableViewController.swift */,
 				933A8784207848CB001C5DFB /* PrioritiesViewController.swift */,
 				930BCCCE207873C700424182 /* ProjectViewController.swift */,
@@ -115,6 +131,11 @@
 		930BCCC120786C9400424182 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9333027C20A6037600D7DAEA /* gratitudes@2x.png */,
+				9333027920A6037600D7DAEA /* priorities@2x.png */,
+				9333027B20A6037600D7DAEA /* projects@2x.png */,
+				9333027A20A6037600D7DAEA /* relationships@2x.png */,
+				9333027820A6037500D7DAEA /* tasks@2x.png */,
 				930BCCD52079BC4F00424182 /* Assets.xcassets */,
 				930BCCDF2079BC9400424182 /* complete-icon.png */,
 				930BCCDE2079BC7F00424182 /* delete-icon.png */,
@@ -216,8 +237,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				933A878D207848CC001C5DFB /* LaunchScreen.storyboard in Resources */,
+				9333027D20A6037600D7DAEA /* tasks@2x.png in Resources */,
 				930BCCDD2079BC6400424182 /* edit-icon.png in Resources */,
 				930BCCD92079BC5000424182 /* Assets.xcassets in Resources */,
+				9333027E20A6037600D7DAEA /* priorities@2x.png in Resources */,
+				9333027F20A6037600D7DAEA /* relationships@2x.png in Resources */,
+				9333028120A6037600D7DAEA /* gratitudes@2x.png in Resources */,
+				9333028020A6037600D7DAEA /* projects@2x.png in Resources */,
 				933A8788207848CB001C5DFB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,10 +316,12 @@
 				930BCCCF207873C700424182 /* ProjectViewController.swift in Sources */,
 				930BCCCB20786FD800424182 /* Task.swift in Sources */,
 				930BCCC720786FC300424182 /* Priority.swift in Sources */,
+				93157D2D20A630C8004008D8 /* Profile.swift in Sources */,
 				9327E83A209A19C400D6DB28 /* ModalViewController.swift in Sources */,
 				933A8785207848CB001C5DFB /* PrioritiesViewController.swift in Sources */,
 				930BCCD32079A62600424182 /* SwipeTableViewController.swift in Sources */,
 				930BCCC920786FCD00424182 /* Project.swift in Sources */,
+				93B5670220A53EB800207697 /* DashboardViewController.swift in Sources */,
 				933A8783207848CB001C5DFB /* AppDelegate.swift in Sources */,
 				9327E8362099078300D6DB28 /* GratitudesViewController.swift in Sources */,
 				930BCCCD20786FEA00424182 /* Gratitude.swift in Sources */,

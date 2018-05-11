@@ -18,6 +18,7 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
     
     let realm = try! Realm()
     var gratitudes: Results<Gratitude>?
+    var indexPath: IndexPath? = nil
     
     weak var delegate: ModalViewControllerDelegate?
     
@@ -49,17 +50,27 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
             ])
         
         
-        
-        // Initialize Placeholders for Gratitude Name and Details
-        gratitudeName.textColor = UIColor.lightGray
-        gratitudeName.delegate = self
-        gratitudeName.text = "Family / Clean Water / etc..."
-        
-        gratitudeNotes.text = "My kids surprised me today by..."
-        gratitudeNotes.textColor = UIColor.lightGray
-        gratitudeNotes.delegate = self
-        
         gratitudes = realm.objects(Gratitude.self).sorted(byKeyPath: "day", ascending: false)
+        
+        if (indexPath != nil) {
+            print(gratitudes![(indexPath?.row)!].name)
+            gratitudeName.text = gratitudes![(indexPath?.row)!].name
+            gratitudeNotes.text = gratitudes![(indexPath?.row)!].notes
+            
+            gratitudeName.textColor = UIColor.white
+            gratitudeNotes.textColor = UIColor.white
+            
+        } else {
+            // Initialize Placeholders for Gratitude Name and Details
+            gratitudeName.textColor = UIColor.lightGray
+            gratitudeName.delegate = self
+            gratitudeName.text = "Family / Clean Water / etc..."
+            
+            gratitudeNotes.text = "My kids surprised me today by..."
+            gratitudeNotes.textColor = UIColor.lightGray
+            gratitudeNotes.delegate = self
+        }
+        
     }
     
     
@@ -108,16 +119,36 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
     
     @IBAction func saveGratitude(_ sender: UIButton) {
         
-        do {
-            try self.realm.write {
-                let newGratitude = Gratitude()
-                newGratitude.name = gratitudeName.text!
-                newGratitude.notes = gratitudeNotes.text!
-                realm.add(newGratitude)
+        // Update Existing Gratitude
+        if (indexPath != nil) {
+            do {
+                try self.realm.write {
+                    gratitudes![(indexPath?.row)!].name = gratitudeName.text!
+                    gratitudes![(indexPath?.row)!].notes = gratitudeNotes.text
+                }
+            } catch {
+                print("Error saving new items, \(error)")
             }
-        } catch {
-            print("Error saving new items, \(error)")
+            
+            
+            
         }
+        // Create New Gratitude
+        else {
+            do {
+                try self.realm.write {
+                    let newGratitude = Gratitude()
+                    newGratitude.name = gratitudeName.text!
+                    newGratitude.notes = gratitudeNotes.text!
+                    realm.add(newGratitude)
+                }
+            } catch {
+                print("Error saving new items, \(error)")
+            }
+            
+        }
+        
+        
 
         dismiss(animated: true, completion: nil)
         delegate?.removeBlurredBackgroundView()
