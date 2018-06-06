@@ -9,10 +9,12 @@
 import UIKit
 import RealmSwift
 
-class TaskViewController: SwipeTableViewController  {
+class TaskViewController: SwipeTableViewController, TaskModalViewControllerDelegate  {
 
     //let realm = try! Realm()
     var tasks: Results<Task>?
+    var profiles: Results<Profile>?
+    var indexPath: IndexPath? = nil
 
     
     var selectedProject : Project? {
@@ -24,9 +26,9 @@ class TaskViewController: SwipeTableViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.tableView.backgroundColor = UIColor.pfOrange
-        profile = realm.objects(Profile.self)
+        profiles = realm.objects(Profile.self)
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,7 +43,6 @@ class TaskViewController: SwipeTableViewController  {
     
     // Defines number of cells to accomodate entire list
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return tasks?.count ?? 1
     }
     
@@ -78,109 +79,46 @@ class TaskViewController: SwipeTableViewController  {
     
     // Queries Tasks from Database
     func loadTasks() {
-        
         tasks = selectedProject?.tasks.sorted(byKeyPath: "order", ascending: true)
-        
         tableView.reloadData()
     }
     
     
-    
-    // Save Projects to Database
-    func save(task: Task) {
-        do {
-            try realm.write {
-                realm.add(task)
-            }
-        }
-        catch {
-            print("Error writing priority \(error)")
-        }
-    }
-    
-    // Add New Projects Button
-    @IBAction func addNewTask(_ sender: UIBarButtonItem) {
-        
-        var textField = UITextField()
-        
-        let alert = UIAlertController(title: "Add Task", message: "", preferredStyle: .alert)
-        
-        alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Add New Task"
-            textField = alertTextField
-        }
-        
-        
-        let action = UIAlertAction(title: "Add Task", style: .default) { (action) in
-            // this is where we say what happens once the button is clicked
-            
-            if let currentProject = self.selectedProject {
-                do {
-                    try self.realm.write {
-                        let newTask = Task()
-                        newTask.name = textField.text!
-                        newTask.order = (self.tasks?.count)!
-                        currentProject.tasks.append(newTask)
-                    }
-                } catch {
-                    print("Error saving new items, \(error)")
+    func addNewItem(itemName: String) {
+        // Create New Item
+        if let currentProject = self.selectedProject {
+            do {
+                try self.realm.write {
+                    let newItem = Task()
+                    newItem.name = itemName
+                    newItem.order = (tasks?.count)!
+                    currentProject.tasks.append(newItem)
                 }
+            } catch {
+                print("Error saving new items, \(error)")
             }
-            
-            self.tableView.reloadData()
-            
         }
         
-        alert.addAction(action)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        present(alert, animated: true, completion: nil)
+        self.tableView.reloadData()
     }
+    
+    
+    func editItem(itemName: String, indexPath: IndexPath) {
+        do {
+            try self.realm.write {
+                tasks![(indexPath.row)].name = itemName
+            }
+        } catch {
+            print("Error saving new items, \(error)")
+        }
+    }
+    
     
     override func deleteButtonPressed(at indexPath: IndexPath) {
         self.deleteItems(at: indexPath, itemList: self.tasks!)
     }
     
-    override func editItem(at indexPath: IndexPath) {
-        
-        var textField = UITextField()
-        let currentTask = tasks![indexPath.row].name
-        
-        let alert = UIAlertController(title: "Update Task", message: "", preferredStyle: .alert)
-        
-        alert.addTextField { (alertTextField) in
-            alertTextField.text = currentTask
-            textField = alertTextField
-        }
-        
-        
-        
-        let action = UIAlertAction(title: "Update", style: .default) { (action) in
-            // this is where we say what happens once the button is clicked
-            
-            if self.selectedProject != nil {
-                do {
-                    try self.realm.write {
-                    
-                        self.tasks![indexPath.row].name = textField.text!
-                        //newItem.dateCreated = Date()
-                        
-                    }
-                } catch {
-                    print("Error saving new items, \(error)")
-                }
-            }
-            
-            self.tableView.reloadData()
-            
-        }
-        
-        alert.addAction(action)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        present(alert, animated: true, completion: nil)
-        
-    }
+
     
     override func markItemComplete(at indexPath: IndexPath) {
 
@@ -194,6 +132,9 @@ class TaskViewController: SwipeTableViewController  {
                     tasks![indexPath.row].setValue(true, forKey: "completed")
                     tasks![indexPath.row].setValue(lastPosition, forKey: "order")
                     
+                    var tasksCompleted = profiles![0].tasksCompleted
+                    tasksCompleted = tasksCompleted + 1
+                    profiles![0].tasksCompleted = tasksCompleted
                 }
             } catch {
                 print("Error updating items after marked complete, \(error)")
@@ -213,13 +154,9 @@ class TaskViewController: SwipeTableViewController  {
                         print("Error updating items after marked complete, \(error)")
                     }
                 }
-                
                 i = i + 1
             }
             tableView.reloadData()
-            
-            
-            
             loadTasks()
         }
         
@@ -232,6 +169,11 @@ class TaskViewController: SwipeTableViewController  {
                     
                     tasks![indexPath.row].setValue(false, forKey: "completed")
                     tasks![indexPath.row].setValue((-1), forKey: "order")
+                    
+                    var tasksCompleted = profiles![0].tasksCompleted
+                    tasksCompleted = tasksCompleted - 1
+                    profiles![0].tasksCompleted = tasksCompleted
+                    print(tasksCompleted)
                 }
             } catch {
                 print("Error updating items after marked complete, \(error)")
@@ -250,8 +192,6 @@ class TaskViewController: SwipeTableViewController  {
                 } catch {
                     print("Error updating items after marked complete, \(error)")
                 }
-                
-                
                 i = i - 1
             }
             
@@ -263,7 +203,6 @@ class TaskViewController: SwipeTableViewController  {
             } catch {
                 print("Error updating items after marked complete, \(error)")
             }
-            
             loadTasks()
         }
     }
@@ -271,7 +210,7 @@ class TaskViewController: SwipeTableViewController  {
     
     
     
-    
+    // Reorder Items
     override func setDataSource(at indexPath: IndexPath, initialIndex: Int) {
         var tasksList = Array(self.tasks!)
         tasksList.swapAt((indexPath.row), (Path.initialIndexPath?.row)!)
@@ -298,6 +237,75 @@ class TaskViewController: SwipeTableViewController  {
             print("Error saving new items, \(error)")
         }
     }
+    
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Captures sender and saves it as indexPath
+        if let identifier = segue.identifier {
+            if identifier == "ShowTaskModalView" {
+                if let viewController = segue.destination as? TaskModalViewController {
+                    if let indexPath = sender as? NSIndexPath {
+                        // Handles Tapped Item
+                        if (tableView.indexPathForSelectedRow != nil) {
+                            viewController.indexPath = tableView.indexPathForSelectedRow!
+                            viewController.itemList = tasks
+                        }
+                            // Handles Swipe - Edit Button
+                        else if (indexPath.row != -1) {
+                            viewController.indexPath = indexPath as IndexPath
+                            viewController.itemList = tasks
+                        }
+                    }
+                    
+                    viewController.delegate = self as TaskModalViewControllerDelegate
+                    viewController.modalPresentationStyle = .overFullScreen
+                }
+            }
+        }
+    }
+    
+    
+    // Handles when item in list is tapped
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ShowTaskModalView", sender: indexPath);
+    }
+    
+    
+    // Handles when Swipe - Edit Button is tapped
+    override func editButtonPressed(at indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ShowTaskModalView", sender: indexPath);
+    }
+    
+    
+    
+    
+    // Removes Blurred Background when Modal is dismissed
+    func removeBlurredBackgroundView() {
+        for subview in view.subviews {
+            if subview.isKind(of: UIVisualEffectView.self) {
+                subview.removeFromSuperview()
+            }
+        }
+        tableView.reloadData()
+    }
+    
+    
+    
+    //    // Save Projects to Database
+    //    func save(task: Task) {
+    //        do {
+    //            try realm.write {
+    //                realm.add(task)
+    //            }
+    //        }
+    //        catch {
+    //            print("Error writing priority \(error)")
+    //        }
+    //    }
+
+    
 }
 
 

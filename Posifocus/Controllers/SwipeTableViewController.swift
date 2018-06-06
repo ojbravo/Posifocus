@@ -15,8 +15,6 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     let realm = try! Realm()
     var cell: UITableViewCell?
     var gratitudes: Results<Gratitude>?
-    var profile: Results<Profile>?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +68,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
             let editButton = SwipeAction(style: .default, title: "Edit") { action, indexPath in
                 // handle action by updating model with deletion
                 
-                self.editItem(at: indexPath)
+                self.editButtonPressed(at: indexPath)
                 
                 
             }
@@ -92,10 +90,9 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     }
     
     func deleteButtonPressed(at indexPath: IndexPath) {}
-    func editItem(at indexPath: IndexPath) {}
+    func editButtonPressed(at indexPath: IndexPath) {}
     func markItemComplete(at indexPath: IndexPath) { print("Marked Complete") }
     func setDataSource(at indexPath: IndexPath, initialIndex: Int) {}
-    
     
     
     
@@ -126,6 +123,10 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
             print("Couldn't delete task \(error)")
         }
     }
+    
+    
+    
+    
     
     
     // Reorder Table Cells with longPressGesture
@@ -220,8 +221,10 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     }
     // end Reorder with longPressGesture
     
-    
 }
+
+
+
 
 extension UIColor {
     

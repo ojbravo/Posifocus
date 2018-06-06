@@ -172,7 +172,7 @@ class PrioritiesViewController: SwipeTableViewController {
 //        }
 //    }
     
-    override func editItem(at indexPath: IndexPath) {
+    override func editButtonPressed(at indexPath: IndexPath) {
         
         var textField = UITextField()
         let currentPriority = priorities![indexPath.row].name

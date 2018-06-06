@@ -28,6 +28,8 @@
 		933A8785207848CB001C5DFB /* PrioritiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933A8784207848CB001C5DFB /* PrioritiesViewController.swift */; };
 		933A8788207848CB001C5DFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A8786207848CB001C5DFB /* Main.storyboard */; };
 		933A878D207848CC001C5DFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A878B207848CC001C5DFB /* LaunchScreen.storyboard */; };
+		934F6AF420C79C0900D18AF3 /* ProjectModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934F6AF320C79C0900D18AF3 /* ProjectModalViewController.swift */; };
+		937A1C2F20C18C9F001B9006 /* TaskModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937A1C2E20C18C9F001B9006 /* TaskModalViewController.swift */; };
 		93B5670220A53EB800207697 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B5670120A53EB800207697 /* DashboardViewController.swift */; };
 		F3BA9CFBAD72B4D98F86F399 /* Pods_Posifocus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34F268D02CBA9A5124F21B2 /* Pods_Posifocus.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +61,8 @@
 		933A8787207848CB001C5DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		933A878C207848CC001C5DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		933A878E207848CC001C5DFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		934F6AF320C79C0900D18AF3 /* ProjectModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModalViewController.swift; sourceTree = "<group>"; };
+		937A1C2E20C18C9F001B9006 /* TaskModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskModalViewController.swift; path = Posifocus/Controllers/TaskModalViewController.swift; sourceTree = SOURCE_ROOT; };
 		93B5670120A53EB800207697 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = Posifocus/Controllers/DashboardViewController.swift; sourceTree = SOURCE_ROOT; };
 		A34F268D02CBA9A5124F21B2 /* Pods_Posifocus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Posifocus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6460EAEC1F9761927555512 /* Pods-Posifocus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Posifocus.release.xcconfig"; path = "Pods/Target Support Files/Pods-Posifocus/Pods-Posifocus.release.xcconfig"; sourceTree = "<group>"; };
@@ -121,7 +125,9 @@
 				930BCCD22079A62600424182 /* SwipeTableViewController.swift */,
 				933A8784207848CB001C5DFB /* PrioritiesViewController.swift */,
 				930BCCCE207873C700424182 /* ProjectViewController.swift */,
+				934F6AF320C79C0900D18AF3 /* ProjectModalViewController.swift */,
 				930BCCD020792E0900424182 /* TaskViewController.swift */,
+				937A1C2E20C18C9F001B9006 /* TaskModalViewController.swift */,
 				9327E8352099078300D6DB28 /* GratitudesViewController.swift */,
 				9327E839209A19C400D6DB28 /* ModalViewController.swift */,
 			);
@@ -314,6 +320,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				930BCCCF207873C700424182 /* ProjectViewController.swift in Sources */,
+				937A1C2F20C18C9F001B9006 /* TaskModalViewController.swift in Sources */,
+				934F6AF420C79C0900D18AF3 /* ProjectModalViewController.swift in Sources */,
 				930BCCCB20786FD800424182 /* Task.swift in Sources */,
 				930BCCC720786FC300424182 /* Priority.swift in Sources */,
 				93157D2D20A630C8004008D8 /* Profile.swift in Sources */,

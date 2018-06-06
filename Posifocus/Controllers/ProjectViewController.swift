@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class ProjectViewController: SwipeTableViewController {
+class ProjectViewController: SwipeTableViewController, ProjectModalViewControllerDelegate {
     
     //let realm = try! Realm()
     var projects: Results<Project>?
@@ -88,10 +88,29 @@ class ProjectViewController: SwipeTableViewController {
     
     // Sends Selected Project to Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! TaskViewController
         
-        if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedProject = projects?[indexPath.row]
+        // Captures sender and saves it as indexPath
+        if let identifier = segue.identifier {
+            if identifier == "ShowProjectModalView" {
+                if let viewController = segue.destination as? ProjectModalViewController {
+                    if let indexPath = sender as? NSIndexPath {
+                        if (indexPath.row != -1) {
+                            viewController.indexPath = indexPath as IndexPath
+                            viewController.itemList = projects
+                        }
+                    }
+                    
+                    viewController.delegate = self as ProjectModalViewControllerDelegate
+                    viewController.modalPresentationStyle = .overFullScreen
+                }
+            }
+            else {
+                let destinationVC = segue.destination as! TaskViewController
+                
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    destinationVC.selectedProject = projects?[indexPath.row]
+                }
+            }
         }
     }
     
@@ -104,56 +123,56 @@ class ProjectViewController: SwipeTableViewController {
         tableView.reloadData()
     }
     
-    // Save Projects to Database
-    func save(project: Project) {
-        do {
-            try realm.write {
-                realm.add(project)
-            }
-        }
-        catch {
-            print("Error writing priority \(error)")
-        }
-    }
-    
-    // Add New Projects Button
-    @IBAction func addNewProject(_ sender: UIBarButtonItem) {
-        
-        var textField = UITextField()
-        
-        let alert = UIAlertController(title: "Add Project", message: "", preferredStyle: .alert)
-        
-        alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Add New Project"
-            textField = alertTextField
-        }
-        
-        
-        let action = UIAlertAction(title: "Add Project", style: .default) { (action) in
-            // this is where we say what happens once the button is clicked
-            
-            if let currentPriority = self.selectedPriority {
-                do {
-                    try self.realm.write {
-                        let newProject = Project()
-                        newProject.name = textField.text!
-                        newProject.order = (self.projects?.count)!
-                        currentPriority.projects.append(newProject)
-                    }
-                } catch {
-                    print("Error saving new items, \(error)")
-                }
-            }
-            
-            self.tableView.reloadData()
- 
-        }
-        
-        alert.addAction(action)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        present(alert, animated: true, completion: nil)
-    }
+//    // Save Projects to Database
+//    func save(project: Project) {
+//        do {
+//            try realm.write {
+//                realm.add(project)
+//            }
+//        }
+//        catch {
+//            print("Error writing priority \(error)")
+//        }
+//    }
+//
+//    // Add New Projects Button
+//    @IBAction func addNewProject(_ sender: UIBarButtonItem) {
+//
+//        var textField = UITextField()
+//
+//        let alert = UIAlertController(title: "Add Project", message: "", preferredStyle: .alert)
+//
+//        alert.addTextField { (alertTextField) in
+//            alertTextField.placeholder = "Add New Project"
+//            textField = alertTextField
+//        }
+//
+//
+//        let action = UIAlertAction(title: "Add Project", style: .default) { (action) in
+//            // this is where we say what happens once the button is clicked
+//
+//            if let currentPriority = self.selectedPriority {
+//                do {
+//                    try self.realm.write {
+//                        let newProject = Project()
+//                        newProject.name = textField.text!
+//                        newProject.order = (self.projects?.count)!
+//                        currentPriority.projects.append(newProject)
+//                    }
+//                } catch {
+//                    print("Error saving new items, \(error)")
+//                }
+//            }
+//
+//            self.tableView.reloadData()
+//
+//        }
+//
+//        alert.addAction(action)
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//
+//        present(alert, animated: true, completion: nil)
+//    }
     
     override func deleteButtonPressed(at indexPath: IndexPath) {
         self.deleteItems(at: indexPath, itemList: self.projects!)
@@ -184,43 +203,74 @@ class ProjectViewController: SwipeTableViewController {
 //
 //    }
     
-    override func editItem(at indexPath: IndexPath) {
-        
-        var textField = UITextField()
-        let currentProject = projects![indexPath.row].name
-        
-        let alert = UIAlertController(title: "Update Project", message: "", preferredStyle: .alert)
-        
-        alert.addTextField { (alertTextField) in
-            alertTextField.text = currentProject
-            textField = alertTextField
-        }
-        
-        
-        let action = UIAlertAction(title: "Update", style: .default) { (action) in
-            // this is where we say what happens once the button is clicked
-            
-            if self.selectedPriority != nil {
-                do {
-                    try self.realm.write {
-                        self.projects![indexPath.row].name = textField.text!    
-                    }
-                } catch {
-                    print("Error saving new items, \(error)")
+//    override func editButtonPressed(at indexPath: IndexPath) {
+//
+//        var textField = UITextField()
+//        let currentProject = projects![indexPath.row].name
+//
+//        let alert = UIAlertController(title: "Update Project", message: "", preferredStyle: .alert)
+//
+//        alert.addTextField { (alertTextField) in
+//            alertTextField.text = currentProject
+//            textField = alertTextField
+//        }
+//
+//
+//        let action = UIAlertAction(title: "Update", style: .default) { (action) in
+//            // this is where we say what happens once the button is clicked
+//
+//            if self.selectedPriority != nil {
+//                do {
+//                    try self.realm.write {
+//                        self.projects![indexPath.row].name = textField.text!
+//                    }
+//                } catch {
+//                    print("Error saving new items, \(error)")
+//                }
+//            }
+//
+//            self.tableView.reloadData()
+//
+//        }
+//
+//        alert.addAction(action)
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//
+//        present(alert, animated: true, completion: nil)
+//
+//    }
+    
+    
+    
+    
+    func addNewItem(itemName: String) {
+        // Create New Item
+        if let currentPriority = self.selectedPriority {
+            do {
+                try self.realm.write {
+                    let newItem = Project()
+                    newItem.name = itemName
+                    newItem.order = (projects?.count)!
+                    currentPriority.projects.append(newItem)
                 }
+            } catch {
+                print("Error saving new items, \(error)")
             }
-            
-            self.tableView.reloadData()
-            
         }
         
-        alert.addAction(action)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        present(alert, animated: true, completion: nil)
-        
+        self.tableView.reloadData()
     }
     
+    
+    func editItem(itemName: String, indexPath: IndexPath) {
+        do {
+            try self.realm.write {
+                projects![(indexPath.row)].name = itemName
+            }
+        } catch {
+            print("Error saving new items, \(error)")
+        }
+    }
     
     
     override func markItemComplete(at indexPath: IndexPath) {
@@ -335,6 +385,25 @@ class ProjectViewController: SwipeTableViewController {
         } catch {
             print("Error saving new items, \(error)")
         }
+    }
+    
+
+    // Handles when Swipe - Edit Button is tapped
+    override func editButtonPressed(at indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ShowProjectModalView", sender: indexPath);
+    }
+    
+    
+    
+    
+    // Removes Blurred Background when Modal is dismissed
+    func removeBlurredBackgroundView() {
+        for subview in view.subviews {
+            if subview.isKind(of: UIVisualEffectView.self) {
+                subview.removeFromSuperview()
+            }
+        }
+        tableView.reloadData()
     }
     
 }

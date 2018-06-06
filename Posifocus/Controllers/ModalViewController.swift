@@ -53,7 +53,6 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
         gratitudes = realm.objects(Gratitude.self).sorted(byKeyPath: "day", ascending: false)
         
         if (indexPath != nil) {
-            print(gratitudes![(indexPath?.row)!].name)
             gratitudeName.text = gratitudes![(indexPath?.row)!].name
             gratitudeNotes.text = gratitudes![(indexPath?.row)!].notes
             
@@ -147,12 +146,9 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
             }
             
         }
-        
-        
 
         dismiss(animated: true, completion: nil)
         delegate?.removeBlurredBackgroundView()
-    
     }
     
 }
