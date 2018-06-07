@@ -12,6 +12,7 @@ import RealmSwift
 class Profile: Object {
     @objc dynamic var name: String = ""
     @objc dynamic var motto: String = ""
+    @objc dynamic var profilePic: String = ""
     @objc dynamic var tasksCompleted: Int = 0
     @objc dynamic var gratitudesListed: Int = 0
     @objc dynamic var lastContact: Int = 0

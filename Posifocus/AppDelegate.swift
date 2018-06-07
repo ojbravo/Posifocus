@@ -18,7 +18,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        // Realm Migrations
+        let config = Realm.Configuration(
+            schemaVersion: 2,
+            migrationBlock: { migration, oldSchemaVersion in
+                // We haven’t migrated anything yet, so oldSchemaVersion == 0
+                if (oldSchemaVersion < 2) {
+                    migration.enumerateObjects(ofType: Profile.className()) { oldObject, newObject in
+                        newObject!["profilePic"] = "user.png"
+                    }
+                    
+                }
+            }
+        )
+        
+        // Tell Realm to use this new configuration object for the default Realm
+        Realm.Configuration.defaultConfiguration = config
+        
+        //print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
+        
         UIApplication.shared.statusBarStyle = .lightContent
         
         do {
@@ -27,6 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch  {
             print("Error initializing Realm \(error)")
         }
+        
+        
         
         return true
     }

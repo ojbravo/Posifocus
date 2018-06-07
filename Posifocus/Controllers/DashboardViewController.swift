@@ -11,7 +11,7 @@ import RealmSwift
 
 class DashboardViewController: UIViewController {
     
-    let realm = try! Realm()
+    
     var cell: UITableViewCell?
     var gratitudes: Results<Gratitude>?
     var profiles: Results<Profile>?
@@ -24,6 +24,14 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        let realm = try! Realm()
+        
         if (realm.objects(Profile.self).count == 0) {
             try! realm.write {
                 realm.add(profile)
@@ -31,9 +39,6 @@ class DashboardViewController: UIViewController {
         }
         profiles = realm.objects(Profile.self)
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         gratituteCount.text = String(realm.objects(Gratitude.self).count)
         tasksCompleted.text = String(profiles![0].tasksCompleted)
     }

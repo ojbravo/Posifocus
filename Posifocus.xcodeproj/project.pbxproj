@@ -31,6 +31,7 @@
 		934F6AF420C79C0900D18AF3 /* ProjectModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934F6AF320C79C0900D18AF3 /* ProjectModalViewController.swift */; };
 		937A1C2F20C18C9F001B9006 /* TaskModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937A1C2E20C18C9F001B9006 /* TaskModalViewController.swift */; };
 		93B5670220A53EB800207697 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B5670120A53EB800207697 /* DashboardViewController.swift */; };
+		93DDE65820C8E4790078E9DE /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 93DDE65720C8E4790078E9DE /* user.png */; };
 		F3BA9CFBAD72B4D98F86F399 /* Pods_Posifocus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34F268D02CBA9A5124F21B2 /* Pods_Posifocus.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		934F6AF320C79C0900D18AF3 /* ProjectModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModalViewController.swift; sourceTree = "<group>"; };
 		937A1C2E20C18C9F001B9006 /* TaskModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskModalViewController.swift; path = Posifocus/Controllers/TaskModalViewController.swift; sourceTree = SOURCE_ROOT; };
 		93B5670120A53EB800207697 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = Posifocus/Controllers/DashboardViewController.swift; sourceTree = SOURCE_ROOT; };
+		93DDE65720C8E4790078E9DE /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
 		A34F268D02CBA9A5124F21B2 /* Pods_Posifocus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Posifocus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6460EAEC1F9761927555512 /* Pods-Posifocus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Posifocus.release.xcconfig"; path = "Pods/Target Support Files/Pods-Posifocus/Pods-Posifocus.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 		930BCCC120786C9400424182 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				93DDE65720C8E4790078E9DE /* user.png */,
 				9333027C20A6037600D7DAEA /* gratitudes@2x.png */,
 				9333027920A6037600D7DAEA /* priorities@2x.png */,
 				9333027B20A6037600D7DAEA /* projects@2x.png */,
@@ -193,7 +196,6 @@
 				933A877C207848CB001C5DFB /* Frameworks */,
 				933A877D207848CB001C5DFB /* Resources */,
 				7C7A0F0F9141B8DB9875DDBB /* [CP] Embed Pods Frameworks */,
-				C3A60C58F0F873F97DBD65AE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -248,6 +250,7 @@
 				930BCCD92079BC5000424182 /* Assets.xcassets in Resources */,
 				9333027E20A6037600D7DAEA /* priorities@2x.png in Resources */,
 				9333027F20A6037600D7DAEA /* relationships@2x.png in Resources */,
+				93DDE65820C8E4790078E9DE /* user.png in Resources */,
 				9333028120A6037600D7DAEA /* gratitudes@2x.png in Resources */,
 				9333028020A6037600D7DAEA /* projects@2x.png in Resources */,
 				933A8788207848CB001C5DFB /* Main.storyboard in Resources */,
@@ -295,21 +298,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Posifocus/Pods-Posifocus-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C3A60C58F0F873F97DBD65AE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Posifocus/Pods-Posifocus-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
