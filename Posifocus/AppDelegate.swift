@@ -20,15 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Realm Migrations
         let config = Realm.Configuration(
-            schemaVersion: 2,
+            schemaVersion: 3,
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
                 if (oldSchemaVersion < 2) {
                     migration.enumerateObjects(ofType: Profile.className()) { oldObject, newObject in
                         newObject!["profilePic"] = "user.png"
                     }
-                    
                 }
+                if (oldSchemaVersion < 3) {
+                    // Deleted GratitudeListed property from Profile
+                    print("Migration to Schema v3!")
+                }
+                
             }
         )
         
@@ -46,8 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch  {
             print("Error initializing Realm \(error)")
         }
-        
-        
         
         return true
     }

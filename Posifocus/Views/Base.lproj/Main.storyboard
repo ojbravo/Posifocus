@@ -257,7 +257,7 @@ LAST CONTACT</string>
                                         </constraints>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JqH-4V-C1s">
-                                        <rect key="frame" x="125" y="16" width="225" height="30"/>
+                                        <rect key="frame" x="125" y="20" width="225" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="225" id="ePc-Tw-6dn"/>
                                         </constraints>
@@ -265,7 +265,7 @@ LAST CONTACT</string>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="&quot;Catchphrase, Slogan, or Inspirational Quote&quot;" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Dli-iA-daC" userLabel="Quote">
-                                        <rect key="frame" x="125" y="46" width="171" height="50"/>
+                                        <rect key="frame" x="125" y="50" width="171" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="CVh-Wb-BDo"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="170" id="gJi-9G-Tfo"/>
@@ -274,13 +274,24 @@ LAST CONTACT</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ler-jb-ieh">
+                                        <rect key="frame" x="17" y="0.0" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="Wgf-Us-N0j"/>
+                                            <constraint firstAttribute="height" constant="100" id="a55-Fd-cbS"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="selectProfilePicture:" destination="e6k-S2-ORe" eventType="touchUpInside" id="mz1-GG-HeY"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="0Nl-2H-KTd" firstAttribute="leading" secondItem="mqe-GH-Lzt" secondAttribute="leading" constant="25" id="GZS-SK-wLR"/>
                                     <constraint firstAttribute="bottom" secondItem="0Nl-2H-KTd" secondAttribute="bottom" constant="10" id="Oiw-mV-9tZ"/>
                                     <constraint firstItem="JqH-4V-C1s" firstAttribute="leading" secondItem="0Nl-2H-KTd" secondAttribute="trailing" constant="20" id="PRD-Cj-AWm"/>
-                                    <constraint firstItem="JqH-4V-C1s" firstAttribute="top" secondItem="mqe-GH-Lzt" secondAttribute="top" constant="16" id="W6v-jm-YyH"/>
+                                    <constraint firstItem="JqH-4V-C1s" firstAttribute="top" secondItem="mqe-GH-Lzt" secondAttribute="top" constant="20" id="W6v-jm-YyH"/>
+                                    <constraint firstItem="ler-jb-ieh" firstAttribute="leading" secondItem="mqe-GH-Lzt" secondAttribute="leading" constant="17" id="cge-cb-B9B"/>
+                                    <constraint firstItem="ler-jb-ieh" firstAttribute="top" secondItem="mqe-GH-Lzt" secondAttribute="top" id="j8V-Ny-Hec"/>
                                     <constraint firstItem="Dli-iA-daC" firstAttribute="leading" secondItem="0Nl-2H-KTd" secondAttribute="trailing" constant="20" id="vzy-cu-eQr"/>
                                     <constraint firstItem="Dli-iA-daC" firstAttribute="top" secondItem="JqH-4V-C1s" secondAttribute="bottom" id="xPl-lB-hsr"/>
                                     <constraint firstItem="0Nl-2H-KTd" firstAttribute="top" secondItem="mqe-GH-Lzt" secondAttribute="top" constant="10" id="yYB-uc-bGO"/>
@@ -308,8 +319,10 @@ LAST CONTACT</string>
                         <barButtonItem key="backBarButtonItem" title="Home" id="jux-Ko-lQf"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="gratituteCount" destination="POq-Lw-WQO" id="JmX-2A-eGv"/>
+                        <outlet property="gratitudeCount" destination="POq-Lw-WQO" id="lXR-Ac-nK9"/>
+                        <outlet property="profileMotto" destination="Dli-iA-daC" id="FAN-Xe-3z5"/>
                         <outlet property="profileName" destination="JqH-4V-C1s" id="Phg-uC-0gY"/>
+                        <outlet property="profilePicture" destination="0Nl-2H-KTd" id="akU-uW-Rsf"/>
                         <outlet property="tasksCompleted" destination="Okm-ZJ-iwY" id="tBk-N7-KT1"/>
                     </connections>
                 </viewController>
