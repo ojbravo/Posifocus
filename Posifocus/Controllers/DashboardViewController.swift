@@ -31,6 +31,8 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addNavBarImage()
+        
         if (realm.objects(Profile.self).count == 0) {
             try! realm.write {
                 realm.add(profile)
@@ -41,6 +43,10 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
         
         let imagePath = getDocumentsDirectory().appendingPathComponent(profiles![0].profilePic)
         profilePicture.image = UIImage(contentsOfFile: imagePath.path)
+        profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
+        profilePicture.clipsToBounds = true
+        profilePicture.layer.borderWidth = 3
+        profilePicture.layer.borderColor = UIColor.white.cgColor
         
         profileName.backgroundColor = UIColor.clear
         profileName.borderStyle = .none
@@ -69,6 +75,9 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        navigationController?.navigationBar.barTintColor = UIColor.pfBlue
+        navigationController?.navigationBar.isTranslucent = false
         
         gratitudeCount.text = String(realm.objects(Gratitude.self).count)
         tasksCompleted.text = String(profiles![0].tasksCompleted)
@@ -179,4 +188,26 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
         let documentsDirectory = paths[0]
         return documentsDirectory
     }
+    
+    
+    func addNavBarImage() {
+        let navController = navigationController!
+        
+        let image = #imageLiteral(resourceName: "posifocus-logo.png")
+        let imageView = UIImageView(image: image)
+        
+        let bannerWidth = navController.navigationBar.frame.size.width
+        let bannerHeight = navController.navigationBar.frame.size.height
+        
+        let bannerX = bannerWidth / 2 - image.size.width / 2
+        let bannerY = bannerHeight / 2 - image.size.height / 2
+        
+        imageView.frame = CGRect(x: bannerX, y: bannerY, width: bannerWidth, height: bannerHeight)
+        imageView.contentMode = .scaleAspectFit
+        
+        navigationItem.titleView = imageView
+        
+    }
+    
+    
 }
