@@ -70,12 +70,16 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
             gratitudeNotes.delegate = self
         }
         
+        // Set Save Button Color
+        saveButton.backgroundColor = UIColor.pfGratitude
+        
     }
     
     
     // Initialize Cancel Button
     @IBOutlet weak var cancelButton: UIButton!
     
+    @IBOutlet weak var saveButton: UIButton!
     @IBAction func cancelButtonPressed(_ sender: Any) {
         
         dismiss(animated: true, completion: nil)
@@ -88,6 +92,7 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if gratitudeName.isFirstResponder == true {
             gratitudeName.text = ""
+            gratitudeName.textColor = UIColor.white
         }
     }
     
@@ -144,7 +149,6 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
             } catch {
                 print("Error saving new items, \(error)")
             }
-            
         }
 
         dismiss(animated: true, completion: nil)

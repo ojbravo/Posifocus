@@ -26,19 +26,25 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.backgroundColor = UIColor.pfOrange
+        self.tableView.backgroundColor = UIColor.pfTask
         profiles = realm.objects(Profile.self)
         self.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = UIColor.pfOrange.darker(darkness: 0.90) //make 25% darker
+        navigationController?.navigationBar.barTintColor = UIColor.pfTask
         navigationController?.navigationBar.isTranslucent = false
         title = (selectedProject?.name)! + " Tasks"
+        
+        if (tasks?.count == 0) {
+            self.tableView.backgroundView = UIImageView(image: UIImage(named: "tasks-instructions-tableview.png"))
+            self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFit
+            self.tableView.backgroundView?.alpha = 0.5
+        }
     }
     
     override func willMove(toParentViewController parent: UIViewController?) {
-        self.navigationController?.navigationBar.barTintColor = UIColor.pfYellow
+        self.navigationController?.navigationBar.barTintColor = UIColor.pfProject
     }
     
     // Defines number of cells to accomodate entire list
@@ -67,7 +73,7 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
             let numberOfRows = 1 - (CGFloat(indexPath.row) / CGFloat(tasks!.count + 3))
             
                 
-            cell.backgroundColor = UIColor.pfOrange.darker(darkness: numberOfRows)
+            cell.backgroundColor = UIColor.pfTask.darker(darkness: numberOfRows)
             cell.textLabel?.textColor = UIColor.white
             attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
                                         value: NSUnderlineStyle.styleNone.rawValue, range: cellRange)
@@ -100,6 +106,8 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
         }
         
         self.tableView.reloadData()
+        
+        updateTableViewBackground(itemList: tasks!)
     }
     
     

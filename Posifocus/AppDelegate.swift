@@ -20,17 +20,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Realm Migrations
         let config = Realm.Configuration(
-            schemaVersion: 3,
+            schemaVersion: 7,
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
                 if (oldSchemaVersion < 2) {
                     migration.enumerateObjects(ofType: Profile.className()) { oldObject, newObject in
-                        newObject!["profilePic"] = "user.png"
+                        newObject!["profilePic"] = "blank-user.png"
                     }
                 }
                 if (oldSchemaVersion < 3) {
                     // Deleted GratitudeListed property from Profile
                     print("Migration to Schema v3!")
+                }
+                if (oldSchemaVersion < 4) {
+                    print("Migration to Schema v4!")
+                }
+                if (oldSchemaVersion < 5) {
+                    print("Migration to Schema v5!")
+                }
+                if (oldSchemaVersion < 6) {
+                    // Changed Contact-contactDay to day
+                    migration.enumerateObjects(ofType: Contact.className()) { oldObject, newObject in
+                        newObject!["day"] = oldObject!["contactDay"]
+                    }
+                    print("Migration to Schema v6!")
+                    
+                }
+                if (oldSchemaVersion < 7) {
+                    // Changed Contact-contactDay to day
+                    migration.enumerateObjects(ofType: Contact.className()) { oldObject, newObject in
+                        newObject!["name"] = oldObject!["type"]
+                    }
+                    print("Migration to Schema v7!")
                 }
                 
             }
@@ -39,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Tell Realm to use this new configuration object for the default Realm
         Realm.Configuration.defaultConfiguration = config
         
-        //print(Realm.Configuration.defaultConfiguration.fileURL!)
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         
         
         UIApplication.shared.statusBarStyle = .lightContent

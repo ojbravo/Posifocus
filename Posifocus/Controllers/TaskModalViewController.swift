@@ -64,9 +64,14 @@ class TaskModalViewController: UIViewController, UITextViewDelegate, UITextField
             itemName.text = "Send Party Invite..."
         }
         
+        // Set Save Button Color
+        saveButton.backgroundColor = UIColor.pfTask
+        
+        
     }
     
     @IBOutlet weak var itemName: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if itemName.isFirstResponder == true {
@@ -86,7 +91,8 @@ class TaskModalViewController: UIViewController, UITextViewDelegate, UITextField
         delegate?.removeBlurredBackgroundView()
     }
     
-    @IBAction func saveButtonPressed(_ sender: Any) {        
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        
         if (indexPath != nil) {
             delegate?.editItem(itemName: itemName.text!, indexPath: indexPath!)
         }

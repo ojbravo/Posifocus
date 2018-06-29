@@ -15,6 +15,5 @@ class Profile: Object {
     @objc dynamic var profilePic: String = ""
     @objc dynamic var tasksCompleted: Int = 0
     @objc dynamic var lastContact: Int = 0
-    
 }
 

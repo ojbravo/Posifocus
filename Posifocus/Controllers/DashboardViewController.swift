@@ -14,6 +14,9 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
     
     var cell: UITableViewCell?
     var gratitudes: Results<Gratitude>?
+    var relationships: Results<Relationship>?
+    var projects: Results<Project>?
+    var tasks: Results<Task>?
     var profiles: Results<Profile>?
     let profile = Profile()
     
@@ -22,16 +25,28 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
     }()
     
     
+
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var profileName: UITextField!
     @IBOutlet weak var profileMotto: UITextView!
     @IBOutlet weak var gratitudeCount: UILabel!
     @IBOutlet weak var tasksCompleted: UILabel!
+    @IBOutlet weak var lastContact: UILabel!
+    @IBOutlet weak var currentProjectCount: UILabel!
+    @IBOutlet weak var currentTaskCount: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addNavBarImage()
+        backgroundImage.image = UIImage(named: "bdlp-paradise-wallpaper.jpg")
+        backgroundImage.contentMode = .scaleAspectFill
+        backgroundImage.alpha = 0.1
+        
+        //self.view.backgroundColor = UIColor.pfGreen.darker(darkness: 0.9)
+        
         
         if (realm.objects(Profile.self).count == 0) {
             try! realm.write {
@@ -41,12 +56,20 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
         
         profiles = realm.objects(Profile.self)
         
-        let imagePath = getDocumentsDirectory().appendingPathComponent(profiles![0].profilePic)
-        profilePicture.image = UIImage(contentsOfFile: imagePath.path)
+        if (profiles![0].profilePic == "") {
+            profilePicture.image = UIImage(named: "blank-user.png")
+        }
+        else {
+            let imagePath = getDocumentsDirectory().appendingPathComponent(profiles![0].profilePic)
+            // Throws BOMStream Warning
+            profilePicture.image = UIImage(contentsOfFile: imagePath.path)
+        }
+        
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
         profilePicture.clipsToBounds = true
         profilePicture.layer.borderWidth = 3
         profilePicture.layer.borderColor = UIColor.white.cgColor
+        
         
         profileName.backgroundColor = UIColor.clear
         profileName.borderStyle = .none
@@ -54,7 +77,7 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
         
         if (profiles![0].name == "") {
             profileName.text = "FirstName LastName"
-            profileName.textColor = UIColor.lightGray
+            profileName.textColor = UIColor.white
         } else {
             profileName.text = profiles![0].name
             profileName.textColor = UIColor.white
@@ -67,7 +90,7 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
         
         if (profiles![0].motto == "") {
             profileMotto.text = "Catchphrase, Slogan, or Inspirational Quote"
-            profileMotto.textColor = UIColor.lightGray
+            profileMotto.textColor = UIColor.white
         } else {
             profileMotto.text = profiles![0].motto
             profileMotto.textColor = UIColor.white
@@ -81,6 +104,21 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
         
         gratitudeCount.text = String(realm.objects(Gratitude.self).count)
         tasksCompleted.text = String(profiles![0].tasksCompleted)
+        currentProjectCount.text = String(realm.objects(Project.self).count)
+        currentTaskCount.text = String(realm.objects(Task.self).count)
+        
+        relationships = realm.objects(Relationship.self).sorted(byKeyPath: "lastContact", ascending: true)
+        if (relationships?.count == 0) {
+            lastContact.text = "n/a"
+        }
+        else {
+            let startDate = relationships![0].lastContact
+            let today = Date()
+            let daysBetween = Calendar.current.dateComponents([.day], from: startDate, to: today).day
+            
+            lastContact.text = "\(daysBetween!)"
+        }
+        
     }
     
     
@@ -96,7 +134,7 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
     func textFieldDidEndEditing(_ textField: UITextField) {
         if (textField.text?.isEmpty)! {
             textField.text = "FirstName LastName"
-            textField.textColor = UIColor.lightGray
+            textField.textColor = UIColor.white
             do {
                 try realm.write {
                     profiles![0].name = ""
@@ -119,7 +157,7 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
     
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray {
+        if (profiles![0].motto == "") {
             textView.text = nil
             textView.textColor = UIColor.white
         }
@@ -128,7 +166,7 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "Catchphrase, Slogan, or Inspirational Quote"
-            textView.textColor = UIColor.lightGray
+            textView.textColor = UIColor.white
             
             do {
                 try realm.write {

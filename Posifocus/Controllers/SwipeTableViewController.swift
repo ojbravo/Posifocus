@@ -22,9 +22,12 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         tableView.rowHeight = 60.0
         tableView.separatorStyle = .none
         
+        self.tableView.backgroundView = UIImageView(image: UIImage(named: "bdlp-paradise-wallpaper.jpg"))
+        self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFill
+        self.tableView.backgroundView?.alpha = 0.1
+        
         let longpress = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureRecognized(gestureRecognizer:)))
         self.tableView.addGestureRecognizer(longpress)
-
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -122,8 +125,46 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         } catch {
             print("Couldn't delete task \(error)")
         }
+        
+        print(T.self)
+        updateTableViewBackground(itemList: itemList)
     }
     
+    func updateTableViewBackground<T: Object>(itemList: Results<T>) {
+        if (itemList.count == 0) {
+            let modelName = String(describing: T.self)
+            switch modelName {
+            case "Priority":
+                    self.tableView.backgroundView = UIImageView(image: UIImage(named: "priorities-instructions-tableview.png"))
+                self.tableView.backgroundView?.alpha = 0.5
+            case "Project":
+                self.tableView.backgroundView = UIImageView(image: UIImage(named: "projects-instructions-tableview.png"))
+                self.tableView.backgroundView?.alpha = 0.5
+            case "Task":
+                self.tableView.backgroundView = UIImageView(image: UIImage(named: "tasks-instructions-tableview.png"))
+                self.tableView.backgroundView?.alpha = 0.5
+            case "Gratitude":
+                self.tableView.backgroundView = UIImageView(image: UIImage(named: "gratitudes-instructions-tableview.png"))
+                self.tableView.backgroundView?.alpha = 0.5
+            case "Relationship":
+                self.tableView.backgroundView = UIImageView(image: UIImage(named: "relationships-instructions-tableview.png"))
+                self.tableView.backgroundView?.alpha = 0.5
+            case "Contact":
+                self.tableView.backgroundView = UIImageView(image: UIImage(named: "contacts-instructions-tableview.png"))
+                self.tableView.backgroundView?.alpha = 0.5
+                
+            default:
+                self.tableView.backgroundView = UIImageView(image: UIImage(named: "bdlp-paradise-wallpaper.jpg"))
+                self.tableView.backgroundView?.alpha = 0.1
+                self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFill
+            }
+        }
+        else {
+            self.tableView.backgroundView = UIImageView(image: UIImage(named: "bdlp-paradise-wallpaper.jpg"))
+            self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFill
+            self.tableView.backgroundView?.alpha = 0.1
+        }
+    }
     
     
     
@@ -232,13 +273,26 @@ extension UIColor {
     static let pfYellow = UIColor(red:0.99, green:0.75, blue:0.18, alpha:1.0)
     static let pfOrange = UIColor(red:0.99, green:0.35, blue:0.19, alpha:1.0)
     static let pfGreen = UIColor(red:0.55, green:0.76, blue:0.32, alpha:1.0)
+    static let pfOrange2 = UIColor(red:0.98, green:0.57, blue:0.22, alpha:1.0)
     static let pfBerry = UIColor(red:0.92, green:0.08, blue:0.41, alpha:1.0)
-    static let pfBlue = UIColor(red:0.05, green:0.56, blue:0.87, alpha:1.0)
+    static let pfBlue = UIColor(red:0.00, green:0.59, blue:1.00, alpha:1.0)
     static let pfFrosted = UIColor(red:1.00, green:1.00, blue:1.00, alpha:0.25)
     
     static let btnGreen = UIColor(red:0.35, green:0.84, blue:0.43, alpha:1.0)
     static let btnBlue = UIColor(red:0.15, green:0.60, blue:0.98, alpha:1.0)
     static let btnRed = UIColor(red:0.98, green:0.25, blue:0.25, alpha:1.0)
+    
+    static let pfGratitude = UIColor(red:0.33, green:0.77, blue:0.67, alpha:1.0)
+    static let pfPriority =
+        UIColor(red:0.26, green:0.73, blue:0.78, alpha:1.0)
+    static let pfProject =
+        UIColor(red:0.26, green:0.69, blue:0.74, alpha:1.0)
+    static let pfTask = UIColor(red:0.25, green:0.60, blue:0.64, alpha:1.0)
+    static let pfRelationship = UIColor(red:0.25, green:0.63, blue:0.72, alpha:1.0)
+    static let pfContact = UIColor(red:0.25, green:0.56, blue:0.70, alpha:1.0)
+    
+    
+    
     
     
     // Create a UIColor from RGB

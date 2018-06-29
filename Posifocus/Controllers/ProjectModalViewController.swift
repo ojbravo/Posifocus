@@ -58,12 +58,16 @@ class ProjectModalViewController: UIViewController, UITextViewDelegate, UITextFi
             // Initialize Placeholders for Gratitude Name and Details
             itemName.textColor = UIColor.lightGray
             itemName.delegate = self
-            itemName.text = "Backyard BBQ..."
+            itemName.text = "Backyard BBQ / New Diet / Vacation..."
         }
+        
+        // Set Save Button Color
+        saveButton.backgroundColor = UIColor.pfProject
         
     }
     
     @IBOutlet weak var itemName: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if itemName.isFirstResponder == true {
@@ -73,7 +77,7 @@ class ProjectModalViewController: UIViewController, UITextViewDelegate, UITextFi
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if (textField.text?.isEmpty)! {
-            textField.text = "Backyard BBQ..."
+            textField.text = "Backyard BBQ / New Diet / Vacation..."
             textField.textColor = UIColor.lightGray
         }
     }

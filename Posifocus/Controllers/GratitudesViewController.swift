@@ -15,20 +15,26 @@ class GratitudesViewController: SwipeTableViewController, ModalViewControllerDel
     //let realm = try! Realm()
     //var gratitudes: Results<Gratitude>?
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.rowHeight = 130.0
-        self.tableView.backgroundColor = UIColor.pfBerry.darker(darkness: 0.9)
+        self.tableView.backgroundColor = UIColor.pfGratitude.darker(darkness: 0.9)
         
         gratitudes = realm.objects(Gratitude.self).sorted(byKeyPath: "day", ascending: false)
+        
+        updateTableViewBackground(itemList: gratitudes!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = UIColor.pfBerry
+        navigationController?.navigationBar.barTintColor = UIColor.pfGratitude
         navigationController?.navigationBar.isTranslucent = false
+        
+        if (gratitudes?.count == 0) {
+            self.tableView.backgroundView = UIImageView(image: UIImage(named: "gratitudes-instructions-tableview.png"))
+            self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFit
+            self.tableView.backgroundView?.alpha = 0.5
+        }
         
     }
     
@@ -50,7 +56,7 @@ class GratitudesViewController: SwipeTableViewController, ModalViewControllerDel
         cell.backgroundColor = UIColor.clear
         
         let shadowPath = UIBezierPath(rect: cell.gratitudeView.bounds).cgPath
-        cell.gratitudeView.backgroundColor = UIColor.pfBerry
+        cell.gratitudeView.backgroundColor = UIColor.pfGratitude
         cell.gratitudeView.layer.cornerRadius = 2
         cell.gratitudeView.clipsToBounds = false
         cell.gratitudeView.layer.shadowColor = UIColor.black.cgColor
@@ -125,6 +131,8 @@ class GratitudesViewController: SwipeTableViewController, ModalViewControllerDel
             }
         }
         tableView.reloadData()
+        
+        updateTableViewBackground(itemList: gratitudes!)
     }
     
 }

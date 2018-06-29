@@ -24,17 +24,23 @@ class ProjectViewController: SwipeTableViewController, ProjectModalViewControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.backgroundColor = UIColor.pfYellow.darker(darkness: 0.9)
+        self.tableView.backgroundColor = UIColor.pfProject.darker(darkness: 0.9)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = UIColor.pfYellow
+        navigationController?.navigationBar.barTintColor = UIColor.pfProject
         navigationController?.navigationBar.isTranslucent = false
         title = (selectedPriority?.name)! + " Projects"
+        
+        if (projects?.count == 0) {
+            self.tableView.backgroundView = UIImageView(image: UIImage(named: "projects-instructions-tableview.png"))
+            self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFit
+            self.tableView.backgroundView?.alpha = 0.5
+        }
     }
     
     override func willMove(toParentViewController parent: UIViewController?) {
-        self.navigationController?.navigationBar.barTintColor = UIColor.pfGreen.darker(darkness: 0.9)
+        self.navigationController?.navigationBar.barTintColor = UIColor.pfPriority
     }
     
     // Defines number of cells to accomodate entire list
@@ -67,7 +73,7 @@ class ProjectViewController: SwipeTableViewController, ProjectModalViewControlle
         } else {
             let numberOfRows = 1 - (CGFloat(indexPath.row) / CGFloat(projects!.count + 3))
             
-            cell.backgroundColor = UIColor.pfYellow.darker(darkness: numberOfRows)
+            cell.backgroundColor = UIColor.pfProject.darker(darkness: numberOfRows)
             cell.textLabel?.textColor = UIColor.white
             attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
                                         value: NSUnderlineStyle.styleNone.rawValue, range: cellRange)
@@ -259,6 +265,8 @@ class ProjectViewController: SwipeTableViewController, ProjectModalViewControlle
         }
         
         self.tableView.reloadData()
+        
+        updateTableViewBackground(itemList: projects!)
     }
     
     
