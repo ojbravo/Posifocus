@@ -18,7 +18,7 @@
 		930BCCDD2079BC6400424182 /* edit-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 930BCCDC2079BC6400424182 /* edit-icon.png */; };
 		93157D2D20A630C8004008D8 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93157D2C20A630C8004008D8 /* Profile.swift */; };
 		9327E8362099078300D6DB28 /* GratitudesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327E8352099078300D6DB28 /* GratitudesViewController.swift */; };
-		9327E83A209A19C400D6DB28 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327E839209A19C400D6DB28 /* ModalViewController.swift */; };
+		9327E83A209A19C400D6DB28 /* GratitudesModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327E839209A19C400D6DB28 /* GratitudesModalViewController.swift */; };
 		9328F2EF20D17FF60011EF1C /* tasks-instructions-tableview.png in Resources */ = {isa = PBXBuildFile; fileRef = 9328F2EE20D17FF60011EF1C /* tasks-instructions-tableview.png */; };
 		9328F2F420D1A13E0011EF1C /* priorities-instructions-tableview.png in Resources */ = {isa = PBXBuildFile; fileRef = 9328F2F020D1A13C0011EF1C /* priorities-instructions-tableview.png */; };
 		9328F2F520D1A13E0011EF1C /* tasks-instructions-tableview.png in Resources */ = {isa = PBXBuildFile; fileRef = 9328F2F120D1A13D0011EF1C /* tasks-instructions-tableview.png */; };
@@ -32,6 +32,12 @@
 		933A8785207848CB001C5DFB /* PrioritiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933A8784207848CB001C5DFB /* PrioritiesViewController.swift */; };
 		933A8788207848CB001C5DFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A8786207848CB001C5DFB /* Main.storyboard */; };
 		933A878D207848CC001C5DFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A878B207848CC001C5DFB /* LaunchScreen.storyboard */; };
+		934CC81520EC1E450008827F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 934CC81420EC1E450008827F /* Images.xcassets */; };
+		934CC81B20EC27810008827F /* 640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = 934CC81620EC27810008827F /* 640x960.png */; };
+		934CC81D20EC27820008827F /* 640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 934CC81820EC27810008827F /* 640x1136.png */; };
+		934CC81E20EC27820008827F /* 750x1334.png in Resources */ = {isa = PBXBuildFile; fileRef = 934CC81920EC27810008827F /* 750x1334.png */; };
+		934CC81F20EC27820008827F /* 1242x2208.png in Resources */ = {isa = PBXBuildFile; fileRef = 934CC81A20EC27810008827F /* 1242x2208.png */; };
+		934CC82220EC28590008827F /* 1125x2436.png in Resources */ = {isa = PBXBuildFile; fileRef = 934CC82120EC28590008827F /* 1125x2436.png */; };
 		934F6AF420C79C0900D18AF3 /* ProjectModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934F6AF320C79C0900D18AF3 /* ProjectModalViewController.swift */; };
 		937A1C2F20C18C9F001B9006 /* TaskModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937A1C2E20C18C9F001B9006 /* TaskModalViewController.swift */; };
 		937EBADE20E67DB000AFDB28 /* blank-user.png in Resources */ = {isa = PBXBuildFile; fileRef = 937EBADD20E67DB000AFDB28 /* blank-user.png */; };
@@ -72,7 +78,7 @@
 		930BCCDF2079BC9400424182 /* complete-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "complete-icon.png"; sourceTree = "<group>"; };
 		93157D2C20A630C8004008D8 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		9327E8352099078300D6DB28 /* GratitudesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratitudesViewController.swift; sourceTree = "<group>"; };
-		9327E839209A19C400D6DB28 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
+		9327E839209A19C400D6DB28 /* GratitudesModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratitudesModalViewController.swift; sourceTree = "<group>"; };
 		9328F2EE20D17FF60011EF1C /* tasks-instructions-tableview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tasks-instructions-tableview.png"; sourceTree = "<group>"; };
 		9328F2F020D1A13C0011EF1C /* priorities-instructions-tableview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "priorities-instructions-tableview.png"; sourceTree = "<group>"; };
 		9328F2F120D1A13D0011EF1C /* tasks-instructions-tableview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tasks-instructions-tableview.png"; path = "../../../_Full-Resolution/ios-icons/2x/tasks-instructions-tableview.png"; sourceTree = "<group>"; };
@@ -88,6 +94,12 @@
 		933A8787207848CB001C5DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		933A878C207848CC001C5DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		933A878E207848CC001C5DFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		934CC81420EC1E450008827F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		934CC81620EC27810008827F /* 640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 640x960.png; sourceTree = "<group>"; };
+		934CC81820EC27810008827F /* 640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 640x1136.png; sourceTree = "<group>"; };
+		934CC81920EC27810008827F /* 750x1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 750x1334.png; sourceTree = "<group>"; };
+		934CC81A20EC27810008827F /* 1242x2208.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1242x2208.png; sourceTree = "<group>"; };
+		934CC82120EC28590008827F /* 1125x2436.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1125x2436.png; sourceTree = "<group>"; };
 		934F6AF320C79C0900D18AF3 /* ProjectModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModalViewController.swift; sourceTree = "<group>"; };
 		937A1C2E20C18C9F001B9006 /* TaskModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskModalViewController.swift; path = Posifocus/Controllers/TaskModalViewController.swift; sourceTree = SOURCE_ROOT; };
 		937EBADD20E67DB000AFDB28 /* blank-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blank-user.png"; sourceTree = "<group>"; };
@@ -178,7 +190,7 @@
 				930BCCD020792E0900424182 /* TaskViewController.swift */,
 				937A1C2E20C18C9F001B9006 /* TaskModalViewController.swift */,
 				9327E8352099078300D6DB28 /* GratitudesViewController.swift */,
-				9327E839209A19C400D6DB28 /* ModalViewController.swift */,
+				9327E839209A19C400D6DB28 /* GratitudesModalViewController.swift */,
 				9393378620DC3F42003F2A8D /* RelationshipViewController.swift */,
 				9393378820DC3F78003F2A8D /* RelationshipModalViewController.swift */,
 				9393378A20DC3F8D003F2A8D /* ContactViewController.swift */,
@@ -205,6 +217,7 @@
 				93D39EA020D0503C008F9B37 /* gratitudes@2x.png */,
 				93F9B89C20CF1CED000CEE80 /* posifocus-logo.png */,
 				9333027920A6037600D7DAEA /* priorities@2x.png */,
+				934CC82020EC278B0008827F /* LaunchScreens */,
 				9333027B20A6037600D7DAEA /* projects@2x.png */,
 				9333027820A6037500D7DAEA /* tasks@2x.png */,
 				930BCCD52079BC4F00424182 /* Assets.xcassets */,
@@ -246,8 +259,21 @@
 				930BCCC020786C5E00424182 /* Controllers */,
 				930BCCC120786C9400424182 /* Supporting Files */,
 				933A878E207848CC001C5DFB /* Info.plist */,
+				934CC81420EC1E450008827F /* Images.xcassets */,
 			);
 			path = Posifocus;
+			sourceTree = "<group>";
+		};
+		934CC82020EC278B0008827F /* LaunchScreens */ = {
+			isa = PBXGroup;
+			children = (
+				934CC81620EC27810008827F /* 640x960.png */,
+				934CC81820EC27810008827F /* 640x1136.png */,
+				934CC82120EC28590008827F /* 1125x2436.png */,
+				934CC81920EC27810008827F /* 750x1334.png */,
+				934CC81A20EC27810008827F /* 1242x2208.png */,
+			);
+			path = LaunchScreens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,11 +345,15 @@
 				9328F2F520D1A13E0011EF1C /* tasks-instructions-tableview.png in Resources */,
 				937EBAE820E6914000AFDB28 /* relationships-instructions-tableview.png in Resources */,
 				9328F2F720D1A13E0011EF1C /* projects-instructions-tableview.png in Resources */,
+				934CC81520EC1E450008827F /* Images.xcassets in Resources */,
 				9328F2F420D1A13E0011EF1C /* priorities-instructions-tableview.png in Resources */,
 				93D39EA120D0503D008F9B37 /* gratitudes@2x.png in Resources */,
+				934CC81D20EC27820008827F /* 640x1136.png in Resources */,
+				934CC81F20EC27820008827F /* 1242x2208.png in Resources */,
 				937EBAED20E6B4E700AFDB28 /* iTunesArtwork@1x.png in Resources */,
 				9328F2EF20D17FF60011EF1C /* tasks-instructions-tableview.png in Resources */,
 				937EBADE20E67DB000AFDB28 /* blank-user.png in Resources */,
+				934CC81E20EC27820008827F /* 750x1334.png in Resources */,
 				937EBAE720E6914000AFDB28 /* contacts-instructions-tableview.png in Resources */,
 				937EBAEE20E6B4E700AFDB28 /* AppIcon.appiconset in Resources */,
 				9333028020A6037600D7DAEA /* projects@2x.png in Resources */,
@@ -334,6 +364,8 @@
 				937EBAE420E68C8500AFDB28 /* relationships.png in Resources */,
 				93D39EA920D17730008F9B37 /* tasks-instructions-portrait.png in Resources */,
 				9328F2F620D1A13E0011EF1C /* gratitudes-instructions-tableview.png in Resources */,
+				934CC82220EC28590008827F /* 1125x2436.png in Resources */,
+				934CC81B20EC27810008827F /* 640x960.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +432,7 @@
 				9393378B20DC3F8D003F2A8D /* ContactViewController.swift in Sources */,
 				9393378720DC3F42003F2A8D /* RelationshipViewController.swift in Sources */,
 				93157D2D20A630C8004008D8 /* Profile.swift in Sources */,
-				9327E83A209A19C400D6DB28 /* ModalViewController.swift in Sources */,
+				9327E83A209A19C400D6DB28 /* GratitudesModalViewController.swift in Sources */,
 				933A8785207848CB001C5DFB /* PrioritiesViewController.swift in Sources */,
 				930BCCD32079A62600424182 /* SwipeTableViewController.swift in Sources */,
 				930BCCC920786FCD00424182 /* Project.swift in Sources */,
@@ -554,6 +586,8 @@
 			baseConfigurationReference = 4F905C57862D01D80BBCAFE5 /* Pods-Posifocus.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = AFC939CULK;
@@ -564,6 +598,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bravo-delapaz.Posifocus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_PNG_TEXT = NO;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -575,6 +610,8 @@
 			baseConfigurationReference = A6460EAEC1F9761927555512 /* Pods-Posifocus.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = AFC939CULK;
@@ -585,6 +622,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bravo-delapaz.Posifocus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_PNG_TEXT = NO;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

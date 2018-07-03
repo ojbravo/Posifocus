@@ -25,6 +25,9 @@ class ProjectModalViewController: UIViewController, UITextViewDelegate, UITextFi
     
     
     override func viewDidLoad() {
+        self.setupHideKeyboardOnTap()
+        itemName.delegate = self
+        
         // Add blurEffect to background
         view.backgroundColor = .clear
         let blurEffect = UIBlurEffect(style: .dark)
@@ -70,8 +73,9 @@ class ProjectModalViewController: UIViewController, UITextViewDelegate, UITextFi
     @IBOutlet weak var saveButton: UIButton!
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if itemName.isFirstResponder == true {
+        if (indexPath == nil) {
             itemName.text = ""
+            itemName.textColor = UIColor.white
         }
     }
     
@@ -99,5 +103,23 @@ class ProjectModalViewController: UIViewController, UITextViewDelegate, UITextFi
         delegate?.removeBlurredBackgroundView()
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension UIViewController {
+    /// Call this once to dismiss open keyboards by tapping anywhere in the view controller
+    func setupHideKeyboardOnTap() {
+        self.view.addGestureRecognizer(self.endEditingRecognizer())
+        self.navigationController?.navigationBar.addGestureRecognizer(self.endEditingRecognizer())
+    }
     
+    /// Dismisses the keyboard from self.view
+    private func endEditingRecognizer() -> UIGestureRecognizer {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(self.view.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        return tap
+    }
 }

@@ -25,6 +25,9 @@ class PrioritiesModalViewController: UIViewController, UITextViewDelegate, UITex
     
     
     override func viewDidLoad() {
+        self.setupHideKeyboardOnTap()
+        itemName.delegate = self
+        
         // Add blurEffect to background
         view.backgroundColor = .clear
         let blurEffect = UIBlurEffect(style: .dark)
@@ -57,7 +60,6 @@ class PrioritiesModalViewController: UIViewController, UITextViewDelegate, UITex
         } else {
             // Initialize Placeholders for Gratitude Name and Details
             itemName.textColor = UIColor.lightGray
-            itemName.delegate = self
             itemName.text = "Family, Friends, Faith, etc..."
         }
         
@@ -69,8 +71,9 @@ class PrioritiesModalViewController: UIViewController, UITextViewDelegate, UITex
     @IBOutlet weak var saveButton: UIButton!
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if itemName.isFirstResponder == true {
+        if (indexPath == nil) {
             itemName.text = ""
+            itemName.textColor = UIColor.white
         }
     }
     
@@ -98,5 +101,9 @@ class PrioritiesModalViewController: UIViewController, UITextViewDelegate, UITex
         delegate?.removeBlurredBackgroundView()
     }
     
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        self.view.endEditing(true)
+        return true
+    }
 }

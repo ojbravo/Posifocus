@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import SwipeCellKit
 
-class GratitudesViewController: SwipeTableViewController, ModalViewControllerDelegate {
+class GratitudesViewController: SwipeTableViewController, GratitudesModalViewControllerDelegate {
 
     //let realm = try! Realm()
     //var gratitudes: Results<Gratitude>?
@@ -107,12 +107,12 @@ class GratitudesViewController: SwipeTableViewController, ModalViewControllerDel
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
-            if identifier == "ShowModalView" {
-                if let viewController = segue.destination as? ModalViewController {
+            if identifier == "ShowGratitudesModalView" {
+                if let viewController = segue.destination as? GratitudesModalViewController {
                     if (tableView.indexPathForSelectedRow != nil) {
                         viewController.indexPath = tableView.indexPathForSelectedRow!
                     }
-                    viewController.delegate = self as ModalViewControllerDelegate
+                    viewController.delegate = self as GratitudesModalViewControllerDelegate
                     viewController.modalPresentationStyle = .overFullScreen
                 }
             }
@@ -120,7 +120,7 @@ class GratitudesViewController: SwipeTableViewController, ModalViewControllerDel
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "ShowModalView", sender: indexPath);
+        self.performSegue(withIdentifier: "ShowGratitudesModalView", sender: indexPath);
     }
     
     func removeBlurredBackgroundView() {

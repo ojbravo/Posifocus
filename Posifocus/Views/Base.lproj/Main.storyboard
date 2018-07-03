@@ -640,7 +640,7 @@ LAST CONTACT</string>
                     <navigationItem key="navigationItem" title="Gratitudes" largeTitleDisplayMode="always" id="ebK-33-308">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="OId-0H-D4e">
                             <connections>
-                                <segue destination="6nu-5Z-X8t" kind="presentation" identifier="ShowModalView" id="f5f-0l-LAB"/>
+                                <segue destination="6nu-5Z-X8t" kind="presentation" identifier="ShowGratitudesModalView" id="f5f-0l-LAB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -649,10 +649,10 @@ LAST CONTACT</string>
             </objects>
             <point key="canvasLocation" x="2709.375" y="-582.04225352112678"/>
         </scene>
-        <!--Modal View Controller-->
+        <!--Gratitudes Modal View Controller-->
         <scene sceneID="HTl-1z-U9x">
             <objects>
-                <viewController id="6nu-5Z-X8t" customClass="ModalViewController" customModule="Posifocus" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6nu-5Z-X8t" customClass="GratitudesModalViewController" customModule="Posifocus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W3n-o4-r2Y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -676,7 +676,7 @@ LAST CONTACT</string>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="desc" text="The kids surprised me today by..." translatesAutoresizingMaskIntoConstraints="NO" id="ZY8-Aa-STm" userLabel="Details Text View">
                                 <rect key="frame" x="35" y="229" width="250" height="200"/>
@@ -684,7 +684,7 @@ LAST CONTACT</string>
                                     <constraint firstAttribute="height" constant="200" id="WhA-eR-fl6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVb-R1-pu3">
                                 <rect key="frame" x="15" y="30" width="25" height="25"/>
@@ -729,8 +729,8 @@ LAST CONTACT</string>
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="eVb-R1-pu3" id="sUH-Fj-9r5"/>
-                        <outlet property="gratitudeName" destination="YPP-QI-up4" id="4hV-fF-p5W"/>
-                        <outlet property="gratitudeNotes" destination="ZY8-Aa-STm" id="uRb-ru-pTr"/>
+                        <outlet property="itemName" destination="YPP-QI-up4" id="Jrl-gc-cbs"/>
+                        <outlet property="itemNotes" destination="ZY8-Aa-STm" id="3O3-Mj-zAY"/>
                         <outlet property="saveButton" destination="2od-6f-ncC" id="HOa-Yl-DCd"/>
                     </connections>
                 </viewController>
@@ -862,7 +862,7 @@ to Complete this Project?</string>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hx-Y4-Kgl">
                                 <rect key="frame" x="15" y="30" width="25" height="25"/>
@@ -931,7 +931,7 @@ Most to this Priority?</string>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yjM-Wz-6WX">
                                 <rect key="frame" x="15" y="30" width="25" height="25"/>
@@ -998,7 +998,7 @@ Most to this Priority?</string>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Goi-8U-ytr">
                                 <rect key="frame" x="15" y="30" width="25" height="25"/>
@@ -1107,7 +1107,7 @@ a Better Relationshp With?</string>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ulf-V7-d27">
                                 <rect key="frame" x="15" y="30" width="25" height="25"/>
@@ -1272,7 +1272,7 @@ you had with this Person?</string>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="desc" text="The kids surprised me today by..." translatesAutoresizingMaskIntoConstraints="NO" id="OjM-SU-fNN" userLabel="Details Text View">
                                 <rect key="frame" x="35" y="250" width="250" height="200"/>
@@ -1280,7 +1280,7 @@ you had with this Person?</string>
                                     <constraint firstAttribute="height" constant="200" id="FEB-BR-urC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MIt-ba-NYL">
                                 <rect key="frame" x="15" y="30" width="25" height="25"/>

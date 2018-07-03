@@ -25,6 +25,9 @@ class RelationshipModalViewController: UIViewController, UITextViewDelegate, UIT
     
     
     override func viewDidLoad() {
+        self.setupHideKeyboardOnTap()
+        itemName.delegate = self
+        
         // Add blurEffect to background
         view.backgroundColor = .clear
         let blurEffect = UIBlurEffect(style: .dark)
@@ -70,8 +73,9 @@ class RelationshipModalViewController: UIViewController, UITextViewDelegate, UIT
     @IBOutlet weak var saveButton: UIButton!
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if itemName.isFirstResponder == true {
+        if (indexPath == nil) {
             itemName.text = ""
+            itemName.textColor = UIColor.white
         }
     }
     
@@ -99,6 +103,8 @@ class RelationshipModalViewController: UIViewController, UITextViewDelegate, UIT
         delegate?.removeBlurredBackgroundView()
     }
     
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
-

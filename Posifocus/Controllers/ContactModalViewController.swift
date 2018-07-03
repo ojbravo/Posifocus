@@ -25,6 +25,10 @@ class ContactModalViewController: UIViewController, UITextViewDelegate, UITextFi
     
     
     override func viewDidLoad() {
+        self.setupHideKeyboardOnTap()
+        itemName.delegate = self
+        itemNotes.delegate = self
+        
         // Add blurEffect to background
         view.backgroundColor = .clear
         let blurEffect = UIBlurEffect(style: .dark)
@@ -81,8 +85,9 @@ class ContactModalViewController: UIViewController, UITextViewDelegate, UITextFi
     @IBOutlet weak var saveButton: UIButton!
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if itemName.isFirstResponder == true {
+        if (indexPath == nil) {
             itemName.text = ""
+            itemName.textColor = UIColor.white
         }
     }
     
@@ -123,6 +128,19 @@ class ContactModalViewController: UIViewController, UITextViewDelegate, UITextFi
         
         dismiss(animated: true, completion: nil)
         delegate?.removeBlurredBackgroundView()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
     
     

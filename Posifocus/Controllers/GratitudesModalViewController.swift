@@ -1,5 +1,5 @@
 //
-//  ModalViewController.swift
+//  GratitudesModalViewController.swift
 //  Posifocus
 //
 //  Created by Omar Jesus Bravo on 5/2/18.
@@ -9,20 +9,24 @@
 import UIKit
 import RealmSwift
 
-protocol ModalViewControllerDelegate: class {
+protocol GratitudesModalViewControllerDelegate: class {
     func removeBlurredBackgroundView()
 }
 
 
-class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
+class GratitudesModalViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     
     let realm = try! Realm()
     var gratitudes: Results<Gratitude>?
     var indexPath: IndexPath? = nil
     
-    weak var delegate: ModalViewControllerDelegate?
+    weak var delegate: GratitudesModalViewControllerDelegate?
     
     override func viewDidLoad() {
+        
+        self.setupHideKeyboardOnTap()
+        itemName.delegate = self
+        itemNotes.delegate = self
         
         // Add blurEffect to background
         view.backgroundColor = .clear
@@ -53,21 +57,21 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
         gratitudes = realm.objects(Gratitude.self).sorted(byKeyPath: "day", ascending: false)
         
         if (indexPath != nil) {
-            gratitudeName.text = gratitudes![(indexPath?.row)!].name
-            gratitudeNotes.text = gratitudes![(indexPath?.row)!].notes
+            itemName.text = gratitudes![(indexPath?.row)!].name
+            itemNotes.text = gratitudes![(indexPath?.row)!].notes
             
-            gratitudeName.textColor = UIColor.white
-            gratitudeNotes.textColor = UIColor.white
+            itemName.textColor = UIColor.white
+            itemNotes.textColor = UIColor.white
             
         } else {
             // Initialize Placeholders for Gratitude Name and Details
-            gratitudeName.textColor = UIColor.lightGray
-            gratitudeName.delegate = self
-            gratitudeName.text = "Family / Clean Water / etc..."
+            itemName.textColor = UIColor.lightGray
+            itemName.delegate = self
+            itemName.text = "Family / Clean Water / etc..."
             
-            gratitudeNotes.text = "My kids surprised me today by..."
-            gratitudeNotes.textColor = UIColor.lightGray
-            gratitudeNotes.delegate = self
+            itemNotes.text = "My kids surprised me today by..."
+            itemNotes.textColor = UIColor.lightGray
+            itemNotes.delegate = self
         }
         
         // Set Save Button Color
@@ -87,12 +91,12 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
     }
     
     // Gratitude Name Text Field
-    @IBOutlet weak var gratitudeName: UITextField!
+    @IBOutlet weak var itemName: UITextField!
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if gratitudeName.isFirstResponder == true {
-            gratitudeName.text = ""
-            gratitudeName.textColor = UIColor.white
+        if (indexPath == nil) {
+            itemName.text = ""
+            itemName.textColor = UIColor.white
         }
     }
     
@@ -105,7 +109,7 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
     
     
     // Gratitude Notes Text View
-    @IBOutlet weak var gratitudeNotes: UITextView!
+    @IBOutlet weak var itemNotes: UITextView!
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
@@ -127,8 +131,8 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
         if (indexPath != nil) {
             do {
                 try self.realm.write {
-                    gratitudes![(indexPath?.row)!].name = gratitudeName.text!
-                    gratitudes![(indexPath?.row)!].notes = gratitudeNotes.text
+                    gratitudes![(indexPath?.row)!].name = itemName.text!
+                    gratitudes![(indexPath?.row)!].notes = itemNotes.text
                 }
             } catch {
                 print("Error saving new items, \(error)")
@@ -142,8 +146,8 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
             do {
                 try self.realm.write {
                     let newGratitude = Gratitude()
-                    newGratitude.name = gratitudeName.text!
-                    newGratitude.notes = gratitudeNotes.text!
+                    newGratitude.name = itemName.text!
+                    newGratitude.notes = itemNotes.text!
                     realm.add(newGratitude)
                 }
             } catch {
@@ -154,5 +158,20 @@ class ModalViewController: UIViewController, UITextViewDelegate, UITextFieldDele
         dismiss(animated: true, completion: nil)
         delegate?.removeBlurredBackgroundView()
     }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
     
 }
