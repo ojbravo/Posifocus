@@ -90,7 +90,7 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
     }
     
     
-    func addNewItem(itemName: String) {
+    func addNewItem(itemName: String, todaySwitchStatus: Bool) {
         // Create New Item
         if let currentProject = self.selectedProject {
             do {
@@ -98,6 +98,7 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
                     let newItem = Task()
                     newItem.name = itemName
                     newItem.order = (tasks?.count)!
+                    newItem.today = todaySwitchStatus
                     currentProject.tasks.append(newItem)
                 }
             } catch {
@@ -111,10 +112,11 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
     }
     
     
-    func editItem(itemName: String, indexPath: IndexPath) {
+    func editItem(itemName: String, todaySwitchStatus: Bool, indexPath: IndexPath) {
         do {
             try self.realm.write {
                 tasks![(indexPath.row)].name = itemName
+                tasks![(indexPath.row)].today = todaySwitchStatus
             }
         } catch {
             print("Error saving new items, \(error)")
@@ -252,7 +254,7 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Captures sender and saves it as indexPath
         if let identifier = segue.identifier {
-            if identifier == "ShowTaskModalView" {
+            if (identifier == "ShowTaskModalView" || identifier == "ShowTaskModalView2") {
                 if let viewController = segue.destination as? TaskModalViewController {
                     if let indexPath = sender as? NSIndexPath {
                         // Handles Tapped Item

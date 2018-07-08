@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Realm Migrations
         let config = Realm.Configuration(
-            schemaVersion: 7,
+            schemaVersion: 8,
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
                 if (oldSchemaVersion < 2) {
@@ -52,6 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         newObject!["name"] = oldObject!["type"]
                     }
                     print("Migration to Schema v7!")
+                }
+                if (oldSchemaVersion < 8) {
+                    // Added Today to Tasks
+                    print("Migration to Schema v8!")
                 }
                 
             }

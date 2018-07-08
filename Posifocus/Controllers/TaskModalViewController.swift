@@ -11,8 +11,8 @@ import RealmSwift
 
 protocol TaskModalViewControllerDelegate: class {
     func removeBlurredBackgroundView()
-    func addNewItem(itemName: String)
-    func editItem(itemName: String, indexPath: IndexPath)
+    func addNewItem(itemName: String, todaySwitchStatus: Bool)
+    func editItem(itemName: String, todaySwitchStatus: Bool, indexPath: IndexPath)
 }
 
 class TaskModalViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
@@ -22,6 +22,8 @@ class TaskModalViewController: UIViewController, UITextViewDelegate, UITextField
     
     var indexPath: IndexPath? = nil
     weak var delegate: TaskModalViewControllerDelegate?
+    
+    var todaySwitchStatus: Bool = false
     
     
     override func viewDidLoad() {
@@ -59,6 +61,10 @@ class TaskModalViewController: UIViewController, UITextViewDelegate, UITextField
         if (indexPath != nil) {
             itemName.text = itemList![(indexPath?.row)!].name
             itemName.textColor = UIColor.white
+            todaySwitchStatus = itemList![(indexPath?.row)!].today
+            if (todaySwitchStatus == true) {
+                todaySwitch.isOn = true
+            }
             
         } else {
             // Initialize Placeholders for Gratitude Name and Details
@@ -74,6 +80,7 @@ class TaskModalViewController: UIViewController, UITextViewDelegate, UITextField
     }
     
     @IBOutlet weak var itemName: UITextField!
+    @IBOutlet weak var todaySwitch: UISwitch!
     @IBOutlet weak var saveButton: UIButton!
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -90,6 +97,10 @@ class TaskModalViewController: UIViewController, UITextViewDelegate, UITextField
         }
     }
     
+    @IBAction func todaySwitchChanged(_ sender: UISwitch) {
+        todaySwitchStatus = todaySwitch.isOn
+    }
+    
     @IBAction func cancelButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
         delegate?.removeBlurredBackgroundView()
@@ -98,10 +109,10 @@ class TaskModalViewController: UIViewController, UITextViewDelegate, UITextField
     @IBAction func saveButtonPressed(_ sender: Any) {
         
         if (indexPath != nil) {
-            delegate?.editItem(itemName: itemName.text!, indexPath: indexPath!)
+            delegate?.editItem(itemName: itemName.text!, todaySwitchStatus: todaySwitchStatus, indexPath: indexPath!)
         }
         else {
-            delegate?.addNewItem(itemName: itemName.text!)
+            delegate?.addNewItem(itemName: itemName.text!, todaySwitchStatus: todaySwitchStatus)
         }
         
         dismiss(animated: true, completion: nil)

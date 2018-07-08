@@ -17,6 +17,7 @@
 		930BCCD92079BC5000424182 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930BCCD52079BC4F00424182 /* Assets.xcassets */; };
 		930BCCDD2079BC6400424182 /* edit-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 930BCCDC2079BC6400424182 /* edit-icon.png */; };
 		93157D2D20A630C8004008D8 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93157D2C20A630C8004008D8 /* Profile.swift */; };
+		9323A9D020EE752000C119EB /* calendar-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9323A9CF20EE752000C119EB /* calendar-icon.png */; };
 		9327E8362099078300D6DB28 /* GratitudesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327E8352099078300D6DB28 /* GratitudesViewController.swift */; };
 		9327E83A209A19C400D6DB28 /* GratitudesModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327E839209A19C400D6DB28 /* GratitudesModalViewController.swift */; };
 		9328F2EF20D17FF60011EF1C /* tasks-instructions-tableview.png in Resources */ = {isa = PBXBuildFile; fileRef = 9328F2EE20D17FF60011EF1C /* tasks-instructions-tableview.png */; };
@@ -55,6 +56,7 @@
 		9393378920DC3F78003F2A8D /* RelationshipModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393378820DC3F78003F2A8D /* RelationshipModalViewController.swift */; };
 		9393378B20DC3F8D003F2A8D /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393378A20DC3F8D003F2A8D /* ContactViewController.swift */; };
 		9393378D20DC3FA3003F2A8D /* ContactModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393378C20DC3FA3003F2A8D /* ContactModalViewController.swift */; };
+		93B2B64320EFCE9D00B978B5 /* TodayTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B2B64220EFCE9D00B978B5 /* TodayTaskViewController.swift */; };
 		93B5670220A53EB800207697 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B5670120A53EB800207697 /* DashboardViewController.swift */; };
 		93D39EA120D0503D008F9B37 /* gratitudes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D39EA020D0503C008F9B37 /* gratitudes@2x.png */; };
 		93D39EA320D163C0008F9B37 /* bdlp-paradise-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93D39EA220D163C0008F9B37 /* bdlp-paradise-wallpaper.jpg */; };
@@ -77,6 +79,7 @@
 		930BCCDE2079BC7F00424182 /* delete-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-icon.png"; sourceTree = "<group>"; };
 		930BCCDF2079BC9400424182 /* complete-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "complete-icon.png"; sourceTree = "<group>"; };
 		93157D2C20A630C8004008D8 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		9323A9CF20EE752000C119EB /* calendar-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-icon.png"; sourceTree = "<group>"; };
 		9327E8352099078300D6DB28 /* GratitudesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratitudesViewController.swift; sourceTree = "<group>"; };
 		9327E839209A19C400D6DB28 /* GratitudesModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratitudesModalViewController.swift; sourceTree = "<group>"; };
 		9328F2EE20D17FF60011EF1C /* tasks-instructions-tableview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tasks-instructions-tableview.png"; sourceTree = "<group>"; };
@@ -117,6 +120,7 @@
 		9393378820DC3F78003F2A8D /* RelationshipModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipModalViewController.swift; sourceTree = "<group>"; };
 		9393378A20DC3F8D003F2A8D /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		9393378C20DC3FA3003F2A8D /* ContactModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModalViewController.swift; sourceTree = "<group>"; };
+		93B2B64220EFCE9D00B978B5 /* TodayTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTaskViewController.swift; sourceTree = "<group>"; };
 		93B5670120A53EB800207697 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = Posifocus/Controllers/DashboardViewController.swift; sourceTree = SOURCE_ROOT; };
 		93D39EA020D0503C008F9B37 /* gratitudes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gratitudes@2x.png"; sourceTree = "<group>"; };
 		93D39EA220D163C0008F9B37 /* bdlp-paradise-wallpaper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bdlp-paradise-wallpaper.jpg"; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 				930BCCCE207873C700424182 /* ProjectViewController.swift */,
 				934F6AF320C79C0900D18AF3 /* ProjectModalViewController.swift */,
 				930BCCD020792E0900424182 /* TaskViewController.swift */,
+				93B2B64220EFCE9D00B978B5 /* TodayTaskViewController.swift */,
 				937A1C2E20C18C9F001B9006 /* TaskModalViewController.swift */,
 				9327E8352099078300D6DB28 /* GratitudesViewController.swift */,
 				9327E839209A19C400D6DB28 /* GratitudesModalViewController.swift */,
@@ -212,6 +217,7 @@
 				9328F2EE20D17FF60011EF1C /* tasks-instructions-tableview.png */,
 				93D39EA820D17730008F9B37 /* tasks-instructions-portrait.png */,
 				9328F2F220D1A13D0011EF1C /* gratitudes-instructions-tableview.png */,
+				9323A9CF20EE752000C119EB /* calendar-icon.png */,
 				9328F2F020D1A13C0011EF1C /* priorities-instructions-tableview.png */,
 				9328F2F120D1A13D0011EF1C /* tasks-instructions-tableview.png */,
 				93D39EA020D0503C008F9B37 /* gratitudes@2x.png */,
@@ -352,6 +358,7 @@
 				934CC81F20EC27820008827F /* 1242x2208.png in Resources */,
 				937EBAED20E6B4E700AFDB28 /* iTunesArtwork@1x.png in Resources */,
 				9328F2EF20D17FF60011EF1C /* tasks-instructions-tableview.png in Resources */,
+				9323A9D020EE752000C119EB /* calendar-icon.png in Resources */,
 				937EBADE20E67DB000AFDB28 /* blank-user.png in Resources */,
 				934CC81E20EC27820008827F /* 750x1334.png in Resources */,
 				937EBAE720E6914000AFDB28 /* contacts-instructions-tableview.png in Resources */,
@@ -430,6 +437,7 @@
 				930BCCC720786FC300424182 /* Priority.swift in Sources */,
 				9393378D20DC3FA3003F2A8D /* ContactModalViewController.swift in Sources */,
 				9393378B20DC3F8D003F2A8D /* ContactViewController.swift in Sources */,
+				93B2B64320EFCE9D00B978B5 /* TodayTaskViewController.swift in Sources */,
 				9393378720DC3F42003F2A8D /* RelationshipViewController.swift in Sources */,
 				93157D2D20A630C8004008D8 /* Profile.swift in Sources */,
 				9327E83A209A19C400D6DB28 /* GratitudesModalViewController.swift in Sources */,

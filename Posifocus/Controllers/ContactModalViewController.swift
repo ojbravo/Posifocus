@@ -11,8 +11,8 @@ import RealmSwift
 
 protocol ContactModalViewControllerDelegate: class {
     func removeBlurredBackgroundView()
-    func addNewItem(itemName: String, itemNotes: String)
-    func editItem(itemName: String, itemNotes: String, indexPath: IndexPath)
+    func addNewItem(itemName: String, itemNotes: String, itemDate: Date)
+    func editItem(itemName: String, itemNotes: String, itemDate: Date, indexPath: IndexPath)
 }
 
 class ContactModalViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
@@ -22,9 +22,12 @@ class ContactModalViewController: UIViewController, UITextViewDelegate, UITextFi
     
     var indexPath: IndexPath? = nil
     weak var delegate: ContactModalViewControllerDelegate?
-    
+    var showDatePickerStatus: Bool = false
+    var itemDate = Date()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         self.setupHideKeyboardOnTap()
         itemName.delegate = self
         itemNotes.delegate = self
@@ -60,6 +63,7 @@ class ContactModalViewController: UIViewController, UITextViewDelegate, UITextFi
         if (indexPath != nil) {
             itemName.text = itemList![(indexPath?.row)!].name
             itemNotes.text = itemList![(indexPath?.row)!].notes
+            itemDate = itemList![(indexPath?.row)!].day
             
             itemName.textColor = UIColor.white
             itemNotes.textColor = UIColor.white
@@ -75,14 +79,27 @@ class ContactModalViewController: UIViewController, UITextViewDelegate, UITextFi
             itemNotes.delegate = self
         }
         
+        // DatePickerView
+        datePickerViewBottom.constant = 300
+        datePickerToolbar.barTintColor = UIColor.pfContact
+        datePicker.date = itemDate
+        
         // Set Save Button Color
         saveButton.backgroundColor = UIColor.pfContact
         
     }
     
+    
+    
+    @IBOutlet weak var datePickerViewBottom: NSLayoutConstraint!
     @IBOutlet weak var itemName: UITextField!
     @IBOutlet weak var itemNotes: UITextView!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var datePickerView: UIView!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var datePickerToolbar: UIToolbar!
+    
+    
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if (indexPath == nil) {
@@ -112,6 +129,39 @@ class ContactModalViewController: UIViewController, UITextViewDelegate, UITextFi
         }
     }
     
+    @IBAction func toggleDatePicker(_ sender: Any) {
+        if (showDatePickerStatus == false) {
+            showDatePicker()
+        } else {
+            hideDatePicker()
+        }
+    }
+    @IBAction func cancelDatePicker(_ sender: Any) {
+        hideDatePicker()
+    }
+    func showDatePicker() {
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            //self.datePickerViewBottom.constant = 0
+            self.datePickerView.frame.origin.y -= 300
+            self.showDatePickerStatus = true
+        })
+    }
+    func hideDatePicker() {
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            //self.datePickerViewBottom.constant = 0
+            self.datePickerView.frame.origin.y += 300
+            self.showDatePickerStatus = false
+        })
+    }
+    
+    @IBAction func setDate(_ sender: UIDatePicker) {
+        hideDatePicker()
+        print (datePicker.date)
+        itemDate = datePicker.date
+        
+    }
+    
+    
     @IBAction func cancelButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
         delegate?.removeBlurredBackgroundView()
@@ -120,10 +170,10 @@ class ContactModalViewController: UIViewController, UITextViewDelegate, UITextFi
     @IBAction func saveButtonPressed(_ sender: Any) {
         
         if (indexPath != nil) {
-            delegate?.editItem(itemName: itemName.text!, itemNotes: itemNotes.text!, indexPath: indexPath!)
+            delegate?.editItem(itemName: itemName.text!, itemNotes: itemNotes.text!, itemDate: itemDate, indexPath: indexPath!)
         }
         else {
-            delegate?.addNewItem(itemName: itemName.text!, itemNotes: itemNotes.text!)
+            delegate?.addNewItem(itemName: itemName.text!, itemNotes: itemNotes.text!, itemDate: itemDate)
         }
         
         dismiss(animated: true, completion: nil)
@@ -142,6 +192,4 @@ class ContactModalViewController: UIViewController, UITextViewDelegate, UITextFi
         }
         return true
     }
-    
-    
 }

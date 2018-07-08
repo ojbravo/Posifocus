@@ -94,7 +94,7 @@ class ContactViewController: SwipeTableViewController, ContactModalViewControlle
         tableView.reloadData()
     }
     
-    func addNewItem(itemName: String, itemNotes: String) {
+    func addNewItem(itemName: String, itemNotes: String, itemDate: Date) {
         print("Adding New Contact")
         // Create New Item
         if let currentParent = self.parentItem {
@@ -103,35 +103,60 @@ class ContactViewController: SwipeTableViewController, ContactModalViewControlle
                     let newItem = Contact()
                     newItem.name = itemName
                     newItem.notes = itemNotes
+                    newItem.day = itemDate
                     currentParent.contacts.append(newItem)
-                    currentParent.lastContact = Date()
+                    if (itemDate > currentParent.lastContact) {
+                      currentParent.lastContact = itemDate
+                    }
+                    
                 }
             } catch {
                 print("Error saving new items, \(error)")
             }
         }
         
+        updateLastContact()
         self.tableView.reloadData()
-        
         updateTableViewBackground(itemList: itemList!)
     }
     
     
-    func editItem(itemName: String, itemNotes: String, indexPath: IndexPath) {
-        do {
-            try self.realm.write {
-                itemList![(indexPath.row)].name = itemName
-                itemList![(indexPath.row)].notes = itemNotes
+    func editItem(itemName: String, itemNotes: String, itemDate: Date, indexPath: IndexPath) {
+        if let currentParent = self.parentItem {
+            do {
+                try self.realm.write {
+                    itemList![(indexPath.row)].name = itemName
+                    itemList![(indexPath.row)].notes = itemNotes
+                    itemList![(indexPath.row)].day = itemDate
+                    if (itemDate > currentParent.lastContact) {
+                        currentParent.lastContact = itemDate
+                    }
+                }
+            } catch {
+                print("Error saving new items, \(error)")
             }
-        } catch {
-            print("Error saving new items, \(error)")
         }
+        updateLastContact()
+        self.tableView.reloadData()
     }
     
+    func updateLastContact() {
+        if let currentParent = self.parentItem {
+            print(itemList![0].day)
+            do {
+                try self.realm.write {
+                    currentParent.lastContact = itemList![0].day
+                }
+            } catch {
+                print("Error setting last contact, \(error)")
+            }
+        }
+    }
     
     override func deleteButtonPressed(at indexPath: IndexPath) {
         self.deleteItems(at: indexPath, itemList: self.itemList!)
         updateTableViewBackground(itemList: itemList!)
+        updateLastContact()
     }
     
     

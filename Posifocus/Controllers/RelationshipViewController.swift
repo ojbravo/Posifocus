@@ -54,7 +54,22 @@ class RelationshipViewController: SwipeTableViewController, RelationshipModalVie
         let startDate = relationships?[indexPath.row].lastContact
         let today = Date()
         let daysBetween = Calendar.current.dateComponents([.day], from: startDate!, to: today).day
-        let label = (relationships?[indexPath.row].name)! + " (" + "\(daysBetween ?? 100)" + " days)"
+        let contactsCount = relationships?[indexPath.row].contacts.count
+        var label = ""
+        if (contactsCount == 0) {
+            label = (relationships?[indexPath.row].name)! + " ( No Contacts )"
+        }
+        else {
+            if (daysBetween == 0) {
+                label = (relationships?[indexPath.row].name)! + " ( Today )"
+            }
+            else if (daysBetween == 1) {
+                label = (relationships?[indexPath.row].name)! + " ( Yesterday )"
+            }
+            else {
+                label = (relationships?[indexPath.row].name)! + " (" + "\(daysBetween ?? 100)" + " days ago)"
+            }
+        }
         
         cell.textLabel?.text = label
         
