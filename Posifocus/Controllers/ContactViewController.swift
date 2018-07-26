@@ -211,6 +211,11 @@ class ContactViewController: SwipeTableViewController, ContactModalViewControlle
     }
     
     
+    @IBAction func goBackToOneButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "unwindContactsToDashboard", sender: self)
+    }
+    
+    
 }
 
 class NotesCell: SwipeTableViewCell {

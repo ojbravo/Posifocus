@@ -12,7 +12,12 @@ import RealmSwift
 
 class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegate {
     
-    let realm = try! Realm()
+    //let realm = try! Realm()
+    
+    lazy var realm:Realm = {
+        return try! Realm()
+    }()
+    
     var cell: UITableViewCell?
     var gratitudes: Results<Gratitude>?
     
@@ -96,6 +101,9 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     func editButtonPressed(at indexPath: IndexPath) {}
     func markItemComplete(at indexPath: IndexPath) { print("Marked Complete") }
     func setDataSource(at indexPath: IndexPath, initialIndex: Int) {}
+    func reorderDatabaseCells<T: Object>(at indexPath: IndexPath, initialIndex: Int, itemList: Results<T>) {
+        
+    }
     
     
     
@@ -170,7 +178,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     
     
     
-    // Reorder Table Cells with longPressGesture
+    // Reorder Table Cells in UI with longPressGesture
     @objc func longPressGestureRecognized(gestureRecognizer: UIGestureRecognizer) {
         
         let longpress = gestureRecognizer as! UILongPressGestureRecognizer
@@ -213,6 +221,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
                 
                 let initialIndex: Int = Int(Path.initialIndexPath!.row)
                 self.setDataSource(at: indexPath!, initialIndex: initialIndex)
+                //self.reorderDatabaseCells(at: indexPath!, initialIndex: initialIndex, itemList: itemList)
                 
                 self.tableView.moveRow(at: Path.initialIndexPath!, to: indexPath!)
                 Path.initialIndexPath = indexPath
@@ -282,15 +291,16 @@ extension UIColor {
     static let btnBlue = UIColor(red:0.15, green:0.60, blue:0.98, alpha:1.0)
     static let btnRed = UIColor(red:0.98, green:0.25, blue:0.25, alpha:1.0)
     
-    static let pfGratitude = UIColor(red:0.33, green:0.77, blue:0.67, alpha:1.0)
-    static let pfPriority =
-        UIColor(red:0.26, green:0.73, blue:0.78, alpha:1.0)
-    static let pfProject =
-        UIColor(red:0.26, green:0.69, blue:0.74, alpha:1.0)
-    static let pfTask = UIColor(red:0.25, green:0.60, blue:0.64, alpha:1.0)
-    static let pfRelationship = UIColor(red:0.25, green:0.63, blue:0.72, alpha:1.0)
+    static let pfGratitude = UIColor(red:0.00, green:0.59, blue:0.90, alpha:1.0)
+    
+    static let pfPriority = UIColor(red:0.00, green:0.59, blue:0.80, alpha:1.0)
+    static let pfProject = UIColor(red:0.00, green:0.62, blue:0.80, alpha:1.0)
+    static let pfTask = UIColor(red:0.00, green:0.65, blue:0.80, alpha:1.0)
+    
+    static let pfRelationship = UIColor(red:0.00, green:0.59, blue:0.70, alpha:1.0)
     static let pfContact = UIColor(red:0.25, green:0.56, blue:0.70, alpha:1.0)
     
+    static let pfToday = UIColor(red:0.00, green:0.59, blue:0.60, alpha:1.0)
     
     
     

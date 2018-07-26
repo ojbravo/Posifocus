@@ -301,19 +301,9 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
         tableView.reloadData()
     }
     
-    
-    
-    //    // Save Projects to Database
-    //    func save(task: Task) {
-    //        do {
-    //            try realm.write {
-    //                realm.add(task)
-    //            }
-    //        }
-    //        catch {
-    //            print("Error writing priority \(error)")
-    //        }
-    //    }
+    @IBAction func goBackToOneButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "unwindTasksToDashboard", sender: self)
+    }
 
     
 }

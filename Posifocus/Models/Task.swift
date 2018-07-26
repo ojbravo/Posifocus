@@ -14,5 +14,6 @@ class Task: Object {
     @objc dynamic var order: Int = 0
     @objc dynamic var completed: Bool = false
     @objc dynamic var today: Bool = false
+    @objc dynamic var todayOrder: Int = 0
     var parentProject = LinkingObjects(fromType: Project.self, property: "tasks")
 }

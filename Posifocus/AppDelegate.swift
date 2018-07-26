@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Realm Migrations
         let config = Realm.Configuration(
-            schemaVersion: 8,
+            schemaVersion: 9,
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
                 if (oldSchemaVersion < 2) {
@@ -57,6 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     // Added Today to Tasks
                     print("Migration to Schema v8!")
                 }
+                if (oldSchemaVersion < 9) {
+                    // Added todayOrder to Tasks
+                    print("Migration to Schema v9!")
+                }
                 
             }
         )
@@ -68,6 +73,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        
+        // Setup Badge Icon Notifications
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+                //print("Success")
+        }
+
+
+        
         
         do {
             _ = try Realm()

@@ -20,12 +20,13 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
     var profiles: Results<Profile>?
     let profile = Profile()
     
+    var gratitudesMissed: Int = 0
+    
     lazy var realm:Realm = {
         return try! Realm()
     }()
     
     
-
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var profileName: UITextField!
@@ -33,8 +34,18 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
     @IBOutlet weak var gratitudeCount: UILabel!
     @IBOutlet weak var tasksCompleted: UILabel!
     @IBOutlet weak var lastContact: UILabel!
+    @IBOutlet weak var missedGratitudeLabel: UILabel!
     @IBOutlet weak var currentProjectCount: UILabel!
     @IBOutlet weak var currentTaskCount: UILabel!
+    
+    // Buttons
+    @IBOutlet weak var GratitudeButtonView: UIView!
+    @IBOutlet weak var PrioritiesButtonView: UIView!
+    @IBOutlet weak var RelationshipButtonView: UIView!
+    @IBOutlet weak var TodaysTasksButtonView: UIView!
+    @IBOutlet weak var ProjectsButtonView: UIView!
+    @IBOutlet weak var TasksButtonView: UIView!
+    
     
     
     override func viewDidLoad() {
@@ -45,8 +56,15 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
         backgroundImage.contentMode = .scaleAspectFill
         backgroundImage.alpha = 0.1
         
-        //self.view.backgroundColor = UIColor.pfGreen.darker(darkness: 0.9)
+        // Button Colors
+        GratitudeButtonView.backgroundColor = UIColor.pfGratitude
+        PrioritiesButtonView.backgroundColor = UIColor.pfPriority
+        ProjectsButtonView.backgroundColor = UIColor.pfProject
+        TasksButtonView.backgroundColor = UIColor.pfTask
+        RelationshipButtonView.backgroundColor = UIColor.pfRelationship
+        TodaysTasksButtonView.backgroundColor = UIColor.pfToday
         
+        //self.view.backgroundColor = UIColor.pfGreen.darker(darkness: 0.9)
         
         if (realm.objects(Profile.self).count == 0) {
             try! realm.write {
@@ -95,12 +113,19 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
             profileMotto.text = profiles![0].motto
             profileMotto.textColor = UIColor.white
         }
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(updateBadgeCounter), name:.NSCalendarDayChanged, object:nil)
+        
+        missedGratitudeLabel.layer.masksToBounds = true
+        missedGratitudeLabel.layer.cornerRadius = 13
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         navigationController?.navigationBar.barTintColor = UIColor.pfBlue
         navigationController?.navigationBar.isTranslucent = false
+        
         
         gratitudeCount.text = String(realm.objects(Gratitude.self).count)
         tasksCompleted.text = String(profiles![0].tasksCompleted)
@@ -119,6 +144,13 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
             lastContact.text = "\(daysBetween!)"
         }
         
+        updateBadgeCounter()
+        missedGratitudeLabel.text = "\(gratitudesMissed)"
+        if (gratitudesMissed == 0) {
+            missedGratitudeLabel.isHidden = true
+        } else {
+            missedGratitudeLabel.isHidden = false
+        }
     }
     
     
@@ -247,5 +279,25 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
         
     }
     
+    //  Sets Notification Badge = Missed Gratitudes
+    @objc func updateBadgeCounter()
+    {
+        gratitudes = realm.objects(Gratitude.self).sorted(byKeyPath: "day", ascending: false)
+        //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        
+        if (gratitudes?.count == 0) {
+            gratitudesMissed = 1
+        } else {
+            let startDate = gratitudes?[0].day
+            let today = Date()
+            gratitudesMissed = Calendar.current.dateComponents([.day], from: startDate!, to: today).day!
+        }
+        
+
+        UIApplication.shared.applicationIconBadgeNumber = gratitudesMissed
+    }
+    
+    
+    @IBAction func unwindToDashboard(segue:UIStoryboardSegue) { }
     
 }

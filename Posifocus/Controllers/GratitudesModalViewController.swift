@@ -19,6 +19,8 @@ class GratitudesModalViewController: UIViewController, UITextViewDelegate, UITex
     let realm = try! Realm()
     var gratitudes: Results<Gratitude>?
     var indexPath: IndexPath? = nil
+    var showDatePickerStatus: Bool = false
+    var itemDate = Date()
     
     weak var delegate: GratitudesModalViewControllerDelegate?
     
@@ -59,6 +61,7 @@ class GratitudesModalViewController: UIViewController, UITextViewDelegate, UITex
         if (indexPath != nil) {
             itemName.text = gratitudes![(indexPath?.row)!].name
             itemNotes.text = gratitudes![(indexPath?.row)!].notes
+            itemDate = gratitudes![(indexPath?.row)!].day
             
             itemName.textColor = UIColor.white
             itemNotes.textColor = UIColor.white
@@ -77,12 +80,16 @@ class GratitudesModalViewController: UIViewController, UITextViewDelegate, UITex
         // Set Save Button Color
         saveButton.backgroundColor = UIColor.pfGratitude
         
+        // DatePickerView
+        datePickerViewBottom.constant = 300
+        datePickerToolbar.barTintColor = UIColor.pfGratitude
+        datePicker.date = itemDate
+        
     }
     
     
-    // Initialize Cancel Button
+    // Initialize Buttons
     @IBOutlet weak var cancelButton: UIButton!
-    
     @IBOutlet weak var saveButton: UIButton!
     @IBAction func cancelButtonPressed(_ sender: Any) {
         
@@ -133,6 +140,7 @@ class GratitudesModalViewController: UIViewController, UITextViewDelegate, UITex
                 try self.realm.write {
                     gratitudes![(indexPath?.row)!].name = itemName.text!
                     gratitudes![(indexPath?.row)!].notes = itemNotes.text
+                    gratitudes![(indexPath?.row)!].day = itemDate
                 }
             } catch {
                 print("Error saving new items, \(error)")
@@ -148,6 +156,7 @@ class GratitudesModalViewController: UIViewController, UITextViewDelegate, UITex
                     let newGratitude = Gratitude()
                     newGratitude.name = itemName.text!
                     newGratitude.notes = itemNotes.text!
+                    newGratitude.day = itemDate
                     realm.add(newGratitude)
                 }
             } catch {
@@ -171,6 +180,44 @@ class GratitudesModalViewController: UIViewController, UITextViewDelegate, UITex
             return false
         }
         return true
+    }
+    
+    @IBOutlet weak var datePickerViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var datePickerView: UIView!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var datePickerToolbar: UIToolbar!
+    
+    @IBAction func toggleDatePicker(_ sender: Any) {
+        if (showDatePickerStatus == false) {
+            showDatePicker()
+        } else {
+            hideDatePicker()
+        }
+    }
+    @IBAction func cancelDatePicker(_ sender: Any) {
+        hideDatePicker()
+    }
+    func showDatePicker() {
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            //self.datePickerViewBottom.constant = 0
+            self.datePickerView.frame.origin.y -= 300
+            self.showDatePickerStatus = true
+        })
+    }
+    func hideDatePicker() {
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            //self.datePickerViewBottom.constant = 0
+            self.datePickerView.frame.origin.y += 300
+            self.showDatePickerStatus = false
+        })
+    }
+    
+ 
+    @IBAction func setDate(_ sender: UIDatePicker) {
+        hideDatePicker()
+        print (datePicker.date)
+        itemDate = datePicker.date
+        
     }
     
     

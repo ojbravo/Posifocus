@@ -110,7 +110,7 @@ class ProjectViewController: SwipeTableViewController, ProjectModalViewControlle
                     viewController.modalPresentationStyle = .overFullScreen
                 }
             }
-            else {
+            else if identifier == "goToTasks" {
                 let destinationVC = segue.destination as! TaskViewController
                 
                 if let indexPath = tableView.indexPathForSelectedRow {
@@ -412,6 +412,10 @@ class ProjectViewController: SwipeTableViewController, ProjectModalViewControlle
             }
         }
         tableView.reloadData()
+    }
+    
+    @IBAction func goBackToOneButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "unwindProjectsToDashboard", sender: self)
     }
     
 }

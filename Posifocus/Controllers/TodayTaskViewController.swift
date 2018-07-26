@@ -19,14 +19,22 @@ class TodayTaskViewController: TaskViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.barTintColor = UIColor.pfTask
+        navigationController?.navigationBar.isTranslucent = false
         title = "Today's Tasks"
+    }
+    
+    override func willMove(toParentViewController parent: UIViewController?) {
+        self.navigationController?.navigationBar.barTintColor = UIColor.pfBlue
     }
     
     // Queries Tasks from Database
     override func loadTasks() {
-        tasks = realm.objects(Task.self).filter("today == true").sorted(byKeyPath: "order", ascending: true)
+        //tasks = realm.objects(Task.self).filter("today == true").sorted(byKeyPath: "order", ascending: true)
+        tasks = realm.objects(Task.self).filter("today == true").sorted(by: [SortDescriptor(keyPath: "order", ascending: true)])
         tableView.reloadData()
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Captures sender and saves it as indexPath

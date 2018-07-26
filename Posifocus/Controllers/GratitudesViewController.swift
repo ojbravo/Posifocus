@@ -9,11 +9,15 @@
 import UIKit
 import RealmSwift
 import SwipeCellKit
+import UserNotifications
+
 
 class GratitudesViewController: SwipeTableViewController, GratitudesModalViewControllerDelegate {
 
     //let realm = try! Realm()
     //var gratitudes: Results<Gratitude>?
+    
+    var DashboardVC = DashboardViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,14 +25,19 @@ class GratitudesViewController: SwipeTableViewController, GratitudesModalViewCon
         tableView.rowHeight = 130.0
         self.tableView.backgroundColor = UIColor.pfGratitude.darker(darkness: 0.9)
         
-        gratitudes = realm.objects(Gratitude.self).sorted(byKeyPath: "day", ascending: false)
+        loadItems()
         
         updateTableViewBackground(itemList: gratitudes!)
+        
+        DashboardVC.updateBadgeCounter()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = UIColor.pfGratitude
         navigationController?.navigationBar.isTranslucent = false
+        
+        DashboardVC.updateBadgeCounter()
         
         if (gratitudes?.count == 0) {
             self.tableView.backgroundView = UIImageView(image: UIImage(named: "gratitudes-instructions-tableview.png"))
@@ -41,6 +50,13 @@ class GratitudesViewController: SwipeTableViewController, GratitudesModalViewCon
     override func willMove(toParentViewController parent: UIViewController?) {
         self.navigationController?.navigationBar.barTintColor = UIColor.pfBlue
     }
+    
+    
+    func loadItems() {
+        gratitudes = realm.objects(Gratitude.self).sorted(byKeyPath: "day", ascending: false)
+        tableView.reloadData()
+    }
+    
     
     // Defines number of cells to accomodate entire list
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -94,6 +110,7 @@ class GratitudesViewController: SwipeTableViewController, GratitudesModalViewCon
                 // handle action by updating model with deletion
                 
                 self.deleteItems(at: indexPath, itemList: self.gratitudes!)
+                self.DashboardVC.updateBadgeCounter()
                 
             }
             
@@ -134,7 +151,7 @@ class GratitudesViewController: SwipeTableViewController, GratitudesModalViewCon
         
         updateTableViewBackground(itemList: gratitudes!)
     }
-    
+
 }
 
 
