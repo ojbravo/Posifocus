@@ -270,6 +270,27 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         static var initialIndexPath: IndexPath? = nil
     }
     // end Reorder with longPressGesture
+
+    
+    
+    func deleteCompletedTasks<T: Object>(itemList: Results<T>) {
+        
+        let totalCompletedTasks = (itemList.count)
+        var i = 0
+        while i < totalCompletedTasks {
+            do {
+                try self.realm.write {
+                    self.realm.delete(itemList[0])
+                }
+            } catch {
+                print("Couldn't delete completed task \(error)")
+            }
+            
+            i = i + 1
+            
+            DispatchQueue.main.async { self.tableView.reloadData() }
+        }
+    }
     
 }
 

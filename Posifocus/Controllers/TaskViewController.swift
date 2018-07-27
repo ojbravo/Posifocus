@@ -15,6 +15,7 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
     var tasks: Results<Task>?
     var profiles: Results<Profile>?
     var indexPath: IndexPath? = nil
+    var completedTasks: Results<Task>?
 
     
     var selectedProject : Project? {
@@ -28,13 +29,15 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
         super.viewDidLoad()
         self.tableView.backgroundColor = UIColor.pfTask
         profiles = realm.objects(Profile.self)
-        self.tableView.reloadData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = UIColor.pfTask
         navigationController?.navigationBar.isTranslucent = false
         title = (selectedProject?.name)! + " Tasks"
+        
+        self.tableView.reloadData()
         
         if (tasks?.count == 0) {
             self.tableView.backgroundView = UIImageView(image: UIImage(named: "tasks-instructions-tableview.png"))
@@ -188,7 +191,6 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
                     var tasksCompleted = profiles![0].tasksCompleted
                     tasksCompleted = tasksCompleted - 1
                     profiles![0].tasksCompleted = tasksCompleted
-                    print(tasksCompleted)
                 }
             } catch {
                 print("Error updating items after marked complete, \(error)")
@@ -306,11 +308,19 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
         tableView.reloadData()
     }
     
+    // Home Button
     @IBAction func goBackToOneButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "unwindTasksToDashboard", sender: self)
     }
 
-    
+    // Clear Completed Tasks
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        completedTasks = selectedProject?.tasks.filter("completed == true")
+        if (scrollView.contentOffset.y > 150.0) {
+            deleteCompletedTasks(itemList: completedTasks!)
+        }
+    }
 }
 
 

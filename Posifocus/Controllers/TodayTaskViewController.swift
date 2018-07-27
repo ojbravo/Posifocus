@@ -187,4 +187,14 @@ class TodayTaskViewController: TaskViewController {
         self.performSegue(withIdentifier: "ShowTaskModalView2", sender: indexPath);
     }
     
+    
+    // Clear Completed Tasks
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+
+        completedTasks = realm.objects(Task.self).filter("completed == true AND today == true")
+        if (scrollView.contentOffset.y > 150.0) {
+            deleteCompletedTasks(itemList: completedTasks!)
+        }
+    }
+
 }
