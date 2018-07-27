@@ -90,7 +90,7 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
     }
     
     
-    func addNewItem(itemName: String, todaySwitchStatus: Bool) {
+    func addNewItem(itemName: String, todaySwitchStatus: Bool, todayOrder: Int) {
         // Create New Item
         if let currentProject = self.selectedProject {
             do {
@@ -99,10 +99,11 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
                     newItem.name = itemName
                     newItem.order = (tasks?.count)!
                     newItem.today = todaySwitchStatus
+                    newItem.todayOrder = todayOrder
                     currentProject.tasks.append(newItem)
                 }
             } catch {
-                print("Error saving new items, \(error)")
+                print("Error saving task, \(error)")
             }
         }
         
@@ -112,14 +113,18 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
     }
     
     
-    func editItem(itemName: String, todaySwitchStatus: Bool, indexPath: IndexPath) {
+    func editItem(itemName: String, todaySwitchStatus: Bool, todayOrder: Int, indexPath: IndexPath) {
         do {
             try self.realm.write {
                 tasks![(indexPath.row)].name = itemName
                 tasks![(indexPath.row)].today = todaySwitchStatus
+                if (todaySwitchStatus) {
+                    tasks![(indexPath.row)].todayOrder = todayOrder
+                }
+                
             }
         } catch {
-            print("Error saving new items, \(error)")
+            print("Error editing task, \(error)")
         }
     }
     

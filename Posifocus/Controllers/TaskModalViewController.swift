@@ -11,19 +11,21 @@ import RealmSwift
 
 protocol TaskModalViewControllerDelegate: class {
     func removeBlurredBackgroundView()
-    func addNewItem(itemName: String, todaySwitchStatus: Bool)
-    func editItem(itemName: String, todaySwitchStatus: Bool, indexPath: IndexPath)
+    func addNewItem(itemName: String, todaySwitchStatus: Bool, todayOrder: Int)
+    func editItem(itemName: String, todaySwitchStatus: Bool, todayOrder: Int, indexPath: IndexPath)
 }
 
 class TaskModalViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
 
     let realm = try! Realm()
     var itemList: Results<Task>?
+    var todayList: Results<Task>?
     
     var indexPath: IndexPath? = nil
     weak var delegate: TaskModalViewControllerDelegate?
     
     var todaySwitchStatus: Bool = false
+    var todayOrder: Int? = 1000
     
     
     override func viewDidLoad() {
@@ -76,7 +78,7 @@ class TaskModalViewController: UIViewController, UITextViewDelegate, UITextField
         // Set Save Button Color
         saveButton.backgroundColor = UIColor.pfTask
         
-        
+        todayList = realm.objects(Task.self).filter("today == true AND completed == false")
     }
     
     @IBOutlet weak var itemName: UITextField!
@@ -99,6 +101,11 @@ class TaskModalViewController: UIViewController, UITextViewDelegate, UITextField
     
     @IBAction func todaySwitchChanged(_ sender: UISwitch) {
         todaySwitchStatus = todaySwitch.isOn
+        if (todaySwitchStatus) {
+            todayOrder = todayList?.count
+        } else {
+            todayOrder = 1000
+        }
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
@@ -109,10 +116,10 @@ class TaskModalViewController: UIViewController, UITextViewDelegate, UITextField
     @IBAction func saveButtonPressed(_ sender: Any) {
         
         if (indexPath != nil) {
-            delegate?.editItem(itemName: itemName.text!, todaySwitchStatus: todaySwitchStatus, indexPath: indexPath!)
+            delegate?.editItem(itemName: itemName.text!, todaySwitchStatus: todaySwitchStatus, todayOrder: todayOrder!, indexPath: indexPath!)
         }
         else {
-            delegate?.addNewItem(itemName: itemName.text!, todaySwitchStatus: todaySwitchStatus)
+            delegate?.addNewItem(itemName: itemName.text!, todaySwitchStatus: todaySwitchStatus, todayOrder: todayOrder!)
         }
         
         dismiss(animated: true, completion: nil)
