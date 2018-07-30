@@ -1524,10 +1524,10 @@ you had with this Person?</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3vX-Ih-rMI">
-                                <rect key="frame" x="274" y="216" width="30" height="30"/>
+                                <rect key="frame" x="261" y="207" width="44" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="Ba2-Ky-EDt"/>
-                                    <constraint firstAttribute="height" constant="30" id="tJC-hm-qdx"/>
+                                    <constraint firstAttribute="width" constant="44" id="Ba2-Ky-EDt"/>
+                                    <constraint firstAttribute="height" constant="44" id="tJC-hm-qdx"/>
                                 </constraints>
                                 <state key="normal" image="icon-calendar-edit"/>
                                 <connections>
@@ -1581,11 +1581,10 @@ you had with this Person?</string>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="OjM-SU-fNN" firstAttribute="top" secondItem="Ip3-hk-ZDR" secondAttribute="bottom" constant="10" id="1ws-SZ-v2s"/>
-                            <constraint firstItem="UWP-Y5-gR9" firstAttribute="trailing" secondItem="3vX-Ih-rMI" secondAttribute="trailing" constant="16" id="3hY-ON-wTS"/>
                             <constraint firstItem="MIt-ba-NYL" firstAttribute="leading" secondItem="UWP-Y5-gR9" secondAttribute="leading" constant="15" id="5yq-Dz-ROj"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ip3-hk-ZDR" secondAttribute="trailing" constant="20" symbolic="YES" id="6k4-xY-7eC"/>
                             <constraint firstItem="RCN-ig-sUk" firstAttribute="top" secondItem="MIt-ba-NYL" secondAttribute="bottom" constant="30" id="8et-6r-J3j"/>
-                            <constraint firstItem="UWP-Y5-gR9" firstAttribute="trailing" secondItem="3vX-Ih-rMI" secondAttribute="trailing" constant="16" id="Cay-gb-Nms"/>
+                            <constraint firstItem="UWP-Y5-gR9" firstAttribute="trailing" secondItem="3vX-Ih-rMI" secondAttribute="trailing" constant="15" id="Cay-gb-Nms"/>
                             <constraint firstItem="Ip3-hk-ZDR" firstAttribute="top" secondItem="Ti6-0w-bry" secondAttribute="bottom" constant="40" id="DC3-fp-GNe"/>
                             <constraint firstItem="UWP-Y5-gR9" firstAttribute="trailing" secondItem="DtZ-zM-aTg" secondAttribute="trailing" constant="40" id="Kfk-rs-rhu"/>
                             <constraint firstItem="Ti6-0w-bry" firstAttribute="top" secondItem="RCN-ig-sUk" secondAttribute="bottom" constant="10" id="Lsx-tV-jvR"/>
@@ -1593,7 +1592,7 @@ you had with this Person?</string>
                             <constraint firstItem="UWP-Y5-gR9" firstAttribute="trailing" secondItem="OjM-SU-fNN" secondAttribute="trailing" constant="35" id="Uah-rb-Aqv"/>
                             <constraint firstItem="MIt-ba-NYL" firstAttribute="top" secondItem="UWP-Y5-gR9" secondAttribute="top" constant="10" id="Uom-Mr-NN1"/>
                             <constraint firstItem="UWP-Y5-gR9" firstAttribute="trailing" secondItem="Ti6-0w-bry" secondAttribute="trailing" constant="25" id="Xql-n2-1zZ"/>
-                            <constraint firstItem="3vX-Ih-rMI" firstAttribute="top" secondItem="Ti6-0w-bry" secondAttribute="bottom" constant="34" id="dFh-1H-ew0"/>
+                            <constraint firstItem="3vX-Ih-rMI" firstAttribute="top" secondItem="Ti6-0w-bry" secondAttribute="bottom" constant="25" id="dFh-1H-ew0"/>
                             <constraint firstItem="DtZ-zM-aTg" firstAttribute="top" secondItem="OjM-SU-fNN" secondAttribute="bottom" constant="20" id="fY5-c3-pIV"/>
                             <constraint firstItem="46X-cA-wEa" firstAttribute="trailing" secondItem="UWP-Y5-gR9" secondAttribute="trailing" id="gFg-68-gow"/>
                             <constraint firstItem="OjM-SU-fNN" firstAttribute="leading" secondItem="UWP-Y5-gR9" secondAttribute="leading" constant="35" id="hxV-N8-Rry"/>
