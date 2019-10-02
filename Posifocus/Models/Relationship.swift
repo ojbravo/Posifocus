@@ -10,9 +10,15 @@ import Foundation
 import RealmSwift
 
 class Relationship: Object {
+    @objc dynamic var id = NSUUID().uuidString
     @objc dynamic var name: String = ""
     @objc dynamic var birthday: Date = Date()
     @objc dynamic var lastContact: Date = Date()
     @objc dynamic var notes: String = ""
     let contacts = List<Contact>()
+    
+    @objc dynamic var isDeleted = false
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }

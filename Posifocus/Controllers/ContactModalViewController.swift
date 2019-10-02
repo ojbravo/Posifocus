@@ -140,14 +140,14 @@ class ContactModalViewController: UIViewController, UITextViewDelegate, UITextFi
         hideDatePicker()
     }
     func showDatePicker() {
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
             //self.datePickerViewBottom.constant = 0
             self.datePickerView.frame.origin.y -= 300
             self.showDatePickerStatus = true
         })
     }
     func hideDatePicker() {
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
             //self.datePickerViewBottom.constant = 0
             self.datePickerView.frame.origin.y += 300
             self.showDatePickerStatus = false

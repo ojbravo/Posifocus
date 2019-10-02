@@ -34,6 +34,7 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = UIColor.pfTask
+        navigationController?.navigationBar.backgroundColor = UIColor.pfTask
         navigationController?.navigationBar.isTranslucent = false
         title = (selectedProject?.name)! + " Tasks"
         
@@ -41,12 +42,12 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
         
         if (tasks?.count == 0) {
             self.tableView.backgroundView = UIImageView(image: UIImage(named: "tasks-instructions-tableview.png"))
-            self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFit
+            self.tableView.backgroundView?.contentMode = UIView.ContentMode.scaleAspectFit
             self.tableView.backgroundView?.alpha = 0.5
         }
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         self.navigationController?.navigationBar.barTintColor = UIColor.pfProject
     }
     
@@ -66,8 +67,8 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
         if (tasks?[indexPath.row].completed)! {
             cell.backgroundColor = UIColor.darkGray
             cell.textLabel?.textColor = UIColor.lightGray
-            attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
-                                        value: NSUnderlineStyle.styleSingle.rawValue, range: cellRange)
+            attributedText.addAttribute(NSAttributedString.Key.strikethroughStyle,
+                                        value: NSUnderlineStyle.single.rawValue, range: cellRange)
             
             
             cell.textLabel?.attributedText =  attributedText
@@ -78,8 +79,8 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
                 
             cell.backgroundColor = UIColor.pfTask.darker(darkness: numberOfRows)
             cell.textLabel?.textColor = UIColor.white
-            attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
-                                        value: NSUnderlineStyle.styleNone.rawValue, range: cellRange)
+            attributedText.addAttribute(NSAttributedString.Key.strikethroughStyle,
+                                        value: [], range: cellRange)
         }
         
         return cell

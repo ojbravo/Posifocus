@@ -26,17 +26,19 @@ class PrioritiesViewController: SwipeTableViewController, PrioritiesModalViewCon
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = UIColor.pfPriority
+        navigationController?.navigationBar.backgroundColor = UIColor.pfPriority
         navigationController?.navigationBar.isTranslucent = false
         
         if (priorities?.count == 0) {
             self.tableView.backgroundView = UIImageView(image: UIImage(named: "priorities-instructions-tableview.png"))
-            self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFit
+            self.tableView.backgroundView?.contentMode = UIView.ContentMode.scaleAspectFit
             self.tableView.backgroundView?.alpha = 0.5
         }
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         self.navigationController?.navigationBar.barTintColor = UIColor.pfBlue
+        self.navigationController?.navigationBar.backgroundColor = UIColor.pfBlue
     }
     
     // Defines number of cells to accomodate entire list
@@ -57,8 +59,8 @@ class PrioritiesViewController: SwipeTableViewController, PrioritiesModalViewCon
         if (priorities?[indexPath.row].completed)! {
             cell.backgroundColor = UIColor.darkGray
             cell.textLabel?.textColor = UIColor.lightGray
-            attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
-                                        value: NSUnderlineStyle.styleSingle.rawValue, range: cellRange)
+            attributedText.addAttribute(NSAttributedString.Key.strikethroughStyle,
+                                        value: NSUnderlineStyle.single.rawValue, range: cellRange)
             
             
             cell.textLabel?.attributedText =  attributedText
@@ -68,8 +70,8 @@ class PrioritiesViewController: SwipeTableViewController, PrioritiesModalViewCon
 
             cell.backgroundColor = UIColor.pfPriority.darker(darkness: numberOfRows)
             cell.textLabel?.textColor = UIColor.white
-            attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
-                                        value: NSUnderlineStyle.styleNone.rawValue, range: cellRange)
+            attributedText.addAttribute(NSAttributedString.Key.strikethroughStyle,
+                                        value: [], range: cellRange)
         }
         
         

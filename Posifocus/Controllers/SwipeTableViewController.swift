@@ -28,7 +28,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         tableView.separatorStyle = .none
         
         self.tableView.backgroundView = UIImageView(image: UIImage(named: "bdlp-paradise-wallpaper.jpg"))
-        self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFill
+        self.tableView.backgroundView?.contentMode = UIView.ContentMode.scaleAspectFill
         self.tableView.backgroundView?.alpha = 0.1
         
         let longpress = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureRecognized(gestureRecognizer:)))
@@ -164,12 +164,12 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
             default:
                 self.tableView.backgroundView = UIImageView(image: UIImage(named: "bdlp-paradise-wallpaper.jpg"))
                 self.tableView.backgroundView?.alpha = 0.1
-                self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFill
+                self.tableView.backgroundView?.contentMode = UIView.ContentMode.scaleAspectFill
             }
         }
         else {
             self.tableView.backgroundView = UIImageView(image: UIImage(named: "bdlp-paradise-wallpaper.jpg"))
-            self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFill
+            self.tableView.backgroundView?.contentMode = UIView.ContentMode.scaleAspectFill
             self.tableView.backgroundView?.alpha = 0.1
         }
     }

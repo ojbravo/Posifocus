@@ -226,18 +226,21 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
     @IBAction func selectProfilePicture(_ sender: Any) {
         let imageController = UIImagePickerController()
         imageController.delegate = self
-        imageController.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        imageController.sourceType = UIImagePickerController.SourceType.photoLibrary
         self.present(imageController, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
-        profilePicture.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        profilePicture.image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage
         
         let imageName = UUID().uuidString
         let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
         
-        if let jpegData = UIImageJPEGRepresentation(profilePicture.image!, 80) {
+        if let jpegData = profilePicture.image!.jpegData(compressionQuality: 80) {
             try? jpegData.write(to: imagePath)
         }
         
@@ -300,4 +303,14 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
     
     @IBAction func unwindToDashboard(segue:UIStoryboardSegue) { }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

@@ -41,14 +41,15 @@ class GratitudesViewController: SwipeTableViewController, GratitudesModalViewCon
         
         if (gratitudes?.count == 0) {
             self.tableView.backgroundView = UIImageView(image: UIImage(named: "gratitudes-instructions-tableview.png"))
-            self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFit
+            self.tableView.backgroundView?.contentMode = UIView.ContentMode.scaleAspectFit
             self.tableView.backgroundView?.alpha = 0.5
         }
         
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         self.navigationController?.navigationBar.barTintColor = UIColor.pfBlue
+        self.navigationController?.navigationBar.backgroundColor = UIColor.pfBlue
     }
     
     

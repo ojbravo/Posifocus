@@ -25,18 +25,19 @@ class RelationshipViewController: SwipeTableViewController, RelationshipModalVie
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = UIColor.pfRelationship
+        navigationController?.navigationBar.backgroundColor = UIColor.pfRelationship
         navigationController?.navigationBar.isTranslucent = false
         
         if (relationships?.count == 0) {
             self.tableView.backgroundView = UIImageView(image: UIImage(named: "relationships-instructions-tableview.png"))
-            self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFit
+            self.tableView.backgroundView?.contentMode = UIView.ContentMode.scaleAspectFit
             self.tableView.backgroundView?.alpha = 0.5
         }
         
         loadItems()
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         self.navigationController?.navigationBar.barTintColor = UIColor.pfBlue
     }
     
@@ -81,8 +82,8 @@ class RelationshipViewController: SwipeTableViewController, RelationshipModalVie
         
         cell.backgroundColor = UIColor.pfRelationship.darker(darkness: numberOfRows)
         cell.textLabel?.textColor = UIColor.white
-        attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
-                                    value: NSUnderlineStyle.styleNone.rawValue, range: cellRange)
+        attributedText.addAttribute(NSAttributedString.Key.strikethroughStyle,
+                                    value: [], range: cellRange)
         
         
         

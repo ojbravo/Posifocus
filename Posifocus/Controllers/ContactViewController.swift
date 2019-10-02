@@ -33,18 +33,19 @@ class ContactViewController: SwipeTableViewController, ContactModalViewControlle
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = UIColor.pfContact
+        navigationController?.navigationBar.backgroundColor = UIColor.pfContact
         navigationController?.navigationBar.isTranslucent = false
         title = (parentItem?.name)!
         
         if (itemList?.count == 0) {
             self.tableView.backgroundView = UIImageView(image: UIImage(named: "contacts-instructions-tableview.png"))
-            self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFit
+            self.tableView.backgroundView?.contentMode = UIView.ContentMode.scaleAspectFit
             self.tableView.backgroundView?.alpha = 0.5
         }
         
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         self.navigationController?.navigationBar.barTintColor = UIColor.pfRelationship
     }
     

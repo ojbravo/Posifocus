@@ -19,12 +19,13 @@ class TodayTaskViewController: TaskViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = UIColor.pfTask
+        navigationController?.navigationBar.backgroundColor = UIColor.pfTask
         navigationController?.navigationBar.isTranslucent = false
         title = "Today's Tasks"
         loadTasks()
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         self.navigationController?.navigationBar.barTintColor = UIColor.pfBlue
     }
     

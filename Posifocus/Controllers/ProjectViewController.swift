@@ -29,17 +29,18 @@ class ProjectViewController: SwipeTableViewController, ProjectModalViewControlle
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = UIColor.pfProject
+        navigationController?.navigationBar.backgroundColor = UIColor.pfProject
         navigationController?.navigationBar.isTranslucent = false
         title = (selectedPriority?.name)! + " Projects"
         
         if (projects?.count == 0) {
             self.tableView.backgroundView = UIImageView(image: UIImage(named: "projects-instructions-tableview.png"))
-            self.tableView.backgroundView?.contentMode = UIViewContentMode.scaleAspectFit
+            self.tableView.backgroundView?.contentMode = UIView.ContentMode.scaleAspectFit
             self.tableView.backgroundView?.alpha = 0.5
         }
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         self.navigationController?.navigationBar.barTintColor = UIColor.pfPriority
     }
     
@@ -64,8 +65,8 @@ class ProjectViewController: SwipeTableViewController, ProjectModalViewControlle
         if (projects?[indexPath.row].completed)! {
             cell.backgroundColor = UIColor.darkGray
             cell.textLabel?.textColor = UIColor.lightGray
-            attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
-                                        value: NSUnderlineStyle.styleSingle.rawValue, range: cellRange)
+            attributedText.addAttribute(NSAttributedString.Key.strikethroughStyle,
+                                        value: NSUnderlineStyle.single.rawValue, range: cellRange)
             
             
             cell.textLabel?.attributedText =  attributedText
@@ -75,8 +76,8 @@ class ProjectViewController: SwipeTableViewController, ProjectModalViewControlle
             
             cell.backgroundColor = UIColor.pfProject.darker(darkness: numberOfRows)
             cell.textLabel?.textColor = UIColor.white
-            attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle,
-                                        value: NSUnderlineStyle.styleNone.rawValue, range: cellRange)
+            attributedText.addAttribute(NSAttributedString.Key.strikethroughStyle,
+                                        value: [], range: cellRange)
         }
         
         
