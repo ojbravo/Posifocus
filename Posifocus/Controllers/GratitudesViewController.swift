@@ -35,7 +35,17 @@ class GratitudesViewController: SwipeTableViewController, GratitudesModalViewCon
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = UIColor.pfGratitude
+        navigationController?.navigationBar.backgroundColor = UIColor.pfGratitude
         navigationController?.navigationBar.isTranslucent = false
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.backgroundColor = UIColor.pfGratitude
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
         
         DashboardVC.updateBadgeCounter()
         

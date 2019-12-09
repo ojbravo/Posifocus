@@ -35,6 +35,15 @@ class ContactViewController: SwipeTableViewController, ContactModalViewControlle
         navigationController?.navigationBar.barTintColor = UIColor.pfContact
         navigationController?.navigationBar.backgroundColor = UIColor.pfContact
         navigationController?.navigationBar.isTranslucent = false
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.backgroundColor = UIColor.pfContact
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
         title = (parentItem?.name)!
         
         if (itemList?.count == 0) {

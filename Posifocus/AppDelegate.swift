@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return .lightContent
         }
         
-        
+        window?.backgroundColor = UIColor.pfBlue
         
         // Setup Badge Icon Notifications
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in

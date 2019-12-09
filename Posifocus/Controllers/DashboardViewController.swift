@@ -125,6 +125,15 @@ class DashboardViewController: UIViewController, UITextFieldDelegate, UITextView
         
         navigationController?.navigationBar.barTintColor = UIColor.pfBlue
         navigationController?.navigationBar.isTranslucent = false
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.backgroundColor = UIColor.pfBlue
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
         
         
         gratitudeCount.text = String(realm.objects(Gratitude.self).count)

@@ -26,6 +26,16 @@ class RelationshipViewController: SwipeTableViewController, RelationshipModalVie
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = UIColor.pfRelationship
         navigationController?.navigationBar.backgroundColor = UIColor.pfRelationship
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.backgroundColor = UIColor.pfRelationship
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
+        
         navigationController?.navigationBar.isTranslucent = false
         
         if (relationships?.count == 0) {

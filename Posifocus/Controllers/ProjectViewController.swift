@@ -31,6 +31,16 @@ class ProjectViewController: SwipeTableViewController, ProjectModalViewControlle
         navigationController?.navigationBar.barTintColor = UIColor.pfProject
         navigationController?.navigationBar.backgroundColor = UIColor.pfProject
         navigationController?.navigationBar.isTranslucent = false
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.backgroundColor = UIColor.pfProject
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
+        
         title = (selectedPriority?.name)! + " Projects"
         
         if (projects?.count == 0) {

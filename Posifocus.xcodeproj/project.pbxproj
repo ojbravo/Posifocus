@@ -35,7 +35,6 @@
 		933A8785207848CB001C5DFB /* PrioritiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933A8784207848CB001C5DFB /* PrioritiesViewController.swift */; };
 		933A8788207848CB001C5DFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A8786207848CB001C5DFB /* Main.storyboard */; };
 		933A878D207848CC001C5DFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 933A878B207848CC001C5DFB /* LaunchScreen.storyboard */; };
-		934CC81520EC1E450008827F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 934CC81420EC1E450008827F /* Images.xcassets */; };
 		934F6AF420C79C0900D18AF3 /* ProjectModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934F6AF320C79C0900D18AF3 /* ProjectModalViewController.swift */; };
 		937A1C2F20C18C9F001B9006 /* TaskModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937A1C2E20C18C9F001B9006 /* TaskModalViewController.swift */; };
 		937EBADE20E67DB000AFDB28 /* blank-user.png in Resources */ = {isa = PBXBuildFile; fileRef = 937EBADD20E67DB000AFDB28 /* blank-user.png */; };
@@ -53,6 +52,8 @@
 		9393378920DC3F78003F2A8D /* RelationshipModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393378820DC3F78003F2A8D /* RelationshipModalViewController.swift */; };
 		9393378B20DC3F8D003F2A8D /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393378A20DC3F8D003F2A8D /* ContactViewController.swift */; };
 		9393378D20DC3FA3003F2A8D /* ContactModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393378C20DC3FA3003F2A8D /* ContactModalViewController.swift */; };
+		939C64042345416900E65B51 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 939C64032345416900E65B51 /* Launch Screen.storyboard */; };
+		939C6406234543C800E65B51 /* 1125x2436.png in Resources */ = {isa = PBXBuildFile; fileRef = 939C6405234543C800E65B51 /* 1125x2436.png */; };
 		93B2B64320EFCE9D00B978B5 /* TodayTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B2B64220EFCE9D00B978B5 /* TodayTaskViewController.swift */; };
 		93B5670220A53EB800207697 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B5670120A53EB800207697 /* DashboardViewController.swift */; };
 		93D39EA120D0503D008F9B37 /* gratitudes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D39EA020D0503C008F9B37 /* gratitudes@2x.png */; };
@@ -98,7 +99,6 @@
 		933A8787207848CB001C5DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		933A878C207848CC001C5DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		933A878E207848CC001C5DFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		934CC81420EC1E450008827F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		934F6AF320C79C0900D18AF3 /* ProjectModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModalViewController.swift; sourceTree = "<group>"; };
 		937A1C2E20C18C9F001B9006 /* TaskModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskModalViewController.swift; path = Posifocus/Controllers/TaskModalViewController.swift; sourceTree = SOURCE_ROOT; };
 		937EBADD20E67DB000AFDB28 /* blank-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blank-user.png"; sourceTree = "<group>"; };
@@ -116,6 +116,8 @@
 		9393378820DC3F78003F2A8D /* RelationshipModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipModalViewController.swift; sourceTree = "<group>"; };
 		9393378A20DC3F8D003F2A8D /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		9393378C20DC3FA3003F2A8D /* ContactModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModalViewController.swift; sourceTree = "<group>"; };
+		939C64032345416900E65B51 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		939C6405234543C800E65B51 /* 1125x2436.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1125x2436.png; sourceTree = "<group>"; };
 		93B2B64220EFCE9D00B978B5 /* TodayTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTaskViewController.swift; sourceTree = "<group>"; };
 		93B5670120A53EB800207697 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = Posifocus/Controllers/DashboardViewController.swift; sourceTree = SOURCE_ROOT; };
 		93D39EA020D0503C008F9B37 /* gratitudes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gratitudes@2x.png"; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				9328F2EE20D17FF60011EF1C /* tasks-instructions-tableview2.png */,
 				93D39EA820D17730008F9B37 /* tasks-instructions-portrait.png */,
 				9328F2F220D1A13D0011EF1C /* gratitudes-instructions-tableview.png */,
+				939C6405234543C800E65B51 /* 1125x2436.png */,
 				9323A9CF20EE752000C119EB /* calendar-icon.png */,
 				9328F2F020D1A13C0011EF1C /* priorities-instructions-tableview.png */,
 				93246840229DDDB4002BD03E /* settings@2x.png */,
@@ -267,7 +270,7 @@
 				930BCCC020786C5E00424182 /* Controllers */,
 				930BCCC120786C9400424182 /* Supporting Files */,
 				933A878E207848CC001C5DFB /* Info.plist */,
-				934CC81420EC1E450008827F /* Images.xcassets */,
+				939C64032345416900E65B51 /* Launch Screen.storyboard */,
 			);
 			path = Posifocus;
 			sourceTree = "<group>";
@@ -350,7 +353,6 @@
 				937EBAE820E6914000AFDB28 /* relationships-instructions-tableview.png in Resources */,
 				9328F2F720D1A13E0011EF1C /* projects-instructions-tableview.png in Resources */,
 				93246841229DDDB5002BD03E /* settings@2x.png in Resources */,
-				934CC81520EC1E450008827F /* Images.xcassets in Resources */,
 				9328F2F420D1A13E0011EF1C /* priorities-instructions-tableview.png in Resources */,
 				93D39EA120D0503D008F9B37 /* gratitudes@2x.png in Resources */,
 				937EBAED20E6B4E700AFDB28 /* iTunesArtwork@1x.png in Resources */,
@@ -365,8 +367,10 @@
 				937EBAF020E6B4E700AFDB28 /* iTunesArtwork@2x.png in Resources */,
 				93E62B8A20F65161009BA1AE /* home-icon.png in Resources */,
 				93D39EA320D163C0008F9B37 /* bdlp-paradise-wallpaper.jpg in Resources */,
+				939C64042345416900E65B51 /* Launch Screen.storyboard in Resources */,
 				937EBAE420E68C8500AFDB28 /* relationships.png in Resources */,
 				93D39EA920D17730008F9B37 /* tasks-instructions-portrait.png in Resources */,
+				939C6406234543C800E65B51 /* 1125x2436.png in Resources */,
 				9328F2F620D1A13E0011EF1C /* gratitudes-instructions-tableview.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -586,16 +590,18 @@
 			baseConfigurationReference = 4F905C57862D01D80BBCAFE5 /* Pods-Posifocus.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMPRESS_PNG_FILES = NO;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = AFC939CULK;
 				INFOPLIST_FILE = Posifocus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bravo-delapaz.Posifocus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -610,16 +616,18 @@
 			baseConfigurationReference = A6460EAEC1F9761927555512 /* Pods-Posifocus.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMPRESS_PNG_FILES = NO;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = AFC939CULK;
 				INFOPLIST_FILE = Posifocus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bravo-delapaz.Posifocus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

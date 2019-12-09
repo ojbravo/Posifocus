@@ -28,6 +28,18 @@ class PrioritiesViewController: SwipeTableViewController, PrioritiesModalViewCon
         navigationController?.navigationBar.barTintColor = UIColor.pfPriority
         navigationController?.navigationBar.backgroundColor = UIColor.pfPriority
         navigationController?.navigationBar.isTranslucent = false
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.backgroundColor = UIColor.pfPriority
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
+        
+        
+        
         
         if (priorities?.count == 0) {
             self.tableView.backgroundView = UIImageView(image: UIImage(named: "priorities-instructions-tableview.png"))

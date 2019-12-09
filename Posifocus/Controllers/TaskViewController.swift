@@ -36,6 +36,15 @@ class TaskViewController: SwipeTableViewController, TaskModalViewControllerDeleg
         navigationController?.navigationBar.barTintColor = UIColor.pfTask
         navigationController?.navigationBar.backgroundColor = UIColor.pfTask
         navigationController?.navigationBar.isTranslucent = false
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.backgroundColor = UIColor.pfTask
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
         title = (selectedProject?.name)! + " Tasks"
         
         self.tableView.reloadData()
